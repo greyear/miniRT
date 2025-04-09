@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:26:26 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:52:11 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_light
 {
 	t_vector	coordinates;
 	double		ratio;
-	t_color		color;
 }	t_light;
 
 typedef struct s_camera
@@ -68,8 +67,14 @@ typedef struct s_camera
 	t_vector	coordinates;
 	t_vector	normalized;
 	double		view_field;
+	double		viewporw_size;
 }	t_camera;
 
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	destination;
+}	t_ray;
 
 typedef struct s_miniRT
 {
