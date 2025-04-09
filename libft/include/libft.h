@@ -28,6 +28,8 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void			ft_clean_arr(char ***arr);
+void			ft_clean_gnl(int fd);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);

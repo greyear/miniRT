@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
+#    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
 #    Updated: 2025/04/09 15:14:43 by msavelie         ###   ########.fr        #
@@ -30,6 +30,9 @@ SRC_DIR 		=	./src
 OBJ_DIR 		=	./obj
 DRAWING			=	./drawing
 
+PARS_DIR		=	parsing
+CLEAN_DIR		=	cleaners
+
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
 MLX_INC			=	$(MLX_DIR)/include
@@ -47,8 +50,16 @@ CFLAGS 			=	-g -Wall -Wextra -Werror
 RM				=	rm -f
 
 # Source files
-SRC				=	$(SRC_DIR)/main.c \
-					$(SRC_DIR)/$(DRAWING)/draw_figure.c \
+PARS_FILES		=	filename.c \
+					set.c \
+					line.c
+CLEAN_FILES		=	struct_cleaning.c
+
+SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
+
+SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
+					$(SRC_DIR)/main.c \
+          $(SRC_DIR)/$(DRAWING)/draw_figure.c \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c
 
 # Object files

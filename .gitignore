@@ -1,5 +1,8 @@
 **/*.o
 **/*.a
 obj
+.DS_Store
+.vscode/
+MLX42/
 .mlx
 miniRT
