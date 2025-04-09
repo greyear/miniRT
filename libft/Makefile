@@ -6,7 +6,7 @@
 #    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/19 12:03:15 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/09 13:00:50 by azinchen         ###   ########.fr        #
+#    Updated: 2025/04/09 14:06:22 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ RM				=	rm -f
 AR				=	ar rcs
 
 # Source files
-FTCLEAN_DIR		=	$(SRC_DIR)ft_clean/ft_clean_arr.c
+FTCLEAN_DIR		=	$(SRC_DIR)ft_clean/ft_clean_arr.c \
+					$(SRC_DIR)ft_clean/ft_clean_gnl.c
 
 FTIS_DIR		=	$(SRC_DIR)ft_is/ft_isalnum.c \
 					$(SRC_DIR)ft_is/ft_isalpha.c \

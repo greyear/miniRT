@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:56:12 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 12:58:46 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:38:36 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_list
 }	t_list;
 
 void			ft_clean_arr(char ***arr);
+void			ft_clean_gnl(int fd);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);

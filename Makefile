@@ -6,7 +6,7 @@
 #    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/09 11:55:29 by azinchen         ###   ########.fr        #
+#    Updated: 2025/04/09 14:30:11 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_DIR 		=	./src
 OBJ_DIR 		=	./obj
 
 PARS_DIR		=	parsing
+CLEAN_DIR		=	cleaners
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -50,7 +51,9 @@ RM				=	rm -f
 # Source files
 
 PARS_FILES		=	filename.c \
+					set.c \
 					line.c
+CLEAN_FILES		=	struct_cleaning.c
 
 SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
 

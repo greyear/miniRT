@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filename.c                                         :+:      :+:    :+:   */
+/*   struct_cleaning.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 12:15:54 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:08:08 by azinchen         ###   ########.fr       */
+/*   Created: 2025/04/09 14:11:30 by azinchen          #+#    #+#             */
+/*   Updated: 2025/04/09 14:17:18 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-void	name_check(char *name)
+void	struct_clean(t_miniRT *rt)
 {
-	int	l;
-
-	l = ft_strlen(name);
-	if (l < 4 || name[l - 1] != 't' || name[l - 2] != 'r'
-		|| name[l - 3] != '.')
+	//another fields
+	if (rt->objects)
 	{
-		ft_putstr_fd("File is not *.rt\n", 2);
-		exit(EXIT_FAILURE); //chech cleaning
+		object_clean(rt);
+		free(rt->objects);
 	}
-}
-
-void	dir_check(char *name)
-{
-	DIR	*dir;
-
-	dir = opendir(name);
-	if (dir != NULL)
-	{
-		closedir(dir);
-		ft_putstr_fd("Argument should be a *.rt file\n", 2);
-		exit(EXIT_FAILURE);
-	}
+	if (rt)
+		free(rt);
 }
