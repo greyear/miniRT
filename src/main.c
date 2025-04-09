@@ -6,10 +6,14 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/09 11:35:35 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:22:49 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main() {
+#include "../include/miniRT.h"
+
+int main()
+{
+	draw_figure();
 	return (0);
 }

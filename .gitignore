@@ -1,6 +1,7 @@
+**/*.o
+**/*.a
+obj
 .DS_Store
-*.a
-*.o
 .vscode/
 MLX42/
 .mlx
