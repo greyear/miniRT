@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
+#    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/19 12:03:15 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/09 11:37:27 by msavelie         ###   ########.fr        #
+#    Updated: 2025/04/09 13:00:50 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ RM				=	rm -f
 AR				=	ar rcs
 
 # Source files
+FTCLEAN_DIR		=	$(SRC_DIR)ft_clean/ft_clean_arr.c
+
 FTIS_DIR		=	$(SRC_DIR)ft_is/ft_isalnum.c \
 					$(SRC_DIR)ft_is/ft_isalpha.c \
 					$(SRC_DIR)ft_is/ft_isascii.c \
@@ -34,7 +36,7 @@ FTIS_DIR		=	$(SRC_DIR)ft_is/ft_isalnum.c \
 					$(SRC_DIR)ft_is/ft_isspace.c \
 					$(SRC_DIR)ft_is/ft_isquote.c \
 					$(SRC_DIR)ft_is/ft_isemptystring.c
-				
+
 FTLST_DIR		=	$(SRC_DIR)ft_lst/ft_lstadd_back.c \
 					$(SRC_DIR)ft_lst/ft_lstadd_front.c \
 					$(SRC_DIR)ft_lst/ft_lstclear.c \
@@ -94,7 +96,9 @@ FTPRINTF_DIR	=	$(SRC_DIR)ft_printf/ft_print_char.c \
 GNL_DIR			=	$(SRC_DIR)get_next_line/get_next_line.c \
 					$(SRC_DIR)get_next_line/get_next_line_utils.c
 
-SRC 			=	$(FTIS_DIR) $(FTLST_DIR) $(FTMEM_DIR) $(FTPUT_DIR) $(FTSTR_DIR) $(FTTO_DIR) $(FTPRINTF_DIR) $(GNL_DIR)
+SRC 			=	$(FTCLEAN_DIR) $(FTIS_DIR) $(FTLST_DIR) $(FTMEM_DIR) \
+					$(FTPUT_DIR) $(FTSTR_DIR) $(FTTO_DIR) $(FTPRINTF_DIR) \
+					$(GNL_DIR)
 
 # Object files
 OBJ				=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))

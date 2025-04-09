@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
+#    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/09 11:39:17 by msavelie         ###   ########.fr        #
+#    Updated: 2025/04/09 11:55:29 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ MLX_DIR			=	./MLX42
 SRC_DIR 		=	./src
 OBJ_DIR 		=	./obj
 
+PARS_DIR		=	parsing
+
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
 MLX_INC			=	$(MLX_DIR)/include
@@ -46,7 +48,14 @@ CFLAGS 			=	-g -Wall -Wextra -Werror
 RM				=	rm -f
 
 # Source files
-SRC				=	$(SRC_DIR)/main.c
+
+PARS_FILES		=	filename.c \
+					line.c
+
+SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
+
+SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
+					$(SRC_DIR)/main.c
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
