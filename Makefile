@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/09 11:39:17 by msavelie         ###   ########.fr        #
+#    Updated: 2025/04/09 15:14:43 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ LIBFT_DIR		= 	./libft
 MLX_DIR			=	./MLX42
 SRC_DIR 		=	./src
 OBJ_DIR 		=	./obj
+DRAWING			=	./drawing
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -46,7 +47,9 @@ CFLAGS 			=	-g -Wall -Wextra -Werror
 RM				=	rm -f
 
 # Source files
-SRC				=	$(SRC_DIR)/main.c
+SRC				=	$(SRC_DIR)/main.c \
+					$(SRC_DIR)/$(DRAWING)/draw_figure.c \
+					$(SRC_DIR)/$(DRAWING)/calculate_colors.c
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

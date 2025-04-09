@@ -1,5 +1,5 @@
 **/*.o
 **/*.a
-**/obj
+obj
 .mlx
 miniRT
