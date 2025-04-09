@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
+#    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/19 12:03:15 by azinchen          #+#    #+#              #
-#    Updated: 2025/01/20 18:22:39 by azinchen         ###   ########.fr        #
+#    Updated: 2025/04/09 11:37:27 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,6 @@ all:			$(NAME)
 
 $(NAME):		$(OBJ)
 				@$(AR) $(NAME) $(OBJ)
-				@echo "$(BLUE)Created Libft$(NC)"
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 				@mkdir -p $(@D)
@@ -121,7 +120,6 @@ clean:
 		
 fclean:			clean 
 				@$(RM) $(NAME)
-				@echo "$(BLUE)Libft removed!$(NC)"
 			
 re:				fclean all
 
