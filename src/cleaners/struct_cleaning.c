@@ -17,7 +17,7 @@ void	struct_clean(t_miniRT *rt)
 	//another fields
 	if (rt->objects)
 	{
-		object_clean(rt);
+		//object_clean(rt);
 		free(rt->objects);
 	}
 	if (rt)

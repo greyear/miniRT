@@ -23,13 +23,23 @@
 # include <dirent.h> 
 # include <math.h>
 
+//Validation
+int			arg_check(int argc);
+int			name_check(char *name);
+int			dir_check(char *name);
+
 //Parsing
-void	name_check(char *name);
-void	dir_check(char *name);
+void		unify_spaces(char *str);
 
 //Drawing
 void		draw_figure(void);
 uint32_t	rgb_to_rgba(uint32_t color);
 uint32_t	gradient(int fst_color, int lst_color, int steps, int cur_step);
+
+//Cleaners
+void		struct_clean(t_miniRT *rt);
+
+//Errors
+int			print_err(char *reason);
 
 #endif

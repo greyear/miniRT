@@ -12,4 +12,17 @@
 
 #include "../../include/miniRT.h"
 
+void	unify_spaces(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			str[i] = ' ';
+		i++;
+	}
+}
+
 

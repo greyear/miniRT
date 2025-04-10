@@ -12,14 +12,24 @@
 
 /* 
 only 1 argiment
-file only *.rt and not a folder
+file only *.rt and not a folder, permissions
+file is not empty
+absolute path for the file!
+file has too many lines (?)
 only allowed type identifiers
+
+spaces at the start of the line??
+
 range checks for lightning/brightness ratio (0.0-1.0)
 				 color (0-255)
 				 normalized vector (-1 to 1)
-				 FOV (0-180)
+				 FOV (0-180) whole number
 atoi/atod?
 only one 1 letter identifier per file
 
+vector: 3 values with commas. can they be without dots?
+color: 3 values with commas
+
+figures dieameters and heights - above 0. just 0 cannot be?
 
 */

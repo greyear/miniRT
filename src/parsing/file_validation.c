@@ -12,20 +12,25 @@
 
 #include "../../include/miniRT.h"
 
-void	name_check(char *name)
+int	arg_check(int argc)
+{
+	if (argc != 2)
+		return (print_err(ARG_ERR_MSG));
+	return (SUCCESS);
+}
+
+int	name_check(char *name)
 {
 	int	l;
 
 	l = ft_strlen(name);
 	if (l < 4 || name[l - 1] != 't' || name[l - 2] != 'r'
-		|| name[l - 3] != '.')
-	{
-		ft_putstr_fd("File is not *.rt\n", 2);
-		exit(EXIT_FAILURE); //chech cleaning
-	}
+			|| name[l - 3] != '.')
+		return (print_err(WRONG_FILENAME_MSG));
+	return (SUCCESS);
 }
 
-void	dir_check(char *name)
+int	dir_check(char *name)
 {
 	DIR	*dir;
 
@@ -33,7 +38,20 @@ void	dir_check(char *name)
 	if (dir != NULL)
 	{
 		closedir(dir);
-		ft_putstr_fd("Argument should be a *.rt file\n", 2);
-		exit(EXIT_FAILURE);
+		return (print_err(FOLDER_MSG));
 	}
+	return (SUCCESS);
+}
+
+int	validation(char *argv[])
+{
+	int	fd;
+
+	if (!name_check(argv[1]) || !dir_check(argv[1]))
+		return(FAILURE);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (print_err(READ_FILE_MSG));
+
+	return (SUCCESS);
 }

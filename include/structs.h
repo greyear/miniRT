@@ -25,11 +25,18 @@ typedef struct s_color
 	uint32_t	cur_color;
 }	t_color;
 
-typedef enum e_obj_type {
+typedef enum e_obj_type
+{
 	SPHERE,
 	CYLINDER,
 	PLANE
 }	t_obj_type;
+
+typedef enum e_return
+{
+	FAILURE = 0,
+	SUCCESS = 1
+}	t_return;
 
 typedef struct s_vector
 {

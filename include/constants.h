@@ -21,3 +21,9 @@
 # ifndef HEX_LEN
 #  define HEX_LEN 8
 # endif
+
+# define ERR_MSG "Error\n"
+# define ARG_ERR_MSG "./miniRT should take exactly one *.rt argument\n"
+# define WRONG_FILENAME_MSG "File is not *.rt\n"
+# define FOLDER_MSG "Argument should be a *.rt file\n"
+# define READ_FILE_MSG "File cannot be read\n"

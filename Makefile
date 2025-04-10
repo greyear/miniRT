@@ -32,6 +32,7 @@ DRAWING			=	./drawing
 
 PARS_DIR		=	parsing
 CLEAN_DIR		=	cleaners
+ERR_DIR			=	errors
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -50,16 +51,20 @@ CFLAGS 			=	-g -Wall -Wextra -Werror
 RM				=	rm -f
 
 # Source files
-PARS_FILES		=	filename.c \
+PARS_FILES		=	file_validation.c \
 					set.c \
-					line.c
+					content_validation.c \
+					aton.c
 CLEAN_FILES		=	struct_cleaning.c
+ERR_FILES		=	print_error.c
 
 SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
+					$(addprefix $(CLEAN_DIR)/, $(CLEAN_FILES)) \
+					$(addprefix $(ERR_DIR)/, $(ERR_FILES)) \
 
 SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/main.c \
-          $(SRC_DIR)/$(DRAWING)/draw_figure.c \
+					$(SRC_DIR)/$(DRAWING)/draw_figure.c \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c
 
 # Object files

@@ -14,6 +14,12 @@
 
 int main()
 {
+	/*
+	if arg_check(argc)
+		return (1);
+	else
+		
+		*/
 	draw_figure();
 	return (0);
 }
