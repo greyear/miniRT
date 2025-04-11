@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line.c                                             :+:      :+:    :+:   */
+/*   content_validation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:16:04 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 13:46:48 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:23:40 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,19 @@ void	unify_spaces(char *str)
 	}
 }
 
+int	cleaning_line(char **str)
+{
+	char	*trimmed;
+
+	trimmed = ft_strtrim(*str, " \t\n\r\f\v");
+	free(*str);
+	*str = trimmed;
+	if (!trimmed || trimmed[0] == '\0')
+	{
+		
+		return (FAILURE);
+	}
+	unify_spaces(*str);
+	return (SUCCESS);
+}
 

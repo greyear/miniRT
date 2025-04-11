@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/09 15:13:15 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:25:08 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int			dir_check(char *name);
 
 //Parsing
 void		unify_spaces(char *str);
+int			cleaning_line(char **str);
 
 //Drawing
 void		draw_figure(void);
