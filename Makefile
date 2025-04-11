@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
+#    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/09 15:14:43 by msavelie         ###   ########.fr        #
+#    Updated: 2025/04/11 17:45:07 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ MLX_DIR			=	./MLX42
 SRC_DIR 		=	./src
 OBJ_DIR 		=	./obj
 DRAWING			=	./drawing
+RAYS			=	./rays
 
 PARS_DIR		=	parsing
 CLEAN_DIR		=	cleaners
@@ -59,8 +60,10 @@ SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
 
 SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/main.c \
-          $(SRC_DIR)/$(DRAWING)/draw_figure.c \
-					$(SRC_DIR)/$(DRAWING)/calculate_colors.c
+         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
+					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
+					\
+					$(SRC_DIR)/$(RAYS)/calculate_rays.c
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

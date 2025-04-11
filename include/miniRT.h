@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/09 15:13:15 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:47:40 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	dir_check(char *name);
 void		draw_figure(void);
 uint32_t	rgb_to_rgba(uint32_t color);
 uint32_t	gradient(int fst_color, int lst_color, int steps, int cur_step);
+void		render(void);
 
 #endif
