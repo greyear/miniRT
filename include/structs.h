@@ -32,6 +32,18 @@ typedef enum e_obj_type
 	PLANE
 }	t_obj_type;
 
+typedef enum e_element_type
+{
+	E_AMBIENT,
+	E_CAMERA,
+	E_LIGHT,
+	E_SPHERE,
+	E_PLANE,
+	E_CYLINDER,
+	E_TYPES_AMOUNT
+}	t_element_type;
+
+
 typedef enum e_return
 {
 	FAILURE = 0,

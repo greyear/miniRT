@@ -33,10 +33,7 @@ int	cleaning_line(char **str)
 	free(*str);
 	*str = trimmed;
 	if (!trimmed || trimmed[0] == '\0')
-	{
-		
 		return (FAILURE);
-	}
 	unify_spaces(*str);
 	return (SUCCESS);
 }
