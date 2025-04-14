@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filename.c                                         :+:      :+:    :+:   */
+/*   file_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:15:54 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:08:08 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:56:25 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	validation(char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (print_err(READ_FILE_MSG));
+
+	/*validate_content*/
 
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:16:04 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/11 15:23:40 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:11:49 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,4 @@ int	cleaning_line(char **str)
 	return (SUCCESS);
 }
 
+int	validate_content()

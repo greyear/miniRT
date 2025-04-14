@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:26:26 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:51:09 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef enum e_element_type
 	E_TYPES_AMOUNT
 }	t_element_type;
 
-
 typedef enum e_return
 {
 	FAILURE = 0,
@@ -56,7 +55,6 @@ typedef struct s_vector
 	double	y;
 	double	z;
 }	t_vector;
-
 
 typedef struct s_obj
 {
@@ -89,11 +87,12 @@ typedef struct s_camera
 	double		view_field;
 }	t_camera;
 
-
 typedef struct s_miniRT
 {
 	t_obj		*objects;
 	t_ambient	amb_light;
 	t_light		light;
 	t_camera	camera;
+	const char	*e_names[E_TYPES_AMOUNT];
+	int			*e_count[E_TYPES_AMOUNT];
 }	t_miniRT;
