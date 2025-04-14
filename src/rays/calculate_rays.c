@@ -19,6 +19,7 @@ static t_obj	init_obj(void)
 
 	def_obj.type = SPHERE;
 	def_obj.color = (t_vector) {0, 1, 0};
+	def_obj.emission_color = (t_vector) {0, 0, 0};
 	def_obj.coordinates = (t_vector){ 10.0, 20.0, 10.0 };
 	def_obj.normalized = (t_vector){ 0.0, 1.0, 0.0 };
 	def_obj.width = 0;
@@ -139,7 +140,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 	else
 	{
 		for (int i = 0; i < obj->obj_count; ++i) {
-			if (spheres[i].color.x > 0)
+			if (spheres[i].emission_color.x > 0)
 			{
 				t_vector transmission = (t_vector) {1, 1, 1};
 				t_vector light_direction = calculate_with_vector(spheres[i].coordinates, phit, SUBTRACT);
@@ -167,7 +168,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 						calculate_with_vector(
 							calculate_with_number(transmission,
 								max(0, dot(nhit, light_direction)), MULTIPLY),
-							spheres[i].color,
+							spheres[i].emission_color,
 							MULTIPLY),
 						MULTIPLY),
 					ADD);
@@ -175,7 +176,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 		}
 	}
 	
-	return (calculate_with_vector(surface_color, sphere->color, ADD));
+	return (calculate_with_vector(surface_color, sphere->emission_color, ADD));
 }
 
 t_vector	*render(t_miniRT *obj) {

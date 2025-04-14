@@ -46,8 +46,8 @@ typedef struct s_obj
 	double		width;
 	double		height;
 	double		diameter;
-	//t_color		color;
 	t_vector	color;
+	t_vector	emission_color;
 	double		reflection;
 	double		transparency;
 }	t_obj;
