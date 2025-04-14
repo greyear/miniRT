@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 16:52:11 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:51:19 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
-
 typedef struct s_obj
 {
 	t_obj_type	type;
@@ -47,7 +46,10 @@ typedef struct s_obj
 	double		width;
 	double		height;
 	double		diameter;
-	t_color		color;
+	//t_color		color;
+	t_vector	color;
+	double		reflection;
+	double		transparency;
 }	t_obj;
 
 typedef struct s_ambient
@@ -83,3 +85,11 @@ typedef struct s_miniRT
 	t_light		light;
 	t_camera	camera;
 }	t_miniRT;
+
+typedef enum s_calc
+{
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE
+}	t_calc;

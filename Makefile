@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/11 17:45:07 by msavelie         ###   ########.fr        #
+#    Updated: 2025/04/14 14:18:39 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
          			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
 					\
-					$(SRC_DIR)/$(RAYS)/calculate_rays.c
+					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
+					$(SRC_DIR)/$(RAYS)/ray_utils.c
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

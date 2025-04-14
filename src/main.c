@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/11 17:48:27 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:21:48 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main()
 {
-	render();
-	draw_figure();
+	t_vector	*image;
+	image = render();
+	draw_figure(image);
 	return (0);
 }

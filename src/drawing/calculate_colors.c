@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:49:50 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/09 14:49:59 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:26:59 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,18 @@ uint32_t	gradient(int fst_color, int lst_color, int steps, int cur_step)
 		| (((uint8_t)(color.b_start
 					+ (steps - cur_step) * step_b) & 0xFF) << 0);
 	return (color.cur_color);
+}
+
+uint32_t	vec_to_rgb(t_vector color)
+{
+	uint8_t		r;
+	uint8_t		g;
+	uint8_t		b;
+	uint32_t	rgba;
+
+	r = ((int)(min(0, color.x) * 255) >> 16) & 0xFF;
+	g = ((int)(min(0, color.y) * 255) >> 8) & 0xFF;
+	b = (int)(min(0, color.z) * 255) & 0xFF;
+	rgba = r | (g << 16) | (b << 8) | (0xFF << 24);
+	return (rgba);
 }
