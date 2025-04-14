@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   struct_cleaning.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:11:30 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:17:18 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:49:56 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-void	struct_clean(t_miniRT *rt)
+void	clean_struct(t_miniRT *rt)
 {
-	//another fields
+	if (!rt)
+		return ;
 	if (rt->objects)
 	{
-		object_clean(rt);
 		free(rt->objects);
+		rt->objects = NULL;
 	}
-	if (rt)
-		free(rt);
 }

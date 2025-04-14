@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/14 13:51:19 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:18:45 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,11 @@ typedef struct s_ray
 typedef struct s_miniRT
 {
 	t_obj		*objects;
-	t_ambient	amb_light;
-	t_light		light;
-	t_camera	camera;
+	t_ambient	*amb_light;
+	t_light		*light;
+	t_camera	*camera;
+	mlx_t		*mlx;
+	int			obj_count;
 }	t_miniRT;
 
 typedef enum s_calc

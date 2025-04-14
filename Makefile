@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/14 14:18:39 by msavelie         ###   ########.fr        #
+#    Updated: 2025/04/14 15:15:49 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,15 @@ WHITE = \033[0;97m
 NAME 			=	miniRT
 
 # Directories
-LIBFT_DIR		= 	./libft
-MLX_DIR			=	./MLX42
-SRC_DIR 		=	./src
-OBJ_DIR 		=	./obj
-DRAWING			=	./drawing
-RAYS			=	./rays
-
+LIBFT_DIR		= 	libft
+MLX_DIR			=	MLX42
+SRC_DIR 		=	src
+OBJ_DIR 		=	obj
+DRAWING			=	drawing
+RAYS			=	rays
+CONTROLS		=	controls
 PARS_DIR		=	parsing
-CLEAN_DIR		=	cleaners
+CLEAN_DIR		=	clean
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -64,7 +64,11 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
 					\
 					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
-					$(SRC_DIR)/$(RAYS)/ray_utils.c
+					$(SRC_DIR)/$(RAYS)/ray_utils.c \
+					\
+					$(SRC_DIR)/$(CLEAN_DIR)/struct_cleaning.c \
+					\
+					$(SRC_DIR)/$(CONTROLS)/hooks.c
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

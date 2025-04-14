@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:25:02 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 14:06:00 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:27:04 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vector	calculate_with_vector(t_vector vec1, t_vector vec2, t_calc operation)
 	return (result);
 }
 
-double	mix(double a, double b, double mix)
+double	lerp(double a, double b, double mix)
 {
 	return (b * mix + a * (1 - mix));
 }
@@ -49,6 +49,8 @@ double	mix(double a, double b, double mix)
 t_vector	calculate_with_number(t_vector vec, double num, t_calc operation)
 {
 	t_vector	result;
+
+	result = vec;
 	if (operation == ADD)
 		result = (t_vector) {vec.x + num, vec.y + num, vec.z + num};
 	else if (operation == SUBTRACT)
@@ -56,7 +58,10 @@ t_vector	calculate_with_number(t_vector vec, double num, t_calc operation)
 	else if (operation == MULTIPLY)
 		result = (t_vector) {vec.x * num, vec.y * num, vec.z * num};
 	else
-		result = (t_vector) {vec.x / num, vec.y / num, vec.z / num};
+	{
+		if (num > 0)
+			result = (t_vector) {vec.x / num, vec.y / num, vec.z / num};
+	}
 	return (result);
 }
 

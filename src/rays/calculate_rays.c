@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 14:41:41 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:31:45 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_obj	init_obj(void)
 	t_obj		def_obj;
 
 	def_obj.type = SPHERE;
-	def_obj.color = (t_vector) {1, 0, 0};
+	def_obj.color = (t_vector) {0, 1, 0};
 	def_obj.coordinates = (t_vector){ 10.0, 20.0, 10.0 };
 	def_obj.normalized = (t_vector){ 0.0, 1.0, 0.0 };
 	def_obj.width = 0;
@@ -40,7 +40,7 @@ static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, double *t
 	double		d2 = pow(ray_length.x, 2) + pow(ray_length.y, 2) + pow(ray_length.z, 2) - tca * tca;
 	if (d2 > radius2)
 		return false;
-	float thc = sqrt(radius2 - d2);
+	double thc = sqrt(radius2 - d2);
 	*t0 = tca - thc;
 	*t1 = tca + thc;
 	return (true);
@@ -58,12 +58,12 @@ static void normalize(t_vector *vector_to_norm)
 	}
 }
 
-t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int depth)
+t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int depth, t_miniRT *obj)
 {
 	double	tnear = INFINITY;
 	t_obj	*sphere = NULL;
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < obj->obj_count; i++) {
 		double t0 = INFINITY, t1 = INFINITY;
 		if (intersect(rayorig, raydir, spheres[i], &t0, &t1))
 		{
@@ -78,7 +78,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 	}
 
 	if (!sphere)
-		return ((t_vector) {2, 2, 2});
+		return ((t_vector) {0, 0, 1});
 
 	t_vector	surface_color = (t_vector) {0, 0, 0};
 	t_vector	phit = calculate_with_vector(calculate_with_vector(rayorig, raydir, ADD), (t_vector) {tnear, tnear, tnear}, MULTIPLY);
@@ -95,7 +95,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 	if ((sphere->transparency > 0 || sphere->reflection > 0) && depth < MAX_DEPTH)
 	{
 		double facingratio = dot(revert_vector(raydir), nhit);
-		double fresneleffect = mix(pow(1 - facingratio, 3), 1, 0.1);
+		double fresneleffect = lerp(pow(1 - facingratio, 3), 1, 0.1);
 
 		t_vector refldir = 
 		calculate_with_vector(raydir,
@@ -106,7 +106,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 		t_vector refl_rayorigin = calculate_with_vector(phit,
 			calculate_with_number(nhit, bias, MULTIPLY),
 			ADD);
-		t_vector reflection = calculate_rays(refl_rayorigin, refldir, spheres, depth + 1);
+		t_vector reflection = calculate_rays(refl_rayorigin, refldir, spheres, depth + 1, obj);
 		t_vector refraction = (t_vector) {0, 0, 0};
 		if (sphere->transparency) {
 			double ior = 1.1;
@@ -126,7 +126,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 			t_vector refr_rayorigin = calculate_with_vector(phit,
 			calculate_with_number(nhit, bias, MULTIPLY),
 			ADD);
-			refraction = calculate_rays(refr_rayorigin, refrdir, spheres, depth + 1);
+			refraction = calculate_rays(refr_rayorigin, refrdir, spheres, depth + 1, obj);
 		}
 		surface_color = calculate_with_vector(
 			calculate_with_vector(
@@ -138,13 +138,13 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 	}
 	else
 	{
-		for (int i = 0; i < 2; ++i) {
+		for (int i = 0; i < obj->obj_count; ++i) {
 			if (spheres[i].color.x > 0)
 			{
 				t_vector transmission = (t_vector) {1, 1, 1};
 				t_vector light_direction = calculate_with_vector(spheres[i].coordinates, phit, SUBTRACT);
 				normalize(&light_direction);
-				for (int j = 0; j < 2; ++j) {
+				for (int j = 0; j < obj->obj_count; ++j) {
 					if (i != j)
 					{
 						double t0, t1;
@@ -178,11 +178,15 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 	return (calculate_with_vector(surface_color, sphere->color, ADD));
 }
 
-t_vector	*render(void) {
-	t_obj	spheres[2];
-
-	spheres[0] = init_obj();
-	spheres[1] = init_obj();
+t_vector	*render(t_miniRT *obj) {
+	obj->objects = ft_calloc(obj->obj_count, sizeof(t_obj));
+	if (!obj->objects)
+	{
+		printf("Malloc error\n");
+		exit(1);
+	}
+	for (int i = 0; i < obj->obj_count; i++)
+		obj->objects[i] = init_obj();
 	double invWidth = 1 / (double) WIN_WIDTH, invHeight = 1 / (double) WIN_HEIGHT;
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
 	if (!pixel)
@@ -200,7 +204,7 @@ t_vector	*render(void) {
 			double yy = (1 - 2 * ((y + 0.5) * invHeight) - 1) * angle;
 			t_vector raydir = (t_vector) { xx, yy, -1 };
 			normalize(&raydir);
-			pixel[x + WIN_WIDTH * y] = calculate_rays(((t_vector) {0, 0, 0}), raydir, spheres, 0);
+			pixel[x + WIN_WIDTH * y] = calculate_rays(((t_vector) {0, 0, 0}), raydir, obj->objects, 0, obj);
 		}
 	}
 	return (pixel);

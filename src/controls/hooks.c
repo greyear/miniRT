@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 15:18:54 by msavelie         ###   ########.fr       */
+/*   Created: 2025/04/14 14:45:40 by msavelie          #+#    #+#             */
+/*   Updated: 2025/04/14 14:53:51 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniRT.h"
+#include "../../include/miniRT.h"
 
-static t_miniRT	init_struct(void)
+void	keys_hook(void *obj)
 {
-	t_miniRT	obj;
+	t_miniRT	*instance;
 
-	obj.mlx = NULL;
-	obj.amb_light = NULL;
-	obj.camera = NULL;
-	obj.light = NULL;
-	obj.objects = NULL;
-	obj.obj_count = 2;
-
-	return (obj);
-}
-
-int main()
-{
-	t_miniRT	obj;
-	t_vector	*image;
-
-	obj = init_struct();
-	image = render(&obj);
-	draw_figure(image, &obj);
-	clean_struct(&obj);
-	return (0);
+	instance = (t_miniRT *) obj;
+	if (mlx_is_key_down(instance->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(instance->mlx);
 }
