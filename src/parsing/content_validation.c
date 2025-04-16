@@ -12,7 +12,7 @@
 
 #include "../../include/miniRT.h"
 
-void	unify_spaces(char *str)
+static void	unify_spaces(char *str)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	unify_spaces(char *str)
 	}
 }
 
-int	cleaning_line(char **str)
+static int	cleaning_line(char **str)
 {
 	char	*trimmed;
 
@@ -38,4 +38,43 @@ int	cleaning_line(char **str)
 	return (SUCCESS);
 }
 
-int	validate_content()
+static int	at_least_one_element(t_miniRT *m)
+{
+	int	i;
+
+	i = 0;
+	while (i < E_TYPES_AMOUNT)
+	{
+		if (m->e_count[i])
+			return (SUCCESS);
+		i++;
+	}
+	return (FAILURE);
+}
+
+int	validate_content(t_miniRT *m)
+{
+	char	*line;
+
+	line = get_next_line(m->fd);
+	while (line)
+	{
+		if (cleaning_line(&line))
+		{
+			free(line);
+			line = get_next_line(m->fd);
+			continue ;
+		}
+		/*if (!validate_line(line, m))
+		{
+			free(line);
+			clean_gnl(m->fd); //?
+			return (FAILURE);
+		}*/
+		free(line);
+		line = get_next_line(m->fd);
+	}
+	if (at_least_one_element(m) == FAILURE)
+		return (print_err(NO_ELEM_MSG));
+	return (SUCCESS);
+}

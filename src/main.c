@@ -14,16 +14,14 @@
 
 void	init_minirt(t_miniRT *m)
 {
-	const char	*e_names[E_TYPES_AMOUNT];
-
-	e_names[0] = "A";
-	e_names[1] = "C",
-	e_names[2] = "L",
-	e_names[3] = "sp",
-	e_names[4] = "pl",
-	e_names[5] = "cy";
 	ft_bzero(m, sizeof(*m));
-	ft_memcpy(m->e_names, e_names, sizeof(e_names));
+
+	m->e_names[0] = "A";
+	m->e_names[1] = "C",
+	m->e_names[2] = "L",
+	m->e_names[3] = "sp",
+	m->e_names[4] = "pl",
+	m->e_names[5] = "cy";
 }
 
 int main()
@@ -33,11 +31,9 @@ int main()
 	init_minirt(&m);
 	
 	/*
-	if arg_check(argc)
-		return (1);
-	else
-		
+	validation(t_miniRT *m)
 		*/
+
 	draw_figure();
 	return (0);
 }

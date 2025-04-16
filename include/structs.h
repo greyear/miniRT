@@ -45,8 +45,8 @@ typedef enum e_element_type
 
 typedef enum e_return
 {
-	FAILURE = 0,
-	SUCCESS = 1
+	SUCCESS = 0,
+	FAILURE = 1
 }	t_return;
 
 typedef struct s_vector
@@ -95,4 +95,5 @@ typedef struct s_miniRT
 	t_camera	camera;
 	const char	*e_names[E_TYPES_AMOUNT];
 	int			*e_count[E_TYPES_AMOUNT];
+	int			fd;
 }	t_miniRT;

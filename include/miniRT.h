@@ -24,13 +24,12 @@
 # include <math.h>
 
 //Validation
-int			arg_check(int argc);
-int			name_check(char *name);
-int			dir_check(char *name);
+int			validation(t_miniRT *m, int argc, char *argv[]);
+int			validate_content(t_miniRT *m);
 
 //Parsing
-void		unify_spaces(char *str);
-int			cleaning_line(char **str);
+int			define_element_type(char *line, t_miniRT *m);
+
 
 //Drawing
 void		draw_figure(void);

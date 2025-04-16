@@ -31,6 +31,7 @@ FTCLEAN_DIR		=	$(SRC_DIR)ft_clean/ft_clean_arr.c \
 FTIS_DIR		=	$(SRC_DIR)ft_is/ft_isalnum.c \
 					$(SRC_DIR)ft_is/ft_isalpha.c \
 					$(SRC_DIR)ft_is/ft_isascii.c \
+					$(SRC_DIR)ft_is/ft_iscapital.c \
 					$(SRC_DIR)ft_is/ft_isdigit.c \
 					$(SRC_DIR)ft_is/ft_isprint.c \
 					$(SRC_DIR)ft_is/ft_issign.c \

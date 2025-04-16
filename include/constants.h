@@ -27,3 +27,7 @@
 # define WRONG_FILENAME_MSG "File is not *.rt\n"
 # define FOLDER_MSG "Argument should be a *.rt file\n"
 # define READ_FILE_MSG "File cannot be read\n"
+# define NO_ELEM_MSG "No elements found\n"
+# define DB_ELEM_MSG "Elements which are defined by a capital letter can only \
+	be declared once\n"
+# define VALID_MSG "Scene file has invalid lines\n"

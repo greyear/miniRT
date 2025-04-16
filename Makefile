@@ -54,6 +54,7 @@ RM				=	rm -f
 PARS_FILES		=	file_validation.c \
 					set.c \
 					content_validation.c \
+					line_validation.c \
 					aton.c
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c

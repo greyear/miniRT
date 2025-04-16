@@ -12,14 +12,14 @@
 
 #include "../../include/miniRT.h"
 
-int	arg_check(int argc)
+static int	arg_check(int argc)
 {
 	if (argc != 2)
 		return (print_err(ARG_ERR_MSG));
 	return (SUCCESS);
 }
 
-int	name_check(char *name)
+static int	name_check(char *name)
 {
 	int	l;
 
@@ -30,7 +30,7 @@ int	name_check(char *name)
 	return (SUCCESS);
 }
 
-int	dir_check(char *name)
+static int	dir_check(char *name)
 {
 	DIR	*dir;
 
@@ -43,17 +43,19 @@ int	dir_check(char *name)
 	return (SUCCESS);
 }
 
-int	validation(char *argv[])
+int	validation(t_miniRT *m, int argc, char *argv[])
 {
-	int	fd;
-
-	if (!name_check(argv[1]) || !dir_check(argv[1]))
+	if (arg_check(argc) || name_check(argv[1]) || dir_check(argv[1]))
 		return(FAILURE);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
+	m->fd = open(argv[1], O_RDONLY);
+	if (m->fd < 0)
 		return (print_err(READ_FILE_MSG));
 
-	/*validate_content*/
-
+	/*if (!validate_content(t_miniRT *m))
+	{
+		//clean?
+		return(FAILURE);
+	}
+		*/
 	return (SUCCESS);
 }
