@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:29 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 14:59:08 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:12:51 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	draw_figure(t_vector *image, t_miniRT *obj)
 	mlx_loop_hook(obj->mlx, keys_hook, obj);
 	mlx_loop(obj->mlx);
 	mlx_terminate(obj->mlx);
+	if (image)
+		free(image);
 }
 

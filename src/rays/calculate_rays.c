@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 15:31:45 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:50:48 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,31 @@ static t_obj	init_obj(void)
 	def_obj.type = SPHERE;
 	def_obj.color = (t_vector) {0, 1, 0};
 	def_obj.emission_color = (t_vector) {0, 0, 0};
-	def_obj.coordinates = (t_vector){ 10.0, 20.0, 10.0 };
-	def_obj.normalized = (t_vector){ 0.0, 1.0, 0.0 };
+	def_obj.coordinates = (t_vector){ 0.0, 0.0, 0.0 };
+	def_obj.normalized = (t_vector){ 0.0, 0.0, 0.0 };
 	def_obj.width = 0;
 	def_obj.diameter = 10.5;
 	def_obj.height = 0;
-	def_obj.transparency = 1;
+	def_obj.transparency = 0;
 	def_obj.reflection = 0;
 	return (def_obj);
+}
+
+t_obj	init_light(void)
+{
+	t_obj	light = {
+		.coordinates = (t_vector){-40, 50, 0},
+		.type = SPHERE,
+		.color = (t_vector) {0, 0, 0},
+		.emission_color = (t_vector) {3, 3, 3},
+		.diameter = 10,
+		.transparency = 0,
+		.reflection = 0,
+		.width = 0,
+		.height = 0
+	};
+
+	return (light);
 }
 
 static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, double *t0, double *t1) 
@@ -36,8 +53,8 @@ static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, double *t
 	t_vector	center = sphere.coordinates;
 	t_vector	ray_length = calculate_with_vector(center, rayorig, SUBTRACT);
 	double		tca = ray_length.x * raydir.x + ray_length.y * raydir.y + ray_length.z * raydir.z;
-	if (tca < 0)
-		return (false);
+	// if (tca < 0)
+	// 	return (false);
 	double		d2 = pow(ray_length.x, 2) + pow(ray_length.y, 2) + pow(ray_length.z, 2) - tca * tca;
 	if (d2 > radius2)
 		return false;
@@ -68,6 +85,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 		double t0 = INFINITY, t1 = INFINITY;
 		if (intersect(rayorig, raydir, spheres[i], &t0, &t1))
 		{
+			//printf("Intersection\n");
 			if (t0 < 0)
 				t0 = t1;
 			if (t0 < tnear)
@@ -80,6 +98,8 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 
 	if (!sphere)
 		return ((t_vector) {0, 0, 1});
+	
+	//printf("sphere found!\n");
 
 	t_vector	surface_color = (t_vector) {0, 0, 0};
 	t_vector	phit = calculate_with_vector(calculate_with_vector(rayorig, raydir, ADD), (t_vector) {tnear, tnear, tnear}, MULTIPLY);
@@ -154,7 +174,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 							calculate_with_number(nhit, bias, MULTIPLY),
 							ADD
 						);
-						if (intersect(light_rayorig, light_direction, spheres[i], &t0, &t1))
+						if (intersect(light_rayorig, light_direction, spheres[j], &t0, &t1))
 						{
 							transmission = (t_vector) {0, 0, 0};
 							break ;
@@ -180,7 +200,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 }
 
 t_vector	*render(t_miniRT *obj) {
-	obj->objects = ft_calloc(obj->obj_count, sizeof(t_obj));
+	obj->objects = ft_calloc(obj->obj_count + 1, sizeof(t_obj));
 	if (!obj->objects)
 	{
 		printf("Malloc error\n");
@@ -188,6 +208,7 @@ t_vector	*render(t_miniRT *obj) {
 	}
 	for (int i = 0; i < obj->obj_count; i++)
 		obj->objects[i] = init_obj();
+	obj->objects[obj->obj_count] = init_light();
 	double invWidth = 1 / (double) WIN_WIDTH, invHeight = 1 / (double) WIN_HEIGHT;
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
 	if (!pixel)
@@ -205,7 +226,7 @@ t_vector	*render(t_miniRT *obj) {
 			double yy = (1 - 2 * ((y + 0.5) * invHeight) - 1) * angle;
 			t_vector raydir = (t_vector) { xx, yy, -1 };
 			normalize(&raydir);
-			pixel[x + WIN_WIDTH * y] = calculate_rays(((t_vector) {0, 0, 0}), raydir, obj->objects, 0, obj);
+			pixel[x + WIN_WIDTH * y] = calculate_rays(obj->camera->coordinates, raydir, obj->objects, 0, obj);
 		}
 	}
 	return (pixel);

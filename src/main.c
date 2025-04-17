@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 15:18:54 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:36:37 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,16 @@ static t_miniRT	init_struct(void)
 
 	obj.mlx = NULL;
 	obj.amb_light = NULL;
-	obj.camera = NULL;
+	obj.camera = ft_calloc(1, sizeof(t_camera));
+	if (!obj.camera)
+	{
+		printf("Malloc error\n");
+		exit(1);
+	}
+	obj.camera->coordinates = (t_vector) {0, -10, -20};
 	obj.light = NULL;
 	obj.objects = NULL;
-	obj.obj_count = 2;
+	obj.obj_count = 1;
 
 	return (obj);
 }
