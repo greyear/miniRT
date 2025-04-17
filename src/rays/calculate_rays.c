@@ -6,21 +6,21 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/17 13:50:48 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:34:48 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
 // here will be an obj from parsing
-static t_obj	init_obj(void)
+static t_obj	init_obj(t_vector coordinates, t_vector em_color)
 {
 	t_obj		def_obj;
 
 	def_obj.type = SPHERE;
 	def_obj.color = (t_vector) {0, 1, 0};
-	def_obj.emission_color = (t_vector) {0, 0, 0};
-	def_obj.coordinates = (t_vector){ 0.0, 0.0, 0.0 };
+	def_obj.emission_color = em_color;
+	def_obj.coordinates = coordinates;
 	def_obj.normalized = (t_vector){ 0.0, 0.0, 0.0 };
 	def_obj.width = 0;
 	def_obj.diameter = 10.5;
@@ -33,9 +33,9 @@ static t_obj	init_obj(void)
 t_obj	init_light(void)
 {
 	t_obj	light = {
-		.coordinates = (t_vector){-40, 50, 0},
+		.coordinates = (t_vector){-20, 30, 0},
 		.type = SPHERE,
-		.color = (t_vector) {0, 0, 0},
+		.color = (t_vector) {1, 1, 1},
 		.emission_color = (t_vector) {3, 3, 3},
 		.diameter = 10,
 		.transparency = 0,
@@ -85,7 +85,6 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 		double t0 = INFINITY, t1 = INFINITY;
 		if (intersect(rayorig, raydir, spheres[i], &t0, &t1))
 		{
-			//printf("Intersection\n");
 			if (t0 < 0)
 				t0 = t1;
 			if (t0 < tnear)
@@ -97,9 +96,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 	}
 
 	if (!sphere)
-		return ((t_vector) {0, 0, 1});
-	
-	//printf("sphere found!\n");
+		return ((t_vector) {1, 1, 0.5});
 
 	t_vector	surface_color = (t_vector) {0, 0, 0};
 	t_vector	phit = calculate_with_vector(calculate_with_vector(rayorig, raydir, ADD), (t_vector) {tnear, tnear, tnear}, MULTIPLY);
@@ -174,24 +171,21 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 							calculate_with_number(nhit, bias, MULTIPLY),
 							ADD
 						);
-						if (intersect(light_rayorig, light_direction, spheres[j], &t0, &t1))
+						if (i != j && spheres[j].emission_color.x <= 0
+							&& intersect(light_rayorig, light_direction, spheres[j], &t0, &t1))
 						{
 							transmission = (t_vector) {0, 0, 0};
 							break ;
 						}
 					}
 				}
-				surface_color = calculate_with_vector(
-					surface_color,
-					calculate_with_vector(
-						surface_color,
-						calculate_with_vector(
-							calculate_with_number(transmission,
-								max(0, dot(nhit, light_direction)), MULTIPLY),
-							spheres[i].emission_color,
-							MULTIPLY),
-						MULTIPLY),
-					ADD);
+				double light_intensity = max(0, dot(nhit, light_direction));
+				t_vector light_contribution = calculate_with_vector(
+					sphere->color,
+					calculate_with_number(spheres[i].emission_color, light_intensity, MULTIPLY),
+					MULTIPLY);
+				light_contribution = calculate_with_vector(light_contribution, transmission, MULTIPLY);
+				surface_color = calculate_with_vector(surface_color, light_contribution, ADD);
 			}
 		}
 	}
@@ -206,8 +200,13 @@ t_vector	*render(t_miniRT *obj) {
 		printf("Malloc error\n");
 		exit(1);
 	}
+	t_vector coordinates = {0, 0, -20}, em_color = {1, 0, 1};
 	for (int i = 0; i < obj->obj_count; i++)
-		obj->objects[i] = init_obj();
+	{
+		obj->objects[i] = init_obj(coordinates, em_color);
+		coordinates = calculate_with_number(coordinates, 5, SUBTRACT);
+		em_color.x -= 0.1;
+	}
 	obj->objects[obj->obj_count] = init_light();
 	double invWidth = 1 / (double) WIN_WIDTH, invHeight = 1 / (double) WIN_HEIGHT;
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
@@ -223,7 +222,7 @@ t_vector	*render(t_miniRT *obj) {
 	for (int y = 0; y < WIN_HEIGHT; ++y) {
 		for (int x = 0; x < WIN_WIDTH; ++x) {
 			double xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspect_ratio;
-			double yy = (1 - 2 * ((y + 0.5) * invHeight) - 1) * angle;
+			double yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
 			t_vector raydir = (t_vector) { xx, yy, -1 };
 			normalize(&raydir);
 			pixel[x + WIN_WIDTH * y] = calculate_rays(obj->camera->coordinates, raydir, obj->objects, 0, obj);
