@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   struct_cleaning.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 14:20:50 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/14 11:50:07 by msavelie         ###   ########.fr       */
+/*   Created: 2025/04/09 14:11:30 by azinchen          #+#    #+#             */
+/*   Updated: 2025/04/17 13:13:25 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef WIN_WIDTH
-#  define WIN_WIDTH 2000
-# endif
+#include "../../include/miniRT.h"
 
-# ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1000
-# endif
-
-# ifndef HEX_LEN
-#  define HEX_LEN 8
-# endif
-
-# ifndef MAX_DEPTH
-#  define MAX_DEPTH 3
-# endif
+void	clean_struct(t_miniRT *rt)
+{
+	if (!rt)
+		return ;
+	if (rt->objects)
+	{
+		free(rt->objects);
+		rt->objects = NULL;
+	}
+	if (rt->light)
+	{
+		free(rt->light);
+		rt->light = NULL;
+	}
+}

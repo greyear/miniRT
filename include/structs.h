@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:26:26 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:18:45 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
-
 typedef struct s_obj
 {
 	t_obj_type	type;
@@ -47,7 +46,10 @@ typedef struct s_obj
 	double		width;
 	double		height;
 	double		diameter;
-	t_color		color;
+	t_vector	color;
+	t_vector	emission_color;
+	double		reflection;
+	double		transparency;
 }	t_obj;
 
 typedef struct s_ambient
@@ -60,7 +62,6 @@ typedef struct s_light
 {
 	t_vector	coordinates;
 	double		ratio;
-	t_color		color;
 }	t_light;
 
 typedef struct s_camera
@@ -68,13 +69,29 @@ typedef struct s_camera
 	t_vector	coordinates;
 	t_vector	normalized;
 	double		view_field;
+	double		viewporw_size;
 }	t_camera;
 
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	destination;
+}	t_ray;
 
 typedef struct s_miniRT
 {
 	t_obj		*objects;
-	t_ambient	amb_light;
-	t_light		light;
-	t_camera	camera;
+	t_ambient	*amb_light;
+	t_light		*light;
+	t_camera	*camera;
+	mlx_t		*mlx;
+	int			obj_count;
 }	t_miniRT;
+
+typedef enum s_calc
+{
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE
+}	t_calc;

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_cleaning.c                                  :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 14:11:30 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:17:18 by azinchen         ###   ########.fr       */
+/*   Created: 2025/04/14 14:45:40 by msavelie          #+#    #+#             */
+/*   Updated: 2025/04/14 14:53:51 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-void	struct_clean(t_miniRT *rt)
+void	keys_hook(void *obj)
 {
-	//another fields
-	if (rt->objects)
-	{
-		object_clean(rt);
-		free(rt->objects);
-	}
-	if (rt)
-		free(rt);
+	t_miniRT	*instance;
+
+	instance = (t_miniRT *) obj;
+	if (mlx_is_key_down(instance->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(instance->mlx);
 }
