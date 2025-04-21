@@ -78,3 +78,19 @@ double	max(double a, double b)
 		return (a);
 	return (b);
 }
+
+void	clamp(t_vector *pixel)
+{
+	if (pixel->x < 0)
+		pixel->x = 0;
+	else if (pixel->x > 1)
+		pixel->x = 1;
+	if (pixel->y < 0)
+		pixel->y = 0;
+	else if (pixel->y > 1)
+		pixel->y = 1;
+	if (pixel->z < 0)
+		pixel->z = 0;
+	else if (pixel->z > 1)
+		pixel->z = 1;
+}

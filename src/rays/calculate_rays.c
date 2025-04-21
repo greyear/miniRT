@@ -18,7 +18,7 @@ static t_obj	init_obj(t_vector coordinates, t_vector em_color)
 	t_obj		def_obj;
 
 	def_obj.type = SPHERE;
-	def_obj.color = (t_vector) {0, 1, 0};
+	def_obj.color = (t_vector) {0, 0, -3};
 	def_obj.emission_color = em_color;
 	def_obj.coordinates = coordinates;
 	def_obj.normalized = (t_vector){ 0.0, 0.0, 0.0 };
@@ -33,10 +33,10 @@ static t_obj	init_obj(t_vector coordinates, t_vector em_color)
 t_obj	init_light(void)
 {
 	t_obj	light = {
-		.coordinates = (t_vector){-20, 30, 0},
-		.type = SPHERE,
+		.coordinates = (t_vector){-10, 10, -10},
+		.type = LIGHT,
 		.color = (t_vector) {1, 1, 1},
-		.emission_color = (t_vector) {3, 3, 3},
+		.emission_color = (t_vector) {1, 1, 1},
 		.diameter = 10,
 		.transparency = 0,
 		.reflection = 0,
@@ -171,7 +171,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 							calculate_with_number(nhit, bias, MULTIPLY),
 							ADD
 						);
-						if (i != j && spheres[j].emission_color.x <= 0
+						if (i != j && spheres[j].emission_color.x <= 0 && spheres[j].type == SPHERE
 							&& intersect(light_rayorig, light_direction, spheres[j], &t0, &t1))
 						{
 							transmission = (t_vector) {0, 0, 0};
@@ -180,6 +180,8 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 					}
 				}
 				double light_intensity = max(0, dot(nhit, light_direction));
+				// if (light_intensity > 0)
+				// 	printf("light_intesity: %f\n", light_intensity);
 				t_vector light_contribution = calculate_with_vector(
 					sphere->color,
 					calculate_with_number(spheres[i].emission_color, light_intensity, MULTIPLY),
@@ -189,7 +191,6 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, int d
 			}
 		}
 	}
-	
 	return (calculate_with_vector(surface_color, sphere->emission_color, ADD));
 }
 
@@ -200,7 +201,7 @@ t_vector	*render(t_miniRT *obj) {
 		printf("Malloc error\n");
 		exit(1);
 	}
-	t_vector coordinates = {0, 0, -20}, em_color = {1, 0, 1};
+	t_vector coordinates = {0, -2, -20}, em_color = {0.6, 0, 1};
 	for (int i = 0; i < obj->obj_count; i++)
 	{
 		obj->objects[i] = init_obj(coordinates, em_color);
@@ -226,6 +227,7 @@ t_vector	*render(t_miniRT *obj) {
 			t_vector raydir = (t_vector) { xx, yy, -1 };
 			normalize(&raydir);
 			pixel[x + WIN_WIDTH * y] = calculate_rays(obj->camera->coordinates, raydir, obj->objects, 0, obj);
+			clamp(&pixel[x + WIN_WIDTH * y]);
 		}
 	}
 	return (pixel);

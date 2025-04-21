@@ -43,6 +43,7 @@ t_vector	calculate_with_number(t_vector vec, double num, t_calc operation);
 double		lerp(double a, double b, double mix);
 double		min(double a, double b);
 double		max(double a, double b);
+void		clamp(t_vector *pixel);
 
 //hooks
 void		keys_hook(void *obj);

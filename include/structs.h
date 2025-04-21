@@ -28,7 +28,8 @@ typedef struct s_color
 typedef enum e_obj_type {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
+	LIGHT
 }	t_obj_type;
 
 typedef struct s_vector
