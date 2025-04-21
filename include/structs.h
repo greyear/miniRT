@@ -60,6 +60,9 @@ typedef struct s_ambient
 typedef struct s_light
 {
 	t_vector	coordinates;
+	t_vector	color;
+	t_vector	emission_color;
+	float		diameter;
 	float		ratio;
 }	t_light;
 

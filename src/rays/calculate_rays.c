@@ -28,19 +28,13 @@ static t_obj	init_obj(t_vector coordinates, t_vector em_color)
 	return (def_obj);
 }
 
-t_obj	init_light(void)
+static void	init_light(t_light *light)
 {
-	t_obj	light = {
-		.coordinates = (t_vector){0, 0, 10},
-		.type = LIGHT,
-		.color = (t_vector) {1, 1, 1},
-		.emission_color = (t_vector) {1, 1, 1},
-		.diameter = 10,
-		.width = 0,
-		.height = 0
-	};
-
-	return (light);
+	light->coordinates = (t_vector){10, 0, 10};
+	light->color = (t_vector){1, 1, 1};
+	light->emission_color = (t_vector) {1, 1, 1},
+	light->diameter = 5.f;
+	light->ratio = 1.f;
 }
 
 static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0, float *t1) 
@@ -72,7 +66,7 @@ static void normalize(t_vector *vector_to_norm)
 	}
 }
 
-t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, t_miniRT *obj)
+static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, t_miniRT *obj)
 {
 	float	tnear = INFINITY;
 	t_obj	*sphere = NULL;
@@ -102,39 +96,38 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, t_min
 	float	bias = 1e-4;
 	if (dot(raydir, nhit) > 0)
 		nhit = revert_vector(nhit);
-	for (int i = 0; i < obj->obj_count; ++i) {
-		if (spheres[i].type == LIGHT)
+
+	// Light calc
+	t_vector transmission = (t_vector) {1, 1, 1};
+	t_vector light_direction = calculate_with_vector(obj->light->coordinates, phit, SUBTRACT);
+	normalize(&light_direction);
+	for (int j = 0; j < obj->obj_count; ++j) {
+		if (&spheres[j] == sphere)
+			continue;
+		float t0, t1;
+		t_vector light_rayorig = calculate_with_vector(
+			phit,
+			calculate_with_number(nhit, bias, MULTIPLY),
+			ADD
+		);
+		if (&spheres[j] != sphere && intersect(light_rayorig, light_direction, spheres[j], &t0, &t1) && t0 > 0)
 		{
-			t_vector transmission = (t_vector) {1, 1, 1};
-			t_vector light_direction = calculate_with_vector(spheres[i].coordinates, phit, SUBTRACT);
-			normalize(&light_direction);
-			for (int j = 0; j < obj->obj_count; ++j) {
-				if (i != j)
-				{
-					float t0, t1;
-					t_vector light_rayorig = calculate_with_vector(
-						phit,
-						calculate_with_number(nhit, bias, MULTIPLY),
-						ADD
-					);
-					if (spheres[j].type != LIGHT
-						&& intersect(light_rayorig, light_direction, spheres[j], &t0, &t1))
-					{
-						transmission = (t_vector) {0.2, 0, 0};
-						break ;
-					}
-				}
-			}
-			float light_intensity = max(0, dot(nhit, light_direction));
-			t_vector light_contribution = calculate_with_vector(
-				sphere->color,
-				calculate_with_number(spheres[i].emission_color, light_intensity, MULTIPLY),
-				MULTIPLY);
-			light_contribution = calculate_with_vector(light_contribution, transmission, MULTIPLY);
-			surface_color = calculate_with_vector(surface_color, light_contribution, ADD);
+			transmission = (t_vector) {0,0,0};
+			break ;
 		}
 	}
-	return (calculate_with_vector(surface_color, sphere->emission_color, ADD));
+	float light_intensity = max(0, dot(nhit, light_direction));
+	t_vector light_contribution = calculate_with_vector(
+		sphere->color,
+		calculate_with_number(obj->light->emission_color, light_intensity, MULTIPLY),
+		MULTIPLY);
+	light_contribution = calculate_with_vector(light_contribution, transmission, MULTIPLY);
+	surface_color = calculate_with_vector(surface_color, light_contribution, ADD);
+	surface_color = calculate_with_vector(surface_color, sphere->emission_color, ADD);
+	t_vector ambient_light = (t_vector){0.1, 0.1, 0.1};
+	t_vector ambient = calculate_with_vector(sphere->color, ambient_light, MULTIPLY);
+	surface_color = calculate_with_vector(surface_color, ambient, ADD);
+	return (surface_color);
 }
 
 t_vector	*render(t_miniRT *obj) {
@@ -151,9 +144,13 @@ t_vector	*render(t_miniRT *obj) {
 		coordinates = calculate_with_number(coordinates, 5, SUBTRACT);
 		em_color.x -= 0.1;
 	}
-	obj->objects[obj->obj_count] = init_light();
-	obj->obj_count++;
-	//obj->objects[obj->obj_count] = NULL;
+	obj->light = ft_calloc(1, sizeof(t_light));
+	if (!obj->light)
+	{
+		printf("Malloc error\n");
+		exit(1);
+	}
+	init_light(obj->light);
 	float invWidth = 1 / (float) WIN_WIDTH, invHeight = 1 / (float) WIN_HEIGHT;
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
 	if (!pixel)
