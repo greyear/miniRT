@@ -12,22 +12,22 @@
 
 #include "../../include/miniRT.h"
 
-float	length2(t_vector vec)
+inline float	length2(t_vector vec)
 {
 	return (pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
 }
 
-t_vector	revert_vector(t_vector vec)
+inline t_vector	revert_vector(t_vector vec)
 {
 	return ((t_vector) {-vec.x, -vec.y, -vec.z});
 }
 
-float	dot(t_vector vec1, t_vector vec2)
+inline float	dot(t_vector vec1, t_vector vec2)
 {
 	return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
 }
 
-t_vector	calculate_with_vector(t_vector vec1, t_vector vec2, t_calc operation)
+inline t_vector	calculate_with_vector(t_vector vec1, t_vector vec2, t_calc operation)
 {
 	t_vector	result;
 	if (operation == ADD)
@@ -41,12 +41,7 @@ t_vector	calculate_with_vector(t_vector vec1, t_vector vec2, t_calc operation)
 	return (result);
 }
 
-float	lerp(float a, float b, float mix)
-{
-	return (b * mix + a * (1 - mix));
-}
-
-t_vector	calculate_with_number(t_vector vec, float num, t_calc operation)
+inline t_vector	calculate_with_number(t_vector vec, float num, t_calc operation)
 {
 	t_vector	result;
 
@@ -60,26 +55,31 @@ t_vector	calculate_with_number(t_vector vec, float num, t_calc operation)
 	else
 	{
 		if (num > 0)
-			result = (t_vector) {vec.x / num, vec.y / num, vec.z / num};
+		result = (t_vector) {vec.x / num, vec.y / num, vec.z / num};
 	}
 	return (result);
 }
 
-float	min(float a, float b)
+inline float	lerp(float a, float b, float mix)
+{
+	return (b * mix + a * (1 - mix));
+}
+
+inline float	min(float a, float b)
 {
 	if (a < b)
 		return (a);
 	return (b);
 }
 
-float	max(float a, float b)
+inline float	max(float a, float b)
 {
 	if (a > b)
 		return (a);
 	return (b);
 }
 
-void	clamp(t_vector *pixel)
+inline void	clamp(t_vector *pixel)
 {
 	if (pixel->x < 0)
 		pixel->x = 0;
@@ -95,7 +95,7 @@ void	clamp(t_vector *pixel)
 		pixel->z = 1;
 }
 
-float	random_float(void)
+inline float	random_float(void)
 {
-	return ((float) rand() / (float) RAND_MAX);
+	return (float)rand() / (float)(RAND_MAX + 1.0f);
 }

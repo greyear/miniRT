@@ -12,31 +12,6 @@
 
 #include "../../include/miniRT.h"
 
-// here will be an obj from parsing
-static t_obj	init_obj(t_vector coordinates, t_vector em_color)
-{
-	t_obj		def_obj;
-
-	def_obj.type = SPHERE;
-	def_obj.color = (t_vector) {1, 0, 1};
-	def_obj.emission_color = em_color;
-	def_obj.coordinates = coordinates;
-	def_obj.normalized = (t_vector){ 0.0, 0.0, 0.0 };
-	def_obj.width = 0;
-	def_obj.diameter = 10.5;
-	def_obj.height = 0;
-	return (def_obj);
-}
-
-static void	init_light(t_light *light)
-{
-	light->coordinates = (t_vector){10, 0, 5};
-	light->color = (t_vector){1, 1, 1};
-	light->emission_color = (t_vector) {1, 1, 1},
-	light->diameter = 5.f;
-	light->ratio = 1.f;
-}
-
 static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0, float *t1) 
 {
 	float		radius2 = pow(sphere.diameter / 2, 2);
@@ -54,7 +29,7 @@ static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0
 	return (true);
 }
 
-static void normalize(t_vector *vector_to_norm)
+static inline void normalize(t_vector *vector_to_norm)
 {
 	float	normalized = length2(*vector_to_norm);
 	if (normalized > 0)
@@ -88,7 +63,7 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 	if (!sphere)
 		return ((t_vector) {1, 1, 0.5});
 
-	t_vector	surface_color = (t_vector) {0, 0, 0};
+	t_vector	surface_color = {0, 0, 0};
 	t_vector	phit = calculate_with_vector(calculate_with_vector(rayorig, raydir, ADD), (t_vector) {tnear, tnear, tnear}, MULTIPLY);
 	t_vector	nhit = calculate_with_vector(phit, sphere->coordinates, SUBTRACT);
 	normalize(&nhit);
@@ -98,7 +73,7 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 		nhit = revert_vector(nhit);
 
 	// Light calc
-	t_vector transmission = (t_vector) {1, 1, 1};
+	t_vector transmission = {1, 1, 1};
 	t_vector light_direction = calculate_with_vector(obj->light->coordinates, phit, SUBTRACT);
 	normalize(&light_direction);
 	for (int j = 0; j < obj->obj_count; ++j) {
@@ -112,7 +87,7 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 		);
 		if (&spheres[j] != sphere && intersect(light_rayorig, light_direction, spheres[j], &t0, &t1) && t0 > 0)
 		{
-			transmission = (t_vector) {0,0,0};
+			transmission = (t_vector) {0, 0, 0};
 			break ;
 		}
 	}
@@ -170,12 +145,11 @@ t_vector	*render(t_miniRT *obj) {
 
 				float xx = (2 * u - 1) * angle * aspect_ratio;
 				float yy = (1 - 2 * v) * angle;
-				t_vector raydir = (t_vector) { xx, yy, -1 };
+				t_vector raydir = { xx, yy, -1 };
 				normalize(&raydir);
 
 				t_vector color = calculate_rays(obj->camera->coordinates, raydir, obj->objects, obj);
 				pixel_color = calculate_with_vector(pixel_color, color, ADD);
-
 			}
 			pixel_color = calculate_with_number(pixel_color, 1.0f / PIXEL_SAMPLES, MULTIPLY);
 			clamp(&pixel_color);

@@ -46,6 +46,10 @@ float		max(float a, float b);
 void		clamp(t_vector *pixel);
 float		random_float(void);
 
+//Objects
+t_obj		init_obj(t_vector coordinates, t_vector em_color);
+void		init_light(t_light *light);
+
 //hooks
 void		keys_hook(void *obj);
 

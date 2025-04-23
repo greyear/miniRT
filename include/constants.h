@@ -27,5 +27,5 @@
 # endif
 
 # ifndef PIXEL_SAMPLES
-#  define PIXEL_SAMPLES 12
+#  define PIXEL_SAMPLES 6 //12
 # endif

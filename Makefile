@@ -33,6 +33,7 @@ RAYS			=	rays
 CONTROLS		=	controls
 PARS_DIR		=	parsing
 CLEAN_DIR		=	clean
+OBJECTS			=	objects
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -68,7 +69,9 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					\
 					$(SRC_DIR)/$(CLEAN_DIR)/struct_cleaning.c \
 					\
-					$(SRC_DIR)/$(CONTROLS)/hooks.c
+					$(SRC_DIR)/$(CONTROLS)/hooks.c \
+					\
+					$(SRC_DIR)/$(OBJECTS)/init_objects.c
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
