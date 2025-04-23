@@ -28,14 +28,15 @@ typedef struct s_color
 typedef enum e_obj_type {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
+	LIGHT
 }	t_obj_type;
 
 typedef struct s_vector
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_vector;
 
 typedef struct s_obj
@@ -43,33 +44,34 @@ typedef struct s_obj
 	t_obj_type	type;
 	t_vector	coordinates;
 	t_vector	normalized;
-	double		width;
-	double		height;
-	double		diameter;
+	float		width;
+	float		height;
+	float		diameter;
 	t_vector	color;
 	t_vector	emission_color;
-	double		reflection;
-	double		transparency;
 }	t_obj;
 
 typedef struct s_ambient
 {
-	double	ratio;
+	float	ratio;
 	t_color	color;
 }	t_ambient;
 
 typedef struct s_light
 {
 	t_vector	coordinates;
-	double		ratio;
+	t_vector	color;
+	t_vector	emission_color;
+	float		diameter;
+	float		ratio;
 }	t_light;
 
 typedef struct s_camera
 {
 	t_vector	coordinates;
 	t_vector	normalized;
-	double		view_field;
-	double		viewporw_size;
+	float		view_field;
+	float		viewporw_size;
 }	t_camera;
 
 typedef struct s_ray

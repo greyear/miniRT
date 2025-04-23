@@ -35,14 +35,15 @@ t_vector	*render(t_miniRT *obj);
 uint32_t	vec_to_rgba(t_vector color);
 
 //Rays
-double		length2(t_vector vec);
-double		dot(t_vector vec1, t_vector vec2);
+float		length2(t_vector vec);
+float		dot(t_vector vec1, t_vector vec2);
 t_vector	revert_vector(t_vector vec);
 t_vector	calculate_with_vector(t_vector vec1, t_vector vec2, t_calc operation);
-t_vector	calculate_with_number(t_vector vec, double num, t_calc operation);
-double		lerp(double a, double b, double mix);
-double		min(double a, double b);
-double		max(double a, double b);
+t_vector	calculate_with_number(t_vector vec, float num, t_calc operation);
+float		lerp(float a, float b, float mix);
+float		min(float a, float b);
+float		max(float a, float b);
+void		clamp(t_vector *pixel);
 
 //hooks
 void		keys_hook(void *obj);
