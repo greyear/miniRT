@@ -25,3 +25,7 @@
 # ifndef MAX_DEPTH
 #  define MAX_DEPTH 3
 # endif
+
+# ifndef PIXEL_SAMPLES
+#  define PIXEL_SAMPLES 12
+# endif

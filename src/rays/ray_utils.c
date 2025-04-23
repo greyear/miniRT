@@ -94,3 +94,8 @@ void	clamp(t_vector *pixel)
 	else if (pixel->z > 1)
 		pixel->z = 1;
 }
+
+float	random_float(void)
+{
+	return ((float) rand() / (float) RAND_MAX);
+}

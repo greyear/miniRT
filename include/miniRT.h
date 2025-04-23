@@ -44,6 +44,7 @@ float		lerp(float a, float b, float mix);
 float		min(float a, float b);
 float		max(float a, float b);
 void		clamp(t_vector *pixel);
+float		random_float(void);
 
 //hooks
 void		keys_hook(void *obj);

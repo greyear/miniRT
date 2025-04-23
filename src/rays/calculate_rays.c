@@ -30,7 +30,7 @@ static t_obj	init_obj(t_vector coordinates, t_vector em_color)
 
 static void	init_light(t_light *light)
 {
-	light->coordinates = (t_vector){10, 0, 10};
+	light->coordinates = (t_vector){10, 0, 5};
 	light->color = (t_vector){1, 1, 1};
 	light->emission_color = (t_vector) {1, 1, 1},
 	light->diameter = 5.f;
@@ -151,7 +151,6 @@ t_vector	*render(t_miniRT *obj) {
 		exit(1);
 	}
 	init_light(obj->light);
-	float invWidth = 1 / (float) WIN_WIDTH, invHeight = 1 / (float) WIN_HEIGHT;
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
 	if (!pixel)
 	{
@@ -164,12 +163,23 @@ t_vector	*render(t_miniRT *obj) {
 
 	for (int y = 0; y < WIN_HEIGHT; ++y) {
 		for (int x = 0; x < WIN_WIDTH; ++x) {
-			float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspect_ratio;
-			float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
-			t_vector raydir = (t_vector) { xx, yy, -1 };
-			normalize(&raydir);
-			pixel[x + WIN_WIDTH * y] = calculate_rays(obj->camera->coordinates, raydir, obj->objects, obj);
-			clamp(&pixel[x + WIN_WIDTH * y]);
+			t_vector pixel_color = {0, 0, 0};
+			for (int s = 0; s < PIXEL_SAMPLES; ++s) {
+				float u = (x + random_float()) / (float) WIN_WIDTH;
+				float v = (y + random_float()) / (float) WIN_HEIGHT;
+
+				float xx = (2 * u - 1) * angle * aspect_ratio;
+				float yy = (1 - 2 * v) * angle;
+				t_vector raydir = (t_vector) { xx, yy, -1 };
+				normalize(&raydir);
+
+				t_vector color = calculate_rays(obj->camera->coordinates, raydir, obj->objects, obj);
+				pixel_color = calculate_with_vector(pixel_color, color, ADD);
+
+			}
+			pixel_color = calculate_with_number(pixel_color, 1.0f / PIXEL_SAMPLES, MULTIPLY);
+			clamp(&pixel_color);
+			pixel[x + WIN_WIDTH * y] = pixel_color; 
 		}
 	}
 	return (pixel);
