@@ -27,56 +27,9 @@ inline float	dot(t_vector vec1, t_vector vec2)
 	return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
 }
 
-inline t_vector	calculate_with_vector(t_vector vec1, t_vector vec2, t_calc operation)
-{
-	t_vector	result;
-	if (operation == ADD)
-		result = (t_vector) {vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z};
-	else if (operation == SUBTRACT)
-		result = (t_vector) {vec1.x - vec2.x, vec1.y - vec2.y, vec1.z - vec2.z};
-	else if (operation == MULTIPLY)
-		result = (t_vector) {vec1.x * vec2.x, vec1.y * vec2.y, vec1.z * vec2.z};
-	else
-		result = (t_vector) {vec1.x / vec2.x, vec1.y / vec2.y, vec1.z / vec2.z};
-	return (result);
-}
-
-inline t_vector	calculate_with_number(t_vector vec, float num, t_calc operation)
-{
-	t_vector	result;
-
-	result = vec;
-	if (operation == ADD)
-		result = (t_vector) {vec.x + num, vec.y + num, vec.z + num};
-	else if (operation == SUBTRACT)
-		result = (t_vector) {vec.x - num, vec.y - num, vec.z - num};
-	else if (operation == MULTIPLY)
-		result = (t_vector) {vec.x * num, vec.y * num, vec.z * num};
-	else
-	{
-		if (num > 0)
-		result = (t_vector) {vec.x / num, vec.y / num, vec.z / num};
-	}
-	return (result);
-}
-
 inline float	lerp(float a, float b, float mix)
 {
 	return (b * mix + a * (1 - mix));
-}
-
-inline float	min(float a, float b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-inline float	max(float a, float b)
-{
-	if (a > b)
-		return (a);
-	return (b);
 }
 
 inline void	clamp(t_vector *pixel)
@@ -93,17 +46,4 @@ inline void	clamp(t_vector *pixel)
 		pixel->z = 0;
 	else if (pixel->z > 1)
 		pixel->z = 1;
-}
-
-inline float	random_float(void)
-{
-	return (float)rand() / (float)(RAND_MAX + 1.0f);
-}
-
-inline float random_float_fast(unsigned int *seed)
-{
-	*seed ^= *seed << 13;
-	*seed ^= *seed >> 17;
-	*seed ^= *seed << 5;
-	return (*seed & 0xFFFFFF) / (float)0xFFFFFF;
 }

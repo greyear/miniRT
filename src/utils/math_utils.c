@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 14:20:50 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/14 11:50:07 by msavelie         ###   ########.fr       */
+/*   Created: 2025/04/23 17:19:35 by msavelie          #+#    #+#             */
+/*   Updated: 2025/04/23 17:21:13 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef WIN_WIDTH
-#  define WIN_WIDTH 2000
-# endif
+#include "../../include/mini_rt.h"
 
-# ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1000
-# endif
+inline float	min(float a, float b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
 
-# ifndef HEX_LEN
-#  define HEX_LEN 8
-# endif
+inline float	max(float a, float b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
 
-# ifndef MAX_DEPTH
-#  define MAX_DEPTH 3
-# endif
-
-# ifndef PIXEL_SAMPLES
-#  define PIXEL_SAMPLES 6 //12
-# endif
+inline float	random_float_fast(unsigned int *seed)
+{
+	*seed ^= *seed << 13;
+	*seed ^= *seed >> 17;
+	*seed ^= *seed << 5;
+	return (*seed & 0xFFFFFF) / (float)0xFFFFFF;
+}

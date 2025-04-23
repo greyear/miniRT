@@ -16,7 +16,7 @@ static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0
 {
 	float		radius2 = pow(sphere.diameter / 2, 2);
 	t_vector	center = sphere.coordinates;
-	t_vector	ray_length = VEC_SUB(center, rayorig);
+	t_vector	ray_length = vec_sub(center, rayorig);
 	float		tca = ray_length.x * raydir.x + ray_length.y * raydir.y + ray_length.z * raydir.z;
 	// if (tca < 0)
 	// 	return (false);
@@ -64,8 +64,8 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 		return ((t_vector) {1, 1, 0.5});
 
 	t_vector	surface_color = {0, 0, 0};
-	t_vector	phit = VEC_MULF(VEC_ADD(rayorig, raydir), tnear);
-	t_vector	nhit = VEC_SUB(phit, sphere->coordinates);
+	t_vector	phit = vec_mul_num(vec_add(rayorig, raydir), tnear);
+	t_vector	nhit = vec_sub(phit, sphere->coordinates);
 	normalize(&nhit);
 
 	float	bias = 1e-4;
@@ -74,13 +74,13 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 
 	// Light calc
 	t_vector transmission = {1, 1, 1};
-	t_vector light_direction = VEC_SUB(obj->light->coordinates, phit);
+	t_vector light_direction = vec_sub(obj->light->coordinates, phit);
 	normalize(&light_direction);
 	for (int j = 0; j < obj->obj_count; ++j) {
 		if (&spheres[j] == sphere)
 			continue;
 		float t0, t1;
-		t_vector light_rayorig = VEC_ADD(phit, VEC_MULF(nhit, bias));
+		t_vector light_rayorig = vec_add(phit, vec_mul_num(nhit, bias));
 		if (&spheres[j] != sphere && intersect(light_rayorig, light_direction, spheres[j], &t0, &t1) && t0 > 0)
 		{
 			transmission = (t_vector) {0, 0, 0};
@@ -88,16 +88,16 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 		}
 	}
 	float light_intensity = max(0, dot(nhit, light_direction));
-	t_vector light_contribution = VEC_MUL(
+	t_vector light_contribution = vec_mul(
 		sphere->color,
-		VEC_MULF(obj->light->emission_color, light_intensity)
+		vec_mul_num(obj->light->emission_color, light_intensity)
 	);
-	light_contribution = VEC_MUL(light_contribution, transmission);
-	surface_color = VEC_ADD(surface_color, light_contribution);
-	surface_color = VEC_ADD(surface_color, sphere->emission_color);
+	light_contribution = vec_mul(light_contribution, transmission);
+	surface_color = vec_add(surface_color, light_contribution);
+	surface_color = vec_add(surface_color, sphere->emission_color);
 	t_vector ambient_light = (t_vector){0.1, 0.1, 0.1};
-	t_vector ambient = VEC_MUL(sphere->color, ambient_light);
-	surface_color = VEC_ADD(surface_color, ambient);
+	t_vector ambient = vec_mul(sphere->color, ambient_light);
+	surface_color = vec_add(surface_color, ambient);
 	return (surface_color);
 }
 
@@ -112,7 +112,7 @@ t_vector	*render(t_miniRT *obj) {
 	for (int i = 0; i < obj->obj_count; i++)
 	{
 		obj->objects[i] = init_obj(coordinates, em_color);
-		coordinates = calculate_with_number(coordinates, 5, SUBTRACT);
+		coordinates = vec_sub_num(coordinates, 5);
 		em_color.x -= 0.1;
 	}
 	obj->light = ft_calloc(1, sizeof(t_light));
@@ -146,9 +146,9 @@ t_vector	*render(t_miniRT *obj) {
 				normalize(&raydir);
 
 				t_vector color = calculate_rays(obj->camera->coordinates, raydir, obj->objects, obj);
-				pixel_color = VEC_ADD(pixel_color, color);
+				pixel_color = vec_add(pixel_color, color);
 			}
-			pixel_color = VEC_MULF(pixel_color, 1.0f / PIXEL_SAMPLES);
+			pixel_color = vec_mul_num(pixel_color, 1.0f / PIXEL_SAMPLES);
 			clamp(&pixel_color);
 			pixel[x + WIN_WIDTH * y] = pixel_color; 
 		}
