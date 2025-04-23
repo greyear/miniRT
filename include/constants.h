@@ -29,3 +29,19 @@
 # ifndef PIXEL_SAMPLES
 #  define PIXEL_SAMPLES 6 //12
 # endif
+
+# ifndef VEC_ADD
+#  define VEC_ADD(a, b) ((t_vector){ (a).x + (b).x, (a).y + (b).y, (a).z + (b).z })
+# endif
+
+# ifndef VEC_SUB
+#  define VEC_SUB(a, b) ((t_vector){ (a).x - (b).x, (a).y - (b).y, (a).z - (b).z })
+# endif
+
+# ifndef VEC_MUL
+#  define VEC_MUL(a, b) ((t_vector){ (a).x * (b).x, (a).y * (b).y, (a).z * (b).z })
+# endif
+
+# ifndef VEC_MULF
+#  define VEC_MULF(a, f) ((t_vector){ (a).x * (f), (a).y * (f), (a).z * (f) })
+# endif

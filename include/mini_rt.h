@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINI_RT_H
+# define MINI_RT_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/include/libft.h"
@@ -45,6 +45,7 @@ float		min(float a, float b);
 float		max(float a, float b);
 void		clamp(t_vector *pixel);
 float		random_float(void);
+float 		random_float_fast(unsigned int *seed);
 
 //Objects
 t_obj		init_obj(t_vector coordinates, t_vector em_color);

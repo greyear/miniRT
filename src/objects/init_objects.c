@@ -6,11 +6,11 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:35:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/23 14:39:09 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:35:26 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 // here will be an obj from parsing
 t_obj	init_obj(t_vector coordinates, t_vector em_color)
