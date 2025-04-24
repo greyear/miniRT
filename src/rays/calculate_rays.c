@@ -6,28 +6,11 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/17 15:34:48 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:29:21 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
-
-static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0, float *t1) 
-{
-	float		radius2 = pow(sphere.diameter / 2, 2);
-	t_vector	center = sphere.coordinates;
-	t_vector	ray_length = vec_sub(center, rayorig);
-	float		tca = ray_length.x * raydir.x + ray_length.y * raydir.y + ray_length.z * raydir.z;
-	// if (tca < 0)
-	// 	return (false);
-	float		d2 = pow(ray_length.x, 2) + pow(ray_length.y, 2) + pow(ray_length.z, 2) - tca * tca;
-	if (d2 > radius2)
-		return false;
-	float thc = sqrt(radius2 - d2);
-	*t0 = tca - thc;
-	*t1 = tca + thc;
-	return (true);
-}
 
 static inline void normalize(t_vector *vector_to_norm)
 {
@@ -41,87 +24,130 @@ static inline void normalize(t_vector *vector_to_norm)
 	}
 }
 
-static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres, t_miniRT *obj)
+static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects, t_miniRT *rt)
 {
 	float	tnear = INFINITY;
-	t_obj	*sphere = NULL;
+	t_obj	*object = NULL;
+	int		hit_part = -1;
 
-	for (int i = 0; i < obj->obj_count; i++) {
+	for (int i = 0; i < rt->obj_count; i++) {
 		float t0 = INFINITY, t1 = INFINITY;
-		if (intersect(rayorig, raydir, spheres[i], &t0, &t1))
-		{
-			if (t0 < 0)
-				t0 = t1;
-			if (t0 < tnear)
-			{
+		int temp_part = -1;
+		bool hit = false;
+
+		if (objects[i].type == SPHERE)
+			hit = intersect_sphere(rayorig, raydir, objects[i], &t0, &t1);
+		else if (objects[i].type == CYLINDER)
+			hit = intersect_cylinder(rayorig, raydir, objects[i], &t0, &temp_part);
+
+		if (hit) {
+			if (t0 < 0) t0 = t1;
+			if (t0 < tnear) {
 				tnear = t0;
-				sphere = &spheres[i];
+				object = &objects[i];
+				hit_part = temp_part;
 			}
 		}
 	}
 
-	if (!sphere)
-		return ((t_vector) {1, 1, 0.5});
+	if (!object)
+		return ((t_vector){1, 1, 0.5});
 
-	t_vector	surface_color = {0, 0, 0};
-	t_vector	phit = vec_mul_num(vec_add(rayorig, raydir), tnear);
-	t_vector	nhit = vec_sub(phit, sphere->coordinates);
-	normalize(&nhit);
+	t_vector phit = vec_add(rayorig, vec_mul_num(raydir, tnear));
+	t_vector nhit;
 
-	float	bias = 1e-4;
+	if (object->type == SPHERE)
+	{
+		nhit = vec_sub(phit, object->coordinates);
+		normalize(&nhit);
+	}
+	else
+	{
+		if (hit_part == 0)
+		{
+			t_vector hit_to_center = vec_sub(phit, object->coordinates);
+			float h = dot(hit_to_center, object->normalized);
+			t_vector axis_proj = vec_mul_num(object->normalized, h);
+			nhit = vec_sub(hit_to_center, axis_proj);
+			normalize(&nhit);
+		}
+		else if (hit_part == 1)
+		{
+			nhit = vec_mul_num(object->normalized, -1.0f);
+		}
+		else
+		{
+			nhit = object->normalized;
+		}
+	}
+
+	float bias = 1e-4;
 	if (dot(raydir, nhit) > 0)
 		nhit = revert_vector(nhit);
 
-	// Light calc
 	t_vector transmission = {1, 1, 1};
-	t_vector light_direction = vec_sub(obj->light->coordinates, phit);
+	t_vector light_direction = vec_sub(rt->light->coordinates, phit);
 	normalize(&light_direction);
-	for (int j = 0; j < obj->obj_count; ++j) {
-		if (&spheres[j] == sphere)
+
+	for (int j = 0; j < rt->obj_count; ++j) {
+		if (&objects[j] == object)
 			continue;
+
 		float t0, t1;
+		int temp_part = -1;
 		t_vector light_rayorig = vec_add(phit, vec_mul_num(nhit, bias));
-		if (&spheres[j] != sphere && intersect(light_rayorig, light_direction, spheres[j], &t0, &t1) && t0 > 0)
-		{
-			transmission = (t_vector) {0, 0, 0};
-			break ;
+
+		bool shadow_hit = false;
+		if (objects[j].type == SPHERE)
+			shadow_hit = intersect_sphere(light_rayorig, light_direction, objects[j], &t0, &t1) && t0 > 0;
+		else if (objects[j].type == CYLINDER)
+			shadow_hit = intersect_cylinder(light_rayorig, light_direction, objects[j], &t0, &temp_part) && t0 > 0;
+
+		if (shadow_hit) {
+			transmission = (t_vector){0, 0, 0};
+			break;
 		}
 	}
-	float light_intensity = max(0, dot(nhit, light_direction));
+
+	float light_intensity = fmax(0, dot(nhit, light_direction));
 	t_vector light_contribution = vec_mul(
-		sphere->color,
-		vec_mul_num(obj->light->emission_color, light_intensity)
+		object->color,
+		vec_mul_num(rt->light->emission_color, light_intensity)
 	);
 	light_contribution = vec_mul(light_contribution, transmission);
-	surface_color = vec_add(surface_color, light_contribution);
-	surface_color = vec_add(surface_color, sphere->emission_color);
+
+	// Ambient + emissive
+	t_vector surface_color = light_contribution;
+	surface_color = vec_add(surface_color, object->emission_color);
 	t_vector ambient_light = (t_vector){0.1, 0.1, 0.1};
-	t_vector ambient = vec_mul(sphere->color, ambient_light);
-	surface_color = vec_add(surface_color, ambient);
-	return (surface_color);
+	surface_color = vec_add(surface_color, vec_mul(object->color, ambient_light));
+
+	return surface_color;
 }
 
-t_vector	*render(t_miniRT *obj) {
-	obj->objects = ft_calloc(obj->obj_count + 1, sizeof(t_obj));
-	if (!obj->objects)
+t_vector	*render(t_miniRT *rt) {
+	rt->objects = ft_calloc(rt->obj_count + 1, sizeof(t_obj));
+	if (!rt->objects)
 	{
 		printf("Malloc error\n");
 		exit(1);
 	}
 	t_vector coordinates = {0, -2, -20}, em_color = {0, 0, 0};
-	for (int i = 0; i < obj->obj_count; i++)
+	for (int i = 0; i < rt->obj_count; i++)
 	{
-		obj->objects[i] = init_obj(coordinates, em_color);
+		t_obj_type type = i == 0 ? SPHERE : CYLINDER;
+		// t_obj_type type = SPHERE;
+		rt->objects[i] = init_obj(coordinates, em_color, type);
 		coordinates = vec_sub_num(coordinates, 5);
 		em_color.x -= 0.1;
 	}
-	obj->light = ft_calloc(1, sizeof(t_light));
-	if (!obj->light)
+	rt->light = ft_calloc(1, sizeof(t_light));
+	if (!rt->light)
 	{
 		printf("Malloc error\n");
 		exit(1);
 	}
-	init_light(obj->light);
+	init_light(rt->light);
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
 	if (!pixel)
 	{
@@ -145,7 +171,7 @@ t_vector	*render(t_miniRT *obj) {
 				t_vector raydir = { xx, yy, -1 };
 				normalize(&raydir);
 
-				t_vector color = calculate_rays(obj->camera->coordinates, raydir, obj->objects, obj);
+				t_vector color = calculate_rays(rt->camera->coordinates, raydir, rt->objects, rt);
 				pixel_color = vec_add(pixel_color, color);
 			}
 			pixel_color = vec_mul_num(pixel_color, 1.0f / PIXEL_SAMPLES);
