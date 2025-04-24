@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniRT.h"
+#include "../include/mini_rt.h"
 
 static t_miniRT	init_struct(void)
 {

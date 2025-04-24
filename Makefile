@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/14 15:15:49 by msavelie         ###   ########.fr        #
+#    Updated: 2025/04/24 11:22:34 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ RAYS			=	rays
 CONTROLS		=	controls
 PARS_DIR		=	parsing
 CLEAN_DIR		=	clean
+OBJECTS			=	objects
+UTILS			=	utils
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -47,7 +49,7 @@ LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-g -Wall -Wextra -Werror
+CFLAGS 			=	-g -Wall -Wextra -Werror -O3
 RM				=	rm -f
 
 # Source files
@@ -64,11 +66,16 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
 					\
 					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
-					$(SRC_DIR)/$(RAYS)/ray_utils.c \
 					\
 					$(SRC_DIR)/$(CLEAN_DIR)/struct_cleaning.c \
 					\
-					$(SRC_DIR)/$(CONTROLS)/hooks.c
+					$(SRC_DIR)/$(CONTROLS)/hooks.c \
+					\
+					$(SRC_DIR)/$(OBJECTS)/init_objects.c \
+					\
+					$(SRC_DIR)/$(UTILS)/math_utils.c \
+					$(SRC_DIR)/$(UTILS)/ray_utils.c \
+					$(SRC_DIR)/$(UTILS)/vec_utils.c 
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

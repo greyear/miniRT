@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 14:45:40 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 14:53:51 by msavelie         ###   ########.fr       */
+/*   Created: 2025/04/23 17:19:35 by msavelie          #+#    #+#             */
+/*   Updated: 2025/04/23 17:21:13 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-void	keys_hook(void *obj)
+inline float	min(float a, float b)
 {
-	t_miniRT	*instance;
+	if (a < b)
+		return (a);
+	return (b);
+}
 
-	instance = (t_miniRT *) obj;
-	if (mlx_is_key_down(instance->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(instance->mlx);
+inline float	max(float a, float b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+inline float	random_float_fast(unsigned int *seed)
+{
+	*seed ^= *seed << 13;
+	*seed ^= *seed >> 17;
+	*seed ^= *seed << 5;
+	return (*seed & 0xFFFFFF) / (float)0xFFFFFF;
 }

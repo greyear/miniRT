@@ -10,38 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
-
-// here will be an obj from parsing
-static t_obj	init_obj(t_vector coordinates, t_vector em_color)
-{
-	t_obj		def_obj;
-
-	def_obj.type = SPHERE;
-	def_obj.color = (t_vector) {1, 0, 1};
-	def_obj.emission_color = em_color;
-	def_obj.coordinates = coordinates;
-	def_obj.normalized = (t_vector){ 0.0, 0.0, 0.0 };
-	def_obj.width = 0;
-	def_obj.diameter = 10.5;
-	def_obj.height = 0;
-	return (def_obj);
-}
-
-static void	init_light(t_light *light)
-{
-	light->coordinates = (t_vector){10, 0, 10};
-	light->color = (t_vector){1, 1, 1};
-	light->emission_color = (t_vector) {1, 1, 1},
-	light->diameter = 5.f;
-	light->ratio = 1.f;
-}
+#include "../../include/mini_rt.h"
 
 static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0, float *t1) 
 {
 	float		radius2 = pow(sphere.diameter / 2, 2);
 	t_vector	center = sphere.coordinates;
-	t_vector	ray_length = calculate_with_vector(center, rayorig, SUBTRACT);
+	t_vector	ray_length = vec_sub(center, rayorig);
 	float		tca = ray_length.x * raydir.x + ray_length.y * raydir.y + ray_length.z * raydir.z;
 	// if (tca < 0)
 	// 	return (false);
@@ -54,7 +29,7 @@ static bool	intersect(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0
 	return (true);
 }
 
-static void normalize(t_vector *vector_to_norm)
+static inline void normalize(t_vector *vector_to_norm)
 {
 	float	normalized = length2(*vector_to_norm);
 	if (normalized > 0)
@@ -88,9 +63,9 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 	if (!sphere)
 		return ((t_vector) {1, 1, 0.5});
 
-	t_vector	surface_color = (t_vector) {0, 0, 0};
-	t_vector	phit = calculate_with_vector(calculate_with_vector(rayorig, raydir, ADD), (t_vector) {tnear, tnear, tnear}, MULTIPLY);
-	t_vector	nhit = calculate_with_vector(phit, sphere->coordinates, SUBTRACT);
+	t_vector	surface_color = {0, 0, 0};
+	t_vector	phit = vec_mul_num(vec_add(rayorig, raydir), tnear);
+	t_vector	nhit = vec_sub(phit, sphere->coordinates);
 	normalize(&nhit);
 
 	float	bias = 1e-4;
@@ -98,35 +73,31 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *spheres
 		nhit = revert_vector(nhit);
 
 	// Light calc
-	t_vector transmission = (t_vector) {1, 1, 1};
-	t_vector light_direction = calculate_with_vector(obj->light->coordinates, phit, SUBTRACT);
+	t_vector transmission = {1, 1, 1};
+	t_vector light_direction = vec_sub(obj->light->coordinates, phit);
 	normalize(&light_direction);
 	for (int j = 0; j < obj->obj_count; ++j) {
 		if (&spheres[j] == sphere)
 			continue;
 		float t0, t1;
-		t_vector light_rayorig = calculate_with_vector(
-			phit,
-			calculate_with_number(nhit, bias, MULTIPLY),
-			ADD
-		);
+		t_vector light_rayorig = vec_add(phit, vec_mul_num(nhit, bias));
 		if (&spheres[j] != sphere && intersect(light_rayorig, light_direction, spheres[j], &t0, &t1) && t0 > 0)
 		{
-			transmission = (t_vector) {0,0,0};
+			transmission = (t_vector) {0, 0, 0};
 			break ;
 		}
 	}
 	float light_intensity = max(0, dot(nhit, light_direction));
-	t_vector light_contribution = calculate_with_vector(
+	t_vector light_contribution = vec_mul(
 		sphere->color,
-		calculate_with_number(obj->light->emission_color, light_intensity, MULTIPLY),
-		MULTIPLY);
-	light_contribution = calculate_with_vector(light_contribution, transmission, MULTIPLY);
-	surface_color = calculate_with_vector(surface_color, light_contribution, ADD);
-	surface_color = calculate_with_vector(surface_color, sphere->emission_color, ADD);
+		vec_mul_num(obj->light->emission_color, light_intensity)
+	);
+	light_contribution = vec_mul(light_contribution, transmission);
+	surface_color = vec_add(surface_color, light_contribution);
+	surface_color = vec_add(surface_color, sphere->emission_color);
 	t_vector ambient_light = (t_vector){0.1, 0.1, 0.1};
-	t_vector ambient = calculate_with_vector(sphere->color, ambient_light, MULTIPLY);
-	surface_color = calculate_with_vector(surface_color, ambient, ADD);
+	t_vector ambient = vec_mul(sphere->color, ambient_light);
+	surface_color = vec_add(surface_color, ambient);
 	return (surface_color);
 }
 
@@ -141,7 +112,7 @@ t_vector	*render(t_miniRT *obj) {
 	for (int i = 0; i < obj->obj_count; i++)
 	{
 		obj->objects[i] = init_obj(coordinates, em_color);
-		coordinates = calculate_with_number(coordinates, 5, SUBTRACT);
+		coordinates = vec_sub_num(coordinates, 5);
 		em_color.x -= 0.1;
 	}
 	obj->light = ft_calloc(1, sizeof(t_light));
@@ -151,7 +122,6 @@ t_vector	*render(t_miniRT *obj) {
 		exit(1);
 	}
 	init_light(obj->light);
-	float invWidth = 1 / (float) WIN_WIDTH, invHeight = 1 / (float) WIN_HEIGHT;
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
 	if (!pixel)
 	{
@@ -161,15 +131,26 @@ t_vector	*render(t_miniRT *obj) {
 	float fov = 70;
 	float aspect_ratio = WIN_WIDTH / (float) WIN_HEIGHT;
 	float angle = tan(M_PI * 0.5 * fov / 180.0);
+	unsigned int seed = 123;
 
 	for (int y = 0; y < WIN_HEIGHT; ++y) {
 		for (int x = 0; x < WIN_WIDTH; ++x) {
-			float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspect_ratio;
-			float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
-			t_vector raydir = (t_vector) { xx, yy, -1 };
-			normalize(&raydir);
-			pixel[x + WIN_WIDTH * y] = calculate_rays(obj->camera->coordinates, raydir, obj->objects, obj);
-			clamp(&pixel[x + WIN_WIDTH * y]);
+			t_vector pixel_color = {0, 0, 0};
+			for (int s = 0; s < PIXEL_SAMPLES; ++s) {
+				float u = (x + random_float_fast(&seed)) / (float) WIN_WIDTH;
+				float v = (y + random_float_fast(&seed)) / (float) WIN_HEIGHT;
+
+				float xx = (2 * u - 1) * angle * aspect_ratio;
+				float yy = (1 - 2 * v) * angle;
+				t_vector raydir = { xx, yy, -1 };
+				normalize(&raydir);
+
+				t_vector color = calculate_rays(obj->camera->coordinates, raydir, obj->objects, obj);
+				pixel_color = vec_add(pixel_color, color);
+			}
+			pixel_color = vec_mul_num(pixel_color, 1.0f / PIXEL_SAMPLES);
+			clamp(&pixel_color);
+			pixel[x + WIN_WIDTH * y] = pixel_color; 
 		}
 	}
 	return (pixel);

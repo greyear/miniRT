@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINI_RT_H
+# define MINI_RT_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/include/libft.h"
-# include <stdint.h>
 # include "constants.h"
 # include "structs.h"
 # include <stdio.h>
@@ -38,15 +37,25 @@ uint32_t	vec_to_rgba(t_vector color);
 float		length2(t_vector vec);
 float		dot(t_vector vec1, t_vector vec2);
 t_vector	revert_vector(t_vector vec);
-t_vector	calculate_with_vector(t_vector vec1, t_vector vec2, t_calc operation);
-t_vector	calculate_with_number(t_vector vec, float num, t_calc operation);
 float		lerp(float a, float b, float mix);
-float		min(float a, float b);
-float		max(float a, float b);
 void		clamp(t_vector *pixel);
+
+//Objects
+t_obj		init_obj(t_vector coordinates, t_vector em_color);
+void		init_light(t_light *light);
 
 //hooks
 void		keys_hook(void *obj);
+
+//utils
+t_vector 	vec_add(t_vector vec1, t_vector vec2);
+t_vector 	vec_sub(t_vector vec1, t_vector vec2);
+t_vector 	vec_mul(t_vector vec1, t_vector vec2);
+t_vector 	vec_mul_num(t_vector vec1, float num);
+t_vector 	vec_sub_num(t_vector vec1, float num);
+float		min(float a, float b);
+float		max(float a, float b);
+float 		random_float_fast(unsigned int *seed);
 
 //clean
 void		clean_struct(t_miniRT *rt);

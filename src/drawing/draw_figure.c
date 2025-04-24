@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 void	draw_figure(t_vector *image, t_miniRT *obj)
 {
 	uint32_t color;
 	obj->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
 	mlx_image_t *img = mlx_new_image(obj->mlx, WIN_WIDTH, WIN_HEIGHT);
-	for (int y = 0; y < WIN_HEIGHT; y++) {
-		for (int x = 0; x < WIN_WIDTH; x++) {
+	for (int y = 0; y < WIN_HEIGHT; ++y) {
+		for (int x = 0; x < WIN_WIDTH; ++x) {
 			color = vec_to_rgba(image[x + WIN_WIDTH * y]);
 			mlx_put_pixel(img, x, y, color);
 		}

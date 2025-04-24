@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 uint32_t	rgb_to_rgba(uint32_t color)
 {
