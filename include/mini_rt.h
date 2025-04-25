@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 15:27:11 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:10:50 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ t_vector	revert_vector(t_vector vec);
 float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
 
+bool		intersect_sphere(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0, float *t1);
+bool		intersect_cylinder(t_vector rayorig, t_vector raydir, t_obj cylinder, float *t_hit, int *hit_part);
+
+
 //Objects
-t_obj		init_obj(t_vector coordinates, t_vector em_color);
+t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);
 void		init_light(t_light *light);
 
 //hooks
@@ -53,8 +57,6 @@ t_vector 	vec_sub(t_vector vec1, t_vector vec2);
 t_vector 	vec_mul(t_vector vec1, t_vector vec2);
 t_vector 	vec_mul_num(t_vector vec1, float num);
 t_vector 	vec_sub_num(t_vector vec1, float num);
-float		min(float a, float b);
-float		max(float a, float b);
 float 		random_float_fast(unsigned int *seed);
 
 //clean

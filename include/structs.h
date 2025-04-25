@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/14 15:18:45 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:11:38 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef struct s_obj
 	t_obj_type	type;
 	t_vector	coordinates;
 	t_vector	normalized;
-	float		width;
 	float		height;
 	float		diameter;
+	float		radius;
 	t_vector	color;
 	t_vector	emission_color;
 }	t_obj;
