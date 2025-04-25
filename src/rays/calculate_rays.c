@@ -12,7 +12,7 @@
 
 #include "../../include/mini_rt.h"
 
-static inline void normalize(t_vector *vector_to_norm)
+inline void normalize(t_vector *vector_to_norm)
 {
 	float	normalized = length2(*vector_to_norm);
 	if (normalized > 0)
@@ -39,6 +39,8 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 			hit = intersect_sphere(rayorig, raydir, objects[i], &t0, &t1);
 		else if (objects[i].type == CYLINDER)
 			hit = intersect_cylinder(rayorig, raydir, objects[i], &t0, &temp_part);
+		else if (objects[i].type == PLANE)
+			hit = intersect_plane(rayorig, raydir, objects[i], &t0);
 
 		if (hit) {
 			if (t0 < 0) t0 = t1;
@@ -61,7 +63,7 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 		nhit = vec_sub(phit, object->coordinates);
 		normalize(&nhit);
 	}
-	else
+	else if (object->type == CYLINDER)
 	{
 		if (hit_part == 0)
 		{
@@ -80,6 +82,8 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 			nhit = object->normalized;
 		}
 	}
+	else
+		nhit = object->normalized;
 
 	float bias = 1e-4;
 	if (dot(raydir, nhit) > 0)
@@ -102,7 +106,8 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 			shadow_hit = intersect_sphere(light_rayorig, light_direction, objects[j], &t0, &t1) && t0 > 0;
 		else if (objects[j].type == CYLINDER)
 			shadow_hit = intersect_cylinder(light_rayorig, light_direction, objects[j], &t0, &temp_part) && t0 > 0;
-
+		else if (objects[j].type == PLANE)
+			shadow_hit = intersect_plane(light_rayorig, light_direction, objects[j], &t0) && t0 > 0;
 		if (shadow_hit) {
 			transmission = (t_vector){0, 0, 0};
 			break;
@@ -126,28 +131,6 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 }
 
 t_vector	*render(t_miniRT *rt) {
-	rt->objects = ft_calloc(rt->obj_count + 1, sizeof(t_obj));
-	if (!rt->objects)
-	{
-		printf("Malloc error\n");
-		exit(1);
-	}
-	t_vector coordinates = {0, -2, -20}, em_color = {0, 0, 0};
-	for (int i = 0; i < rt->obj_count; i++)
-	{
-		t_obj_type type = i == 0 ? SPHERE : CYLINDER;
-		// t_obj_type type = SPHERE;
-		rt->objects[i] = init_obj(coordinates, em_color, type);
-		coordinates = vec_sub_num(coordinates, 5);
-		em_color.x -= 0.1;
-	}
-	rt->light = ft_calloc(1, sizeof(t_light));
-	if (!rt->light)
-	{
-		printf("Malloc error\n");
-		exit(1);
-	}
-	init_light(rt->light);
 	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
 	if (!pixel)
 	{

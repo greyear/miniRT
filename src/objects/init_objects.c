@@ -22,6 +22,7 @@ t_obj	init_obj(t_vector coordinates, t_vector em_color, t_obj_type type)
 	def_obj.emission_color = em_color;
 	def_obj.coordinates = coordinates;
 	def_obj.normalized = (t_vector){ 0.0, 1.0, 0.0};
+	//normalize(&def_obj.normalized);
 	def_obj.diameter = 10.5;
 	def_obj.radius = def_obj.diameter / 2;
 	def_obj.height = 10;

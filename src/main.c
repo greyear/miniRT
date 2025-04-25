@@ -25,9 +25,24 @@ static t_miniRT	init_struct(void)
 		exit(1);
 	}
 	obj.camera->coordinates = (t_vector) {0, 0, 0};
-	obj.light = NULL;
-	obj.objects = NULL;
-	obj.obj_count = 2;
+	obj.obj_count = 3;
+	obj.objects = ft_calloc(obj.obj_count, sizeof(t_obj));
+	if (!obj.objects)
+	{
+		printf("Malloc error\n");
+		exit(1);
+	}
+	t_vector  em_color = {0, 0, 0};
+	obj.objects[0] = init_obj((t_vector) {0, -2, -20}, em_color, SPHERE);
+	obj.objects[1] = init_obj((t_vector) {-5, -7, -25}, em_color, CYLINDER);
+	obj.objects[2] = init_obj((t_vector) {0, -10, 0}, em_color, PLANE);
+	obj.light = ft_calloc(1, sizeof(t_light));
+	if (!obj.light)
+	{
+		printf("Malloc error\n");
+		exit(1);
+	}
+	init_light(obj.light);
 
 	return (obj);
 }
