@@ -95,4 +95,18 @@ bool	intersect_cylinder(t_vector rayorig, t_vector raydir, t_obj cylinder, float
 	return (*hit_part != -1);
 }
 
-
+bool	intersect_plane(t_vector rayorig, t_vector raydir, t_obj plane, float *t)
+{
+	float	denom = dot(raydir, plane.normalized);
+	if (fabsf(denom) > 1e-6f)
+	{
+		t_vector	diff = vec_sub(plane.coordinates, rayorig);
+		float	temp_t = dot(diff, plane.normalized) / denom;
+		if (temp_t >= 0)
+		{
+			*t = temp_t;
+			return (true);
+		}
+	}
+	return (false);
+}

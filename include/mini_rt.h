@@ -39,10 +39,11 @@ float		dot(t_vector vec1, t_vector vec2);
 t_vector	revert_vector(t_vector vec);
 float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
+void 		normalize(t_vector *vector_to_norm);
 
 bool		intersect_sphere(t_vector rayorig, t_vector raydir, t_obj sphere, float *t0, float *t1);
 bool		intersect_cylinder(t_vector rayorig, t_vector raydir, t_obj cylinder, float *t_hit, int *hit_part);
-
+bool		intersect_plane(t_vector rayorig, t_vector raydir, t_obj plane, float *t);
 
 //Objects
 t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);
