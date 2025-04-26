@@ -74,13 +74,9 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 			normalize(&nhit);
 		}
 		else if (hit_part == 1)
-		{
 			nhit = vec_mul_num(object->normalized, -1.0f);
-		}
 		else
-		{
 			nhit = object->normalized;
-		}
 	}
 	else
 		nhit = object->normalized;
@@ -106,8 +102,13 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 			shadow_hit = intersect_sphere(light_rayorig, light_direction, objects[j], &t0, &t1) && t0 > 0;
 		else if (objects[j].type == CYLINDER)
 			shadow_hit = intersect_cylinder(light_rayorig, light_direction, objects[j], &t0, &temp_part) && t0 > 0;
-		else if (objects[j].type == PLANE)
-			shadow_hit = intersect_plane(light_rayorig, light_direction, objects[j], &t0) && t0 > 0;
+		else if (objects[j].type == PLANE) {
+			float plane_side_phit = dot(vec_sub(phit, objects[j].coordinates), objects[j].normalized);
+			float plane_side_light = dot(vec_sub(rt->light->coordinates, objects[j].coordinates), objects[j].normalized);
+		
+			if (plane_side_phit * plane_side_light < 0.0f)
+				shadow_hit = intersect_plane(light_rayorig, light_direction, objects[j], &t0) && t0 > 0;
+		}
 		if (shadow_hit) {
 			transmission = (t_vector){0, 0, 0};
 			break;
