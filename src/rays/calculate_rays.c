@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 14:24:54 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:24:29 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 {
-	float	tnear = INFINITY;
-	t_obj	*object = NULL;
-	t_ray	ray = {rayorig, raydir};
-	t_hit	hit_arr[2];
+	float			tnear;
+	t_obj			*object;
+	t_ray			ray = {rayorig, raydir};
+	t_hit			hit_arr[2];
+	t_light_calc	lights;
 
+	tnear = INFINITY;
+	object = NULL;
 	hit_arr[0] = (t_hit) {INFINITY, INFINITY, -1, -1, {0,0,0}, {0,0,0}};
 	hit_arr[1] = hit_arr[0];
 	object = check_obj_intersection(rt, ray, (t_hit *[2]) {&hit_arr[0], &hit_arr[1]}, &tnear);
@@ -33,28 +36,28 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 	if (dot(raydir, hit_arr[0].nhit) > 0)
 		hit_arr[0].nhit = revert_vector(hit_arr[0].nhit);
 
-	t_vector transmission = {1, 1, 1};
-	t_vector light_direction = vec_sub(rt->light->coordinates, hit_arr[0].phit);
-	normalize(&light_direction);
-	t_vector light_rayorig = {0, 0, 0};
-	t_ray	light_ray = {light_rayorig, light_direction};
+	lights.transmission = (t_vector){1, 1, 1};
+	lights.light_ray.destination = vec_sub(rt->light->coordinates, hit_arr[0].phit);
+	normalize(&lights.light_ray.destination);
+	lights.light_ray.origin = (t_vector){0, 0, 0};
+	t_ray	light_ray = {lights.light_ray.origin, lights.light_ray.destination};
 
-	transmission = calculate_shadows(rt, object, &hit_arr[0], light_ray);
+	lights.transmission = calculate_shadows(rt, object, &hit_arr[0], light_ray);
 
-	float light_intensity = fmax(0, dot(hit_arr[0].nhit, light_direction));
+	lights.light_intensity = fmax(0, dot(hit_arr[0].nhit, lights.light_ray.destination));
 	t_vector light_contribution = vec_mul(
 		object->color,
-		vec_mul_num(rt->light->emission_color, light_intensity)
+		vec_mul_num(rt->light->emission_color, lights.light_intensity)
 	);
-	light_contribution = vec_mul(light_contribution, transmission);
+	light_contribution = vec_mul(light_contribution, lights.transmission);
 
-	// Ambient + emissive
-	t_vector surface_color = light_contribution;
-	surface_color = vec_add(surface_color, object->emission_color);
+
+	lights.surface_color = light_contribution;
+	lights.surface_color = vec_add(lights.surface_color, object->emission_color);
 	t_vector ambient_light = (t_vector){0.1, 0.1, 0.1};
-	surface_color = vec_add(surface_color, vec_mul(object->color, ambient_light));
+	lights.surface_color = vec_add(lights.surface_color, vec_mul(object->color, ambient_light));
 
-	return surface_color;
+	return (lights.surface_color);
 }
 
 t_vector	*render(t_rt *rt)

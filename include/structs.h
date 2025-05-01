@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/01 14:05:12 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:20:56 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,15 @@ typedef struct s_hit
 	t_vector	nhit;
 }	t_hit;
 
+typedef struct s_light_calc
+{
+	t_ray		light_ray;
+	t_vector	transmission;
+	t_vector	light_contribution;
+	t_vector	surface_color;
+	float		light_intensity;
+}	t_light_calc;
+
 typedef struct s_rt
 {
 	t_obj		*objects;
@@ -98,6 +107,7 @@ typedef struct s_rt
 	t_camera	*camera;
 	mlx_t		*mlx;
 	int			obj_count;
+	t_vector	ambient_light;
 }	t_rt;
 
 typedef enum s_calc
