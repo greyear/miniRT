@@ -6,13 +6,13 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:29 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/17 15:07:33 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:49:16 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-void	draw_figure(t_vector *image, t_miniRT *obj)
+void	draw_figure(t_vector *image, t_rt *obj)
 {
 	uint32_t color;
 	obj->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);

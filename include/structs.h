@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/24 14:11:38 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:38:19 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,15 @@ typedef struct s_ray
 	t_vector	destination;
 }	t_ray;
 
-typedef struct s_miniRT
+typedef struct s_hit
+{
+	float	t0;
+	float	t1;
+	int		temp_part;
+	int		hit_part;
+}	t_hit;
+
+typedef struct s_rt
 {
 	t_obj		*objects;
 	t_ambient	*amb_light;
@@ -88,7 +96,7 @@ typedef struct s_miniRT
 	t_camera	*camera;
 	mlx_t		*mlx;
 	int			obj_count;
-}	t_miniRT;
+}	t_rt;
 
 typedef enum s_calc
 {

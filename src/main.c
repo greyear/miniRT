@@ -6,15 +6,15 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/17 15:34:19 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:18:00 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/mini_rt.h"
 
-static t_miniRT	init_struct(void)
+static t_rt	init_struct(void)
 {
-	t_miniRT	obj;
+	t_rt	obj;
 
 	obj.mlx = NULL;
 	obj.amb_light = NULL;
@@ -49,7 +49,7 @@ static t_miniRT	init_struct(void)
 
 int main()
 {
-	t_miniRT	obj;
+	t_rt	obj;
 	t_vector	*image;
 
 	obj = init_struct();
