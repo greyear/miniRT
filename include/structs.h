@@ -49,6 +49,14 @@ typedef enum e_return
 	FAILURE = 1
 }	t_return;
 
+typedef enum e_val_flags
+{
+	VAL_INT = 1 << 0,
+	VAL_FLOAT = 1 << 1,
+	VAL_RANGE = 1 << 2,
+	//VAL_TUPLE = 1 << 3
+}	t_val_flags;
+
 typedef struct s_vector
 {
 	double	x;
