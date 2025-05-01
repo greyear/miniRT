@@ -28,6 +28,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int				ft_array_len(char **arr);
 void			ft_clean_arr(char ***arr);
 void			ft_clean_gnl(int fd);
 int				ft_isalpha(int c);

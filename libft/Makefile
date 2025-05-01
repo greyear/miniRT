@@ -25,6 +25,8 @@ RM				=	rm -f
 AR				=	ar rcs
 
 # Source files
+FTARRAY_DIR		=	$(SRC_DIR)ft_array/ft_array_len.c
+
 FTCLEAN_DIR		=	$(SRC_DIR)ft_clean/ft_clean_arr.c \
 					$(SRC_DIR)ft_clean/ft_clean_gnl.c
 
@@ -98,9 +100,9 @@ FTPRINTF_DIR	=	$(SRC_DIR)ft_printf/ft_print_char.c \
 GNL_DIR			=	$(SRC_DIR)get_next_line/get_next_line.c \
 					$(SRC_DIR)get_next_line/get_next_line_utils.c
 
-SRC 			=	$(FTCLEAN_DIR) $(FTIS_DIR) $(FTLST_DIR) $(FTMEM_DIR) \
-					$(FTPUT_DIR) $(FTSTR_DIR) $(FTTO_DIR) $(FTPRINTF_DIR) \
-					$(GNL_DIR)
+SRC 			=	$(FTARRAY_DIR) $(FTCLEAN_DIR) $(FTIS_DIR) $(FTLST_DIR) \
+					$(FTMEM_DIR) $(FTPUT_DIR) $(FTSTR_DIR) $(FTTO_DIR) \
+					$(FTPRINTF_DIR) $(GNL_DIR)
 
 # Object files
 OBJ				=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))

@@ -55,7 +55,10 @@ PARS_FILES		=	file_validation.c \
 					set.c \
 					content_validation.c \
 					line_validation.c \
-					aton.c
+					figures.c \
+					non_figures.c \
+					validation_utils.c \
+					rt_atod.c
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c
 

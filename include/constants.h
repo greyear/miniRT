@@ -31,3 +31,10 @@
 # define DB_ELEM_MSG "Elements which are defined by a capital letter can only \
 	be declared once\n"
 # define VALID_MSG "Scene file has invalid lines\n"
+# define AMBIENT_ARGS "Ambient lightning has wrong number of arguments\n"
+# define CAMERA_ARGS "Camera has wrong number of arguments\n"
+# define LIGHT_ARGS "Light has wrong number of arguments\n"
+# define SPHERE_ARGS "Sphere has wrong number of arguments\n"
+# define PLANE_ARGS "Plane has wrong number of arguments\n"
+# define CYLINDER_ARGS "Cylinder has wrong number of arguments\n"
+# define MLLC_MSG "Malloc failure\n"
