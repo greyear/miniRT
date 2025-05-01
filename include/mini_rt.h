@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 10:52:56 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:06:40 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ float		dot(t_vector vec1, t_vector vec2);
 t_vector	revert_vector(t_vector vec);
 float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
-void 		normalize(t_vector *vector_to_norm);
 
+//Intersection
 bool		intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info);
 bool		intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info);
 bool		intersect_plane(t_ray ray, t_obj plane, float *t);
 bool		check_intersection(t_ray ray, t_obj object, t_hit *hit_info);
+t_obj		*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear);
 
 //Objects
 t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);
@@ -60,6 +61,8 @@ t_vector 	vec_mul(t_vector vec1, t_vector vec2);
 t_vector 	vec_mul_num(t_vector vec1, float num);
 t_vector 	vec_sub_num(t_vector vec1, float num);
 float 		random_float_fast(unsigned int *seed);
+void 		normalize(t_vector *vector_to_norm);
+void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_hit);
 
 //clean
 void		clean_struct(t_rt *rt);

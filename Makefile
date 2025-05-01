@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/24 13:57:57 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/01 12:03:31 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
 					\
 					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
+					$(SRC_DIR)/$(RAYS)/hits.c \
 					$(SRC_DIR)/$(RAYS)/intersection.c \
 					\
 					$(SRC_DIR)/$(CLEAN_DIR)/struct_cleaning.c \
@@ -75,6 +76,7 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(OBJECTS)/init_objects.c \
 					\
 					$(SRC_DIR)/$(UTILS)/math_utils.c \
+					$(SRC_DIR)/$(UTILS)/normalization.c \
 					$(SRC_DIR)/$(UTILS)/ray_utils.c \
 					$(SRC_DIR)/$(UTILS)/vec_utils.c 
 

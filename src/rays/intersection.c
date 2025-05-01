@@ -6,39 +6,38 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:54:22 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 11:00:45 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:59:51 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-// t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_obj *objects)
-// {
-// 	int temp_part = -1;
-// 	bool hit = false;
-// 	float t0 = INFINITY;
-// 	float t1 = INFINITY;
-	
-// 	for (int i = 0; i < rt->obj_count; i++) {
-		
-// 		if (objects[i].type == SPHERE)
-// 			hit = intersect_sphere(ray.origin, ray.destination, objects[i], &t0, &t1);
-// 		else if (objects[i].type == CYLINDER)
-// 			hit = intersect_cylinder(ray.origin, ray.destination, objects[i], &t0, &temp_part);
-// 		else if (objects[i].type == PLANE)
-// 			hit = intersect_plane(ray.origin, ray.destination, objects[i], &t0);
+t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear)
+{
+	t_obj	*object;
+	bool	hit;
+	int		i;
 
-// 		if (hit) {
-// 			if (t0 < 0) t0 = t1;
-// 			if (t0 < tnear) {
-// 				tnear = t0;
-// 				hit_part = temp_part;
-// 				return (&objects[i]);
-// 			}
-// 		}
-// 	}
-// 	return (NULL);
-// }
+	hit = false;
+	object = NULL;
+	i = 0;
+	while (i < rt->obj_count) {
+		hit_arr[0]->temp_part = -1;
+		hit_arr[0]->t0 = INFINITY;
+		hit_arr[0]->t1 = INFINITY;
+		hit = check_intersection(ray, rt->objects[i], hit_arr[0]);
+		if (hit) {
+			if (hit_arr[0]->t0 < 0) hit_arr[0]->t0 = hit_arr[0]->t1;
+			if (hit_arr[0]->t0 < *tnear) {
+				*tnear = hit_arr[0]->t0;
+				object = &rt->objects[i];
+				*(hit_arr[1]) = *(hit_arr[0]);
+			}
+		}
+		i++;
+	}
+	return (object);
+}
 
 bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 {

@@ -6,49 +6,22 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 11:27:38 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:07:10 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
-
-inline void normalize(t_vector *vector_to_norm)
-{
-	float	normalized = length2(*vector_to_norm);
-	if (normalized > 0)
-	{
-		float invNor = 1 / sqrt(normalized);
-		vector_to_norm->x *= invNor;
-		vector_to_norm->y *= invNor;
-		vector_to_norm->z *= invNor;
-	}
-}
 
 static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects, t_rt *rt)
 {
 	float	tnear = INFINITY;
 	t_obj	*object = NULL;
 	t_ray	ray = {rayorig, raydir};
-	t_hit	hit_info = {INFINITY, INFINITY, -1, -1};
-	t_hit	cyl_hits = hit_info;
-	bool 	hit;
+	t_hit	hit_arr[2];
 
-	for (int i = 0; i < rt->obj_count; i++) {
-		hit_info.temp_part = -1;
-		hit_info.t0 = INFINITY;
-		hit_info.t1 = INFINITY;
-
-		hit = check_intersection(ray, objects[i], &hit_info);
-
-		if (hit) {
-			if (hit_info.t0 < 0) hit_info.t0 = hit_info.t1;
-			if (hit_info.t0 < tnear) {
-				tnear = hit_info.t0;
-				object = &objects[i];
-				cyl_hits = hit_info;
-			}
-		}
-	}
+	hit_arr[0] = (t_hit) {INFINITY, INFINITY, -1, -1};
+	hit_arr[1] = hit_arr[0];
+	object = check_obj_intersection(rt, ray, (t_hit *[2]) {&hit_arr[0], &hit_arr[1]}, &tnear);
 
 	if (!object)
 		return ((t_vector){1, 1, 0.5});
@@ -56,28 +29,29 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 	t_vector phit = vec_add(rayorig, vec_mul_num(raydir, tnear));
 	t_vector nhit;
 
-	if (object->type == SPHERE)
-	{
-		nhit = vec_sub(phit, object->coordinates);
-		normalize(&nhit);
-	}
-	else if (object->type == CYLINDER)
-	{
-		if (cyl_hits.hit_part == 0)
-		{
-			t_vector hit_to_center = vec_sub(phit, object->coordinates);
-			float h = dot(hit_to_center, object->normalized);
-			t_vector axis_proj = vec_mul_num(object->normalized, h);
-			nhit = vec_sub(hit_to_center, axis_proj);
-			normalize(&nhit);
-		}
-		else if (cyl_hits.hit_part == 1)
-			nhit = vec_mul_num(object->normalized, -1.0f);
-		else
-			nhit = object->normalized;
-	}
-	else
-		nhit = object->normalized;
+	// if (object->type == SPHERE)
+	// {
+	// 	nhit = vec_sub(phit, object->coordinates);
+	// 	normalize(&nhit);
+	// }
+	// else if (object->type == CYLINDER)
+	// {
+	// 	if (hit_arr[1].hit_part == 0)
+	// 	{
+	// 		t_vector hit_to_center = vec_sub(phit, object->coordinates);
+	// 		float h = dot(hit_to_center, object->normalized);
+	// 		t_vector axis_proj = vec_mul_num(object->normalized, h);
+	// 		nhit = vec_sub(hit_to_center, axis_proj);
+	// 		normalize(&nhit);
+	// 	}
+	// 	else if (hit_arr[1].hit_part == 1)
+	// 		nhit = vec_mul_num(object->normalized, -1.0f);
+	// 	else
+	// 		nhit = object->normalized;
+	// }
+	// else
+	// 	nhit = object->normalized;
+	normilize_object(object, &nhit, &phit, hit_arr[1]);
 
 	float bias = 1e-4;
 	if (dot(raydir, nhit) > 0)
@@ -93,24 +67,22 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_obj *objects
 		if (&objects[j] == object)
 			continue;
 
-		//float t0, t1;
-		hit_info.t0 = 0;
-		hit_info.t1 = 0;
-		hit_info.temp_part = -1;
-		//int temp_part = -1;
+		hit_arr[0].t0 = 0;
+		hit_arr[0].t1 = 0;
+		hit_arr[0].temp_part = -1;
 		light_ray.origin = vec_add(phit, vec_mul_num(nhit, bias));
 
 		bool shadow_hit = false;
 		if (objects[j].type == SPHERE)
-			shadow_hit = intersect_sphere(light_ray, objects[j], &hit_info) && hit_info.t0 > 0;
+			shadow_hit = intersect_sphere(light_ray, objects[j], &hit_arr[0]) && hit_arr[0].t0 > 0;
 		else if (objects[j].type == CYLINDER)
-			shadow_hit = intersect_cylinder(light_ray, objects[j], &hit_info) && hit_info.t0 > 0;
+			shadow_hit = intersect_cylinder(light_ray, objects[j], &hit_arr[0]) && hit_arr[0].t0 > 0;
 		else if (objects[j].type == PLANE) {
 			float plane_side_phit = dot(vec_sub(phit, objects[j].coordinates), objects[j].normalized);
 			float plane_side_light = dot(vec_sub(rt->light->coordinates, objects[j].coordinates), objects[j].normalized);
 		
 			if (plane_side_phit * plane_side_light < 0.0f)
-				shadow_hit = intersect_plane(light_ray, objects[j], &hit_info.t0) && hit_info.t0 > 0;
+				shadow_hit = intersect_plane(light_ray, objects[j], &hit_arr[0].t0) && hit_arr[0].t0 > 0;
 		}
 		if (shadow_hit) {
 			transmission = (t_vector){0, 0, 0};
