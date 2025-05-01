@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/01 11:44:56 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:05:12 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ typedef struct s_ray
 
 typedef struct s_hit
 {
-	float	t0;
-	float	t1;
-	int		temp_part;
-	int		hit_part;
+	float		t0;
+	float		t1;
+	int			temp_part;
+	int			hit_part;
+	t_vector	phit;
+	t_vector	nhit;
 }	t_hit;
 
 typedef struct s_rt

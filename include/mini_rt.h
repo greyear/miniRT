@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 12:06:40 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:25:29 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ void		clamp(t_vector *pixel);
 
 //Intersection
 bool		intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info);
-bool		intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info);
+bool		intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info, int *hit_part);
 bool		intersect_plane(t_ray ray, t_obj plane, float *t);
 bool		check_intersection(t_ray ray, t_obj object, t_hit *hit_info);
 t_obj		*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear);
+
+//Shadows
+bool		check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info);
+t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light_ray);
 
 //Objects
 t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);

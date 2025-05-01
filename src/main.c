@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 11:18:00 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:14:50 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_rt	init_struct(void)
 	t_vector  em_color = {0, 0, 0};
 	obj.objects[0] = init_obj((t_vector) {0, -2, -20}, em_color, SPHERE);
 	obj.objects[1] = init_obj((t_vector) {-5, -7, -25}, em_color, CYLINDER);
-	obj.objects[2] = init_obj((t_vector) {0, -10, 0}, em_color, PLANE);
+	obj.objects[2] = init_obj((t_vector) {0, -7, 0}, em_color, PLANE);
 	obj.light = ft_calloc(1, sizeof(t_light));
 	if (!obj.light)
 	{

@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:54:22 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 11:59:51 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:21:46 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 	return (true);
 }
 
-bool	intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info)
+bool	intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info, int *hit_part)
 {
 	hit_info->t0 = INFINITY;
-	hit_info->hit_part = -1;
+	*hit_part = -1;
 
 	t_vector	oc = vec_sub(ray.origin, cylinder.coordinates);
 	float		dir_dot_axis = dot(ray.destination, cylinder.normalized);
@@ -92,7 +92,7 @@ bool	intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info)
 			if (height >= 0.0f && height <= cylinder.height && t_candidate < hit_info->t0)
 			{
 				hit_info->t0 = t_candidate;
-				hit_info->hit_part = 0;
+				*hit_part = 0;
 			}
 		}
 	}
@@ -115,11 +115,11 @@ bool	intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info)
 		if (dot(to_center, to_center) <= cylinder.radius * cylinder.radius)
 		{
 			hit_info->t0 = t_intersection;
-			hit_info->hit_part = (cap == 0) ? 1 : 2;
+			*hit_part = (cap == 0) ? 1 : 2;
 		}
 	}
 
-	return (hit_info->hit_part != -1);
+	return (*hit_part != -1);
 }
 
 bool	intersect_plane(t_ray ray, t_obj plane, float *t)
