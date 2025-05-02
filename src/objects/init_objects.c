@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:35:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 15:30:58 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:37:01 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ t_obj	*init_objects(t_rt *rt)
 	em_color = (t_vector) {0, 0, 0};
 	objects = ft_calloc(rt->obj_count, sizeof(t_obj));
 	if (!objects)
-	{
-		free(rt->camera);
-		printf("Malloc error\n");
-		exit(1);
-	}
+		clean_exit(rt);
 	objects[0] = init_obj((t_vector) {0, -2, -20}, em_color, SPHERE);
 	objects[1] = init_obj((t_vector) {-5, -7, -25}, em_color, CYLINDER);
 	objects[2] = init_obj((t_vector) {0, -7, 0}, em_color, PLANE);
@@ -54,12 +50,7 @@ t_light	*init_light(t_rt *rt)
 
 	light = ft_calloc(1, sizeof(t_light));
 	if (!light)
-	{
-		free(rt->objects);
-		free(rt->camera);
-		printf("Malloc error\n");
-		exit(1);
-	}
+		clean_exit(rt);
 	light->coordinates = (t_vector) {10, 0, 5};
 	light->color = (t_vector) {1, 1, 1};
 	light->emission_color = (t_vector) {1, 1, 1},
@@ -74,10 +65,7 @@ t_camera	*init_camera(void)
 
 	camera = ft_calloc(1, sizeof(t_camera));
 	if (!camera)
-	{
-		printf("Malloc error\n");
-		exit(1);
-	}
+		clean_exit(NULL);
 	camera->coordinates = (t_vector) {0, 0, 0};
 	camera->fov = 70;
 	camera->aspect_ratio = WIN_WIDTH / (float) WIN_HEIGHT;

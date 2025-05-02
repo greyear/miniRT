@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 15:31:04 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:35:23 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_
 
 //clean
 void		clean_struct(t_rt *rt);
+void		clean_exit(t_rt *rt);
 
 #endif

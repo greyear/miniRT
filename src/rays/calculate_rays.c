@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 15:19:13 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:36:26 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ static t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 
 t_vector	*render(t_rt *rt)
 {
-	t_vector	*pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
-	if (!pixel)
-	{
-		printf("malloc error\n");
-		exit (1);
-	}
-	float angle = tan(M_PI * 0.5 * rt->camera->fov / 180.0);
-	unsigned int seed = 123;
+	float			angle;
+	t_vector		*pixel;
+	unsigned int	seed;
 
+	seed = 123;
+	angle = tan(M_PI * 0.5 * rt->camera->fov / 180.0);
+	pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
+	if (!pixel)
+		clean_exit(rt);
+	
 	for (int y = 0; y < WIN_HEIGHT; ++y) {
 		for (int x = 0; x < WIN_WIDTH; ++x) {
 			t_vector pixel_color = {0, 0, 0};
