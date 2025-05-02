@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:50 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/24 11:25:41 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:35:09 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,9 @@
 # endif
 
 # ifndef PIXEL_SAMPLES
-#  define PIXEL_SAMPLES 12
+#  define PIXEL_SAMPLES 4
+# endif
+
+# ifndef BIAS
+#  define BIAS 1e-4
 # endif
