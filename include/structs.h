@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/02 15:20:18 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:39:19 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_camera
 	float		fov;
 	float		viewporw_size;
 	float		aspect_ratio;
+	float		angle;
 }	t_camera;
 
 typedef struct s_ray

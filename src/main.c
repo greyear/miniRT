@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 15:31:18 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:10:07 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_rt	init_struct(void)
 	obj.objects = init_objects(&obj);
 	obj.light = init_light(&obj);
 	obj.ambient_light = (t_vector) {0.1, 0.1, 0.1};
-
 	return (obj);
 }
 

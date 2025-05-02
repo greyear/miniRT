@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 15:35:23 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:52:34 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ t_vector	*render(t_rt *obj);
 uint32_t	vec_to_rgba(t_vector color);
 
 //Rays
+t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
 float		length2(t_vector vec);
 float		dot(t_vector vec1, t_vector vec2);
 t_vector	revert_vector(t_vector vec);
 float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
+t_vector	smooth_pixel(int x, int y, t_rt *rt);
 
 //Intersection
 bool		intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info);

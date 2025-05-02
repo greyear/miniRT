@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/05/01 14:25:43 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/02 16:04:54 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
          			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
 					\
+					$(SRC_DIR)/$(RAYS)/anti_aliasing.c \
 					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
 					$(SRC_DIR)/$(RAYS)/hits.c \
 					$(SRC_DIR)/$(RAYS)/intersection.c \

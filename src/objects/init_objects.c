@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:35:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 15:37:01 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:40:11 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ t_camera	*init_camera(void)
 	camera->coordinates = (t_vector) {0, 0, 0};
 	camera->fov = 70;
 	camera->aspect_ratio = WIN_WIDTH / (float) WIN_HEIGHT;
+	camera->angle = tan(M_PI * 0.5 * camera->fov / 180.0);
 	return (camera);
 }
