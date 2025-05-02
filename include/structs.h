@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/01 15:20:56 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:20:18 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ typedef struct s_camera
 {
 	t_vector	coordinates;
 	t_vector	normalized;
-	float		view_field;
+	float		fov;
 	float		viewporw_size;
+	float		aspect_ratio;
 }	t_camera;
 
 typedef struct s_ray
@@ -109,11 +110,3 @@ typedef struct s_rt
 	int			obj_count;
 	t_vector	ambient_light;
 }	t_rt;
-
-typedef enum s_calc
-{
-	ADD,
-	SUBTRACT,
-	MULTIPLY,
-	DIVIDE
-}	t_calc;

@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/01 14:25:29 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:31:04 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light
 
 //Objects
 t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);
-void		init_light(t_light *light);
+t_light		*init_light(t_rt *rt);
+t_camera	*init_camera(void);
+t_obj		*init_objects(t_rt *rt);
 
 //hooks
 void		keys_hook(void *obj);
