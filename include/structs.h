@@ -52,10 +52,19 @@ typedef enum e_return
 typedef enum e_val_flags
 {
 	VAL_INT = 1 << 0,
-	VAL_FLOAT = 1 << 1,
+	VAL_DBL = 1 << 1,
 	VAL_RANGE = 1 << 2,
-	//VAL_TUPLE = 1 << 3
+	VAL_COMPONENTS = 1 << 3
 }	t_val_flags;
+
+typedef struct s_val_rules
+{
+	t_val_flags	flags;
+	double		min;
+	double		max;
+	int			comp;
+	char		*err_msg;
+}	t_val_rules;
 
 typedef struct s_vector
 {

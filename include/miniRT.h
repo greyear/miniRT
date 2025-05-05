@@ -36,9 +36,14 @@ int			validate_light(char **args);
 int			validate_sphere(char **args);
 int			validate_plane(char **args);
 int			validate_cylinder(char **args);
+int			validate_value(char *str, t_val_rules rules);
+int			if_out_of_range(char *str, double min, double max);
 
 //ATON
+int			pre_atoi(char *str);
+int			pre_atod(char *str);
 int			rt_atod(const char *str, double *number);
+
 
 //Drawing
 void		draw_figure(void);
