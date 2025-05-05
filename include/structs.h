@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/02 15:39:19 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:24:16 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,24 @@ typedef struct s_light_calc
 	t_vector	surface_color;
 	float		light_intensity;
 }	t_light_calc;
+
+typedef struct s_cyl_inter
+{
+	t_vector	oc;
+	float		dir_dot_axis;
+	t_vector	ray_perp_dir;
+	float		ray_perp_len;
+	float		oc_dot_axis;
+	t_vector	oc_proj;
+	float		discriminant;
+	float		sqrt_disc;
+	float		t0;
+	float		t1;
+	float		t_candidate;
+	t_vector	intersection;
+	t_vector	to_point;
+	int			*hit_part;
+}	t_cyl_inter;
 
 typedef struct s_rt
 {
