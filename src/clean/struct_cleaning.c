@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:11:30 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/02 15:35:05 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:45:45 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ void	clean_struct(t_rt *rt)
 	{
 		free(rt->camera);
 		rt->light = NULL;
+	}
+	if (rt->image)
+	{
+		free(rt->image);
+		rt->image = NULL;
 	}
 }
 

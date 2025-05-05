@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/05 13:24:16 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:48:40 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_cyl_inter
 
 typedef struct s_rt
 {
+	int			width;
+	int			height;
 	t_obj		*objects;
 	t_ambient	*amb_light;
 	t_light		*light;
@@ -128,4 +130,7 @@ typedef struct s_rt
 	mlx_t		*mlx;
 	int			obj_count;
 	t_vector	ambient_light;
+	t_vector	*image;
+	mlx_image_t	*mlx_img;
+	int			needs_render;
 }	t_rt;

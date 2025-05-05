@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:54:22 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 16:21:58 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:36:31 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,34 @@ t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tne
 	return (object);
 }
 
+static void	set_hit_interval(t_hit *hit_info, float tca, float radius2, float d2)
+{
+	float thc;
+	
+	thc = sqrt(radius2 - d2);
+	hit_info->t0 = tca - thc;
+	hit_info->t1 = tca + thc;
+}
+
 bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 {
-	float		radius2 = pow(sphere.diameter / 2, 2);
-	t_vector	center = sphere.coordinates;
-	t_vector	ray_length = vec_sub(center, ray.origin);
-	float		tca = ray_length.x * ray.destination.x + ray_length.y * ray.destination.y + ray_length.z * ray.destination.z;
+	float		radius2;
+	t_vector	center;
+	t_vector	ray_length;
+	float		tca;
+	float		d2;
+
+	radius2 = pow(sphere.diameter / 2, 2);
+	center = sphere.coordinates;
+	ray_length = vec_sub(center, ray.origin);
+	tca = ray_length.x * ray.destination.x + ray_length.y * ray.destination.y + ray_length.z * ray.destination.z;
 	// return if camera is inside an object
 	// if (tca < 0)
 	// 	return (false);
-	float		d2 = pow(ray_length.x, 2) + pow(ray_length.y, 2) + pow(ray_length.z, 2) - tca * tca;
+	d2 = pow(ray_length.x, 2) + pow(ray_length.y, 2) + pow(ray_length.z, 2) - tca * tca;
 	if (d2 > radius2)
 		return false;
-	float thc = sqrt(radius2 - d2);
-	hit_info->t0 = tca - thc;
-	hit_info->t1 = tca + thc;
+	set_hit_interval(hit_info, tca, radius2, d2);
 	return (true);
 }
 

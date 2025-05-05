@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 14:24:35 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 16:19:38 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:16:13 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 {
 	bool	shadow_hit;
-	float	plane_side_phit;
-	float	plane_side_light;
+	float	pl_side_phit;
+	float	pl_side_light;
 
 	shadow_hit = false;
 	if (object.type == SPHERE)
@@ -25,9 +25,9 @@ bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 		shadow_hit = intersect_cylinder(light_ray, object, hit_info, &hit_info->hit_part) && hit_info->t0 > 0;
 	else if (object.type == PLANE)
 	{
-		plane_side_phit = dot(vec_sub(hit_info->phit, object.coordinates), object.normalized);
-		plane_side_light = dot(vec_sub(rt->light->coordinates, object.coordinates), object.normalized);
-		if (plane_side_phit * plane_side_light < 0.0f)
+		pl_side_phit = dot(vec_sub(hit_info->phit, object.coordinates), object.normalized);
+		pl_side_light = dot(vec_sub(rt->light->coordinates, object.coordinates), object.normalized);
+		if (pl_side_phit * pl_side_light < 0.0f)
 			shadow_hit = intersect_plane(light_ray, object, &hit_info->t0) && hit_info->t0 > 0;
 	}
 	return (shadow_hit);

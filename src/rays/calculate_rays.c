@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 16:12:43 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:52:16 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,25 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 	return (lights.surface_color);
 }
 
-t_vector	*render(t_rt *rt)
+void	render(t_rt *rt)
 {
-	t_vector		*pixel;
 	t_vector		pixel_color;
 	int				x;
 	int				y;
 
-	pixel = ft_calloc(WIN_WIDTH * WIN_HEIGHT, sizeof(t_vector));
-	if (!pixel)
-		clean_exit(rt);
 	x = 0;
 	y = 0;
-	while (y < WIN_HEIGHT) {
+	while (y < rt->height)
+	{
 		x = 0;
-		while (x < WIN_WIDTH) {
+		while (x < rt->width)
+		{
 			pixel_color = smooth_pixel(x, y, rt);
 			pixel_color = vec_mul_num(pixel_color, 1.0f / PIXEL_SAMPLES);
 			clamp(&pixel_color);
-			pixel[x + WIN_WIDTH * y] = pixel_color;
+			rt->image[x + rt->width * y] = pixel_color;
 			x++;
 		}
 		y++;
 	}
-	return (pixel);
 }
