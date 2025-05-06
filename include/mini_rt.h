@@ -22,6 +22,8 @@
 # include <dirent.h> 
 # include <math.h>
 
+# include <sys/time.h> // deleteme
+
 //Parsing
 void	name_check(char *name);
 void	dir_check(char *name);
@@ -78,5 +80,7 @@ void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_
 //clean
 void		clean_struct(t_rt *rt);
 void		clean_exit(t_rt *rt);
+
+size_t	get_time(void); //deleteme
 
 #endif

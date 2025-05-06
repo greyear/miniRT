@@ -34,11 +34,13 @@ void	draw_pixels(t_rt *rt)
 
 void	draw_figure(t_rt *rt)
 {
+	size_t time = get_time();
 	rt->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
 	mlx_image_t *img = mlx_new_image(rt->mlx, rt->width, rt->height);
 	rt->mlx_img = img;
 	draw_pixels(rt);
 	mlx_image_to_window(rt->mlx, img, 0, 0);
+	printf("%zu\n", get_time() - time);
 	mlx_loop_hook(rt->mlx, keys_hook, rt);
 	mlx_resize_hook(rt->mlx, win_resize, rt);
 	mlx_loop(rt->mlx);

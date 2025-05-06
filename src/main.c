@@ -40,12 +40,22 @@ static t_rt	init_struct(void)
 	return (rt);
 }
 
+size_t	get_time(void) //deleteme
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
 int main(void)
 {
 	t_rt		rt;
 
 	rt = init_struct();
+	size_t	time = get_time();
 	render(&rt);
+	printf("%zu\n", get_time() - time);
 	draw_figure(&rt);
 	clean_struct(&rt);
 	return (0);

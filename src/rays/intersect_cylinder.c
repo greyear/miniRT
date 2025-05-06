@@ -41,7 +41,7 @@ static void	check_caps_intersection(t_obj cylinder, t_hit *hit_info, t_ray ray, 
 		++cap;
 		cap_center = vec_add(cylinder.coordinates, vec_mul_num(cylinder.normalized, calc_cap_offset(cylinder, cap)));
 		ray_dot_axis = dot(ray.destination, cylinder.normalized);
-		if (fabsf(ray_dot_axis) < 1e-6f)
+		if (fabsl(ray_dot_axis) < 1e-6f)
 			continue;
 		t_intersection = dot(vec_sub(cap_center, ray.origin), cylinder.normalized) / ray_dot_axis;
 		if (t_intersection < 0.0f || t_intersection > hit_info->t0)

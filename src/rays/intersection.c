@@ -77,7 +77,7 @@ bool	intersect_plane(t_ray ray, t_obj plane, float *t)
 	float		temp_t;
 
 	denom = dot(ray.destination, plane.normalized);
-	if (fabsf(denom) > 1e-6f)
+	if (fabsl(denom) > 1e-6f)
 	{
 		diff = vec_sub(plane.coordinates, ray.origin);
 		temp_t = dot(diff, plane.normalized) / denom;

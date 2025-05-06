@@ -27,8 +27,6 @@ void	keys_hook(void *obj)
 		draw_pixels(rt);
 		rt->needs_render = 0;
 	}
-	if (mlx_is_mouse_down(rt->mlx, MLX_MOUSE_BUTTON_LEFT))
-		printf("click\n");
 }
 
 void	win_resize(int width, int height, void *param)
@@ -39,4 +37,5 @@ void	win_resize(int width, int height, void *param)
 	rt->width = width;
 	rt->height = height;
 	rt->needs_render = 1;
+	rt->camera->aspect_ratio = rt->width / (float) rt->height;
 }
