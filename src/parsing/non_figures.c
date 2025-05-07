@@ -5,6 +5,11 @@ int validate_ambient(char **args)
 {
 	if (ft_array_len(args) != 2)
 		return (print_err(AMBIENT_ARGS));
+	if (validate_ratio(args[0]))
+		return (FAILURE);
+	if (validate_color(args[1]))
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 int validate_camera(char **args)

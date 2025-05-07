@@ -58,6 +58,12 @@ PARS_FILES		=	file_validation.c \
 					figures.c \
 					non_figures.c \
 					value_validation.c \
+					colors.c \
+					vectors.c \
+					ratios.c \
+					coordinates.c \
+					FOV.c \
+					diameter_height.c \
 					pre_aton.c \
 					rt_atoi.c \
 					rt_atod.c
