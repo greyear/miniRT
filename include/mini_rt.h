@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 15:52:34 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:59:13 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@
 # include <dirent.h> 
 # include <math.h>
 
+# include <sys/time.h> // deleteme
+
 //Parsing
 void	name_check(char *name);
 void	dir_check(char *name);
 
 //Drawing
-void		draw_figure(t_vector *image, t_rt *obj);
+void		draw_figure(t_rt *obj);
 uint32_t	rgb_to_rgba(uint32_t color);
 uint32_t	gradient(int fst_color, int lst_color, int steps, int cur_step);
-t_vector	*render(t_rt *obj);
+void		render(t_rt *obj);
 uint32_t	vec_to_rgba(t_vector color);
+void		draw_pixels(t_rt *rt);
+void		create_img(t_rt *rt);
 
 //Rays
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
@@ -61,6 +65,7 @@ t_obj		*init_objects(t_rt *rt);
 
 //hooks
 void		keys_hook(void *obj);
+void		win_resize(int width, int height, void *param);
 
 //utils
 t_vector 	vec_add(t_vector vec1, t_vector vec2);
@@ -75,5 +80,7 @@ void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_
 //clean
 void		clean_struct(t_rt *rt);
 void		clean_exit(t_rt *rt);
+
+size_t	get_time(void); //deleteme
 
 #endif
