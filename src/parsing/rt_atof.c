@@ -1,7 +1,7 @@
 
 #include "../../include/miniRT.h"
 
-static int	atod_sign(const char **str)
+static int	atof_sign(const char **str)
 {
 	int	sign;
 
@@ -17,9 +17,9 @@ static int	atod_sign(const char **str)
 	return (sign);
 }
 
-static double	atod_before(const char **str)
+static float	atof_before(const char **str)
 {
-	double	bef;
+	float	bef;
 
 	bef = 0.0;
 	while (ft_isdigit(**str))
@@ -30,10 +30,10 @@ static double	atod_before(const char **str)
 	return (bef);
 }
 
-static double	atod_after(const char **str)
+static float	atof_after(const char **str)
 {
-	double	aft;
-	double	div;
+	float	aft;
+	float	div;
 
 	aft = 0.0;
 	div = 10.0;
@@ -50,20 +50,20 @@ static double	atod_after(const char **str)
 	return (aft);
 }
 
-int	rt_atod(const char *str, double *number)
+int	rt_atof(const char *str, float *number)
 {
 	int		sign;
-	double	bef;
-	double	aft;
-	double	res;
+	float	bef;
+	float	aft;
+	float	res;
 
 	if (!str || !number)
 		return (FAILURE);
-	sign = atod_sign(&str);
-	bef = atod_before(&str);
-	aft = atod_after(&str);
+	sign = atof_sign(&str);
+	bef = atof_before(&str);
+	aft = atof_after(&str);
 	res = (bef + aft) * sign;
-	if (res > DBL_MAX || res < -DBL_MAX || isinf(res) || isnan(res))
+	if (res > FLT_MAX || res < -FLT_MAX || isinf(res) || isnan(res))
 		return (FAILURE);
 	while (ft_isspace(*str))
 		str++;

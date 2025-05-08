@@ -12,11 +12,11 @@ t_val_err	int_out_of_range(char *str, int min, int max)
 	return (VAL_SUCCESS);
 }
 
-t_val_err	dbl_out_of_range(char *str, double min, double max)
+t_val_err	flt_out_of_range(char *str, float min, float max)
 {
-	double	value;
+	float	value;
 
-	if (rt_atod(str, &value) == 1)
+	if (rt_atof(str, &value) == 1)
 		return (VAL_ERR_ATON);
 	if (value < min || value > max)
 		return (VAL_ERR_RANGE);
@@ -38,7 +38,7 @@ t_val_err	validate_value(char *str, t_val_rules rules)
 		ft_clean_arr(&set);
 		return (VAL_ERR_COMPONENTS);
 	}
-	if ((rules.flags & VAL_INT) && (rules.flags & VAL_DBL))
+	if ((rules.flags & VAL_INT) && (rules.flags & VAL_FLT))
 	{
 		ft_clean_arr(&set);
 		return (VAL_ERR_CONFLICTING_FLAGS);
@@ -49,13 +49,13 @@ t_val_err	validate_value(char *str, t_val_rules rules)
 	{
 		if ((rules.flags & VAL_INT) && ((err = pre_atoi(*cur)) != VAL_SUCCESS))
 			break ;
-		if ((rules.flags & VAL_DBL) && ((err = pre_atod(*cur)) != VAL_SUCCESS))
+		if ((rules.flags & VAL_FLT) && ((err = pre_atof(*cur)) != VAL_SUCCESS))
 			break ;
 		if ((rules.flags & VAL_INT_RANGE) &&
 				((err = int_out_of_range(*cur, rules.min_int, rules.max_int)) != VAL_SUCCESS))
 			break ;
-		if ((rules.flags & VAL_DBL_RANGE) &&
-				((err = dbl_out_of_range(*cur, rules.min_dbl, rules.max_dbl)) != VAL_SUCCESS))
+		if ((rules.flags & VAL_FLT_RANGE) &&
+				((err = flt_out_of_range(*cur, rules.min_flt, rules.max_flt)) != VAL_SUCCESS))
 			break ;
 		cur++;
 	}

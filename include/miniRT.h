@@ -44,11 +44,11 @@ int			validate_coordinates(char *str);
 int			validate_fov(char *str);
 int			validate_diameter_height(char *str);
 int			int_out_of_range(char *str, int min, int max);
-int			dbl_out_of_range(char *str, double min, double max);
+int			flt_out_of_range(char *str, float min, float max);
 t_val_err	pre_atoi(char *str);
-t_val_err	pre_atod(char *str);
+t_val_err	pre_atof(char *str);
 int			rt_atoi(const char *str, int *number);
-int			rt_atod(const char *str, double *number);
+int			rt_atof(const char *str, float *number);
 
 //Drawing
 void		draw_figure(void);

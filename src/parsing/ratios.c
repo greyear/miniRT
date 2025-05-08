@@ -10,10 +10,10 @@ int	validate_ratio(char *str)
 	t_val_rules	rules;
 	t_val_err	err;
 
-	flags = VAL_DBL | VAL_DBL_RANGE | VAL_COMPONENTS;
+	flags = VAL_FLT | VAL_FLT_RANGE | VAL_COMPONENTS;
 	rules.flags = flags;
-	rules.min_dbl = 0.0;
-	rules.max_dbl = 1.0;
+	rules.min_flt = 0.0;
+	rules.max_flt = 1.0;
 	rules.comp = 1;
 	err = validate_value(str, rules);
 	if (err != VAL_SUCCESS)

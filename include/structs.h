@@ -52,9 +52,9 @@ typedef enum e_return
 typedef enum e_val_flags
 {
 	VAL_INT = 1 << 0,
-	VAL_DBL = 1 << 1,
+	VAL_FLT = 1 << 1,
 	VAL_INT_RANGE = 1 << 2,
-	VAL_DBL_RANGE = 1 << 3,
+	VAL_FLT_RANGE = 1 << 3,
 	VAL_COMPONENTS = 1 << 4
 }	t_val_flags;
 
@@ -78,8 +78,8 @@ typedef enum e_val_err
 typedef struct s_val_rules
 {
 	t_val_flags	flags;
-	double		min_dbl;
-	double		max_dbl;
+	float		min_flt;
+	float		max_flt;
 	int			min_int;
 	int			max_int;
 	int			comp;
@@ -88,9 +88,9 @@ typedef struct s_val_rules
 
 typedef struct s_vector
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_vector;
 
 typedef struct s_obj
@@ -98,22 +98,22 @@ typedef struct s_obj
 	t_obj_type	type;
 	t_vector	coordinates;
 	t_vector	normalized;
-	double		width;
-	double		height;
-	double		diameter;
+	float		width;
+	float		height;
+	float		diameter;
 	t_color		color;
 }	t_obj;
 
 typedef struct s_ambient
 {
-	double	ratio;
+	float	ratio;
 	t_color	color;
 }	t_ambient;
 
 typedef struct s_light
 {
 	t_vector	coordinates;
-	double		ratio;
+	float		ratio;
 	t_color		color;
 }	t_light;
 
@@ -121,7 +121,7 @@ typedef struct s_camera
 {
 	t_vector	coordinates;
 	t_vector	normalized;
-	double		view_field;
+	float		view_field;
 }	t_camera;
 
 typedef struct s_miniRT

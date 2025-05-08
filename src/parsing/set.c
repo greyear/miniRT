@@ -24,7 +24,7 @@ range checks for lightning/brightness ratio (0.0-1.0)
 				 color (0-255)
 				 normalized vector (-1 to 1)
 				 FOV (0-180) whole number
-atoi/atod?
+atoi/atof?
 only one 1 letter identifier per file
 
 vector: 3 values with commas. can they be without dots?
@@ -37,8 +37,8 @@ figures dieameters and heights - above 0. just 0 cannot be?
 /*
 переделала на вывод ошибок:
 - pre_atoi
-- pre_atod
+- pre_atof
 - validate_value
 - validate: ratio, color, vector, coordinates, diameter/height, FOV
-- int/dbl out_of_range
+- int/flt out_of_range
 */

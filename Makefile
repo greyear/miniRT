@@ -66,7 +66,7 @@ PARS_FILES		=	file_validation.c \
 					diameter_height.c \
 					pre_aton.c \
 					rt_atoi.c \
-					rt_atod.c
+					rt_atof.c
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c
 

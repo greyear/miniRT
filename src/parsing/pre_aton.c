@@ -70,7 +70,7 @@ static t_val_err	process_line(char *str, int *i)
 	return (VAL_SUCCESS);
 }
 
-t_val_err	pre_atod(char *str)
+t_val_err	pre_atof(char *str)
 {
 	int			i;
 	t_val_err	err;

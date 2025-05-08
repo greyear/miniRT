@@ -1,7 +1,7 @@
 
 #include "../../include/miniRT.h"
 
-/*coordinates [do we have any restrictions?], dbl, 3 numbers
+/*coordinates [do we have any restrictions?], flt, 3 numbers
 for camera, light, sphere, plane, cylinder*/
 
 int	validate_coordinates(char *str)
@@ -10,7 +10,7 @@ int	validate_coordinates(char *str)
 	t_val_rules	rules;
 	t_val_err	err;
 
-	flags = VAL_DBL | VAL_COMPONENTS;
+	flags = VAL_FLT | VAL_COMPONENTS;
 	rules.flags = flags;
 	rules.comp = 3;
 	err = validate_value(str, rules);
