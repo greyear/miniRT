@@ -37,8 +37,7 @@ int validate_element_type(char *line, t_miniRT *m)
 	while (i < E_TYPES_AMOUNT)
 	{
 		len = ft_strlen(m->e_names[i]);
-		if (!ft_strncmp(line, m->e_names[i], len) \
-			|| line[len] && line[len] == ' ')
+		if (!ft_strncmp(line, m->e_names[i], len) && line[len] == ' ')
 		{
 			m->e_count[i]++;
 			if (ft_iscapital(m->e_names[i][0]) && m->e_count[i] > 1)

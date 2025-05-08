@@ -24,15 +24,13 @@ void	init_minirt(t_miniRT *m)
 	m->e_names[5] = "cy";
 }
 
-int main()
+int main(int argc, char *argv[])
 {
 	t_miniRT	m; //allocate?
 
 	init_minirt(&m);
 	
-	/*
-	validation(t_miniRT *m)
-		*/
+	validation(&m, argc, argv);
 
 	draw_figure();
 	return (0);
