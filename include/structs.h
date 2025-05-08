@@ -131,6 +131,6 @@ typedef struct s_miniRT
 	t_light		light;
 	t_camera	camera;
 	const char	*e_names[E_TYPES_AMOUNT];
-	int			*e_count[E_TYPES_AMOUNT];
+	int			e_count[E_TYPES_AMOUNT];
 	int			fd;
 }	t_miniRT;

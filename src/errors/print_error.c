@@ -8,7 +8,7 @@ int print_err(char *reason)
 	return(FAILURE);
 }
 
-int	print_val_err(t_val_err err, const char *place)
+int	print_val_err(t_val_err err, char *place)
 {
 	if (place)
 		ft_putstr_fd(place, STDERR_FILENO);

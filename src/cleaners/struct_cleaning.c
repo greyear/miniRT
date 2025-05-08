@@ -20,6 +20,8 @@ void	struct_clean(t_miniRT *rt)
 		//object_clean(rt);
 		free(rt->objects);
 	}
-	if (rt)
-		free(rt);
+	if (rt->fd >= 0)
+		close(rt->fd);
+	/*if (rt)
+		free(rt); as we're not allocating rt in main, but just have it in stack*/ 
 }

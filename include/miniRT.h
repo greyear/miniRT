@@ -43,8 +43,8 @@ int			validate_ratio(char *str);
 int			validate_coordinates(char *str);
 int			validate_fov(char *str);
 int			validate_diameter_height(char *str);
-int			int_out_of_range(char *str, int min, int max);
-int			flt_out_of_range(char *str, float min, float max);
+t_val_err	int_out_of_range(char *str, int min, int max);
+t_val_err	flt_out_of_range(char *str, float min, float max);
 t_val_err	pre_atoi(char *str);
 t_val_err	pre_atof(char *str);
 int			rt_atoi(const char *str, int *number);
@@ -60,6 +60,6 @@ void		struct_clean(t_miniRT *rt);
 
 //Errors
 int			print_err(char *reason);
-int			print_val_err(t_val_err err, const char *place);
+int			print_val_err(t_val_err err, char *place);
 
 #endif

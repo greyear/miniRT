@@ -50,10 +50,8 @@ int	validation(t_miniRT *m, int argc, char *argv[])
 	m->fd = open(argv[1], O_RDONLY);
 	if (m->fd < 0)
 		return (print_err(READ_FILE_MSG));
-	if (!validate_content(m))
+	if (validate_content(m) == FAILURE)
 	{
-		//clean?
-		close (m->fd);
 		return(FAILURE);
 	}
 	return (SUCCESS);

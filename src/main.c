@@ -30,8 +30,12 @@ int main(int argc, char *argv[])
 
 	init_minirt(&m);
 	
-	validation(&m, argc, argv);
-
+	if (validation(&m, argc, argv))
+	{
+		struct_clean(&m);
+		return (FAILURE);
+	}
 	draw_figure();
-	return (0);
+	struct_clean(&m);
+	return (SUCCESS);
 }
