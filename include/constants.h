@@ -48,4 +48,5 @@
 # define DIGIT_MSG "double should contain at least one digit\n"
 # define COMP_MSG "wrong number of components\n"
 # define CONFL_MSG "number should be int or double not both\n"
+# define ATON_MSG "atoi/atod failed\n"
 # define MLLC_MSG "memory allocation failed\n"

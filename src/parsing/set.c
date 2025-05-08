@@ -39,5 +39,6 @@ figures dieameters and heights - above 0. just 0 cannot be?
 - pre_atoi
 - pre_atod
 - validate_value
-- validate: ratio, color, 
+- validate: ratio, color, vector, coordinates, diameter/height, FOV
+- int/dbl out_of_range
 */

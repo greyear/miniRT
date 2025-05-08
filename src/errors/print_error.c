@@ -31,11 +31,11 @@ int	print_val_err(t_val_err err, const char *place)
 	else if (err == VAL_ERR_COMPONENTS)
 		ft_putstr_fd(COMP_MSG, STDERR_FILENO);
 	else if (err == VAL_ERR_RANGE)
-		ft_putstr_fd("value is out of allowed range\n", STDERR_FILENO);
+		ft_putstr_fd(RANGE_MSG, STDERR_FILENO);
 	else if (err == VAL_ERR_CONFLICTING_FLAGS)
 		ft_putstr_fd(CONFL_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_PARSE)
-		ft_putstr_fd("parse failed (atod/atoi)\n", STDERR_FILENO);
+	else if (err == VAL_ERR_ATON)
+		ft_putstr_fd(ATON_MSG, STDERR_FILENO);
 	else if (err == VAL_ERR_MALLOC)
 		ft_putstr_fd(MLLC_MSG, STDERR_FILENO);
 	return (FAILURE);

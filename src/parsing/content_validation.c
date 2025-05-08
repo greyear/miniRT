@@ -65,12 +65,12 @@ int	validate_content(t_miniRT *m)
 			line = get_next_line(m->fd);
 			continue ;
 		}
-		/*if (!validate_line(line, m))
+		if (!validate_element_type(line, m))
 		{
 			free(line);
 			clean_gnl(m->fd); //?
 			return (FAILURE);
-		}*/
+		}
 		free(line);
 		line = get_next_line(m->fd);
 	}

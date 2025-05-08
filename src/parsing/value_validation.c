@@ -1,38 +1,26 @@
 
 #include "../../include/miniRT.h"
 
-int	int_out_of_range(char *str, int min, int max)
+t_val_err	int_out_of_range(char *str, int min, int max)
 {
 	int	value;
 
 	if (rt_atoi(str, &value) == 1)
-	{
-		ft_putstr_fd(NUM_MSG, STDERR_FILENO);
-		return (print_err(str));
-	}
+		return (VAL_ERR_ATON);
 	if (value < min || value > max)
-	{
-		ft_putstr_fd(str, STDERR_FILENO);
-		return (print_err(RANGE_MSG));
-	}
-	return (SUCCESS);
+		return (VAL_ERR_RANGE);
+	return (VAL_SUCCESS);
 }
 
-int	dbl_out_of_range(char *str, double min, double max)
+t_val_err	dbl_out_of_range(char *str, double min, double max)
 {
 	double	value;
 
 	if (rt_atod(str, &value) == 1)
-	{
-		ft_putstr_fd(NUM_MSG, STDERR_FILENO);
-		return (print_err(str));
-	}
+		return (VAL_ERR_ATON);
 	if (value < min || value > max)
-	{
-		ft_putstr_fd(str, STDERR_FILENO);
-		return (print_err(RANGE_MSG));
-	}
-	return (SUCCESS);
+		return (VAL_ERR_RANGE);
+	return (VAL_SUCCESS);
 }
 
 t_val_err	validate_value(char *str, t_val_rules rules)
