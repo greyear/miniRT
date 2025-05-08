@@ -65,7 +65,7 @@ int	validate_content(t_miniRT *m)
 			line = get_next_line(m->fd);
 			continue ;
 		}
-		if (!validate_element_type(line, m))
+		if (validate_element_type(line, m) == FAILURE)
 		{
 			//print where the problem is?
 			free(line);
