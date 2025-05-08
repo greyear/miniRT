@@ -33,3 +33,11 @@ color: 3 values with commas
 figures dieameters and heights - above 0. just 0 cannot be?
 
 */
+
+/*
+переделала на вывод ошибок:
+- pre_atoi
+- pre_atod
+- validate_value
+- validate: ratio, color, 
+*/

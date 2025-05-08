@@ -58,6 +58,23 @@ typedef enum e_val_flags
 	VAL_COMPONENTS = 1 << 4
 }	t_val_flags;
 
+typedef enum e_val_err
+{
+	VAL_SUCCESS = 0,
+	VAL_ERR_EMPTY,
+	VAL_ERR_MINUS,
+	VAL_ERR_NOT_DIGIT,
+	VAL_ERR_DOTS,
+	VAL_ERR_BEF_DOT,
+	VAL_ERR_AFT_DOT,
+	VAL_ERR_NO_DIGIT,
+	VAL_ERR_ATON,
+	VAL_ERR_RANGE,
+	VAL_ERR_COMPONENTS,
+	VAL_ERR_CONFLICTING_FLAGS,
+	VAL_ERR_MALLOC
+}	t_val_err;
+
 typedef struct s_val_rules
 {
 	t_val_flags	flags;

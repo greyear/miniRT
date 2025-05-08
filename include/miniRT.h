@@ -36,7 +36,7 @@ int			validate_light(char **args);
 int			validate_sphere(char **args);
 int			validate_plane(char **args);
 int			validate_cylinder(char **args);
-int			validate_value(char *str, t_val_rules rules);
+t_val_err	validate_value(char *str, t_val_rules rules);
 int			validate_color(char *str);
 int			validate_vector(char *str);
 int			validate_ratio(char *str);
@@ -44,8 +44,8 @@ int			validate_coordinates(char *str);
 
 int			int_out_of_range(char *str, int min, int max);
 int			dbl_out_of_range(char *str, double min, double max);
-int			pre_atoi(char *str);
-int			pre_atod(char *str);
+t_val_err	pre_atoi(char *str);
+t_val_err	pre_atod(char *str);
 int			rt_atoi(const char *str, int *number);
 int			rt_atod(const char *str, double *number);
 
