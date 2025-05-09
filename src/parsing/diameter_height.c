@@ -4,7 +4,7 @@
 /*diameter/height [0.0, unlimited], 1 number
 for sphere, cylinder*/
 
-int	validate_diameter_height(char *str)
+int	validate_diameter_height(char *str, char *element)
 {
 	t_val_flags	flags;
 	t_val_rules	rules;
@@ -17,6 +17,6 @@ int	validate_diameter_height(char *str)
 	rules.comp = 1;
 	err = validate_value(str, rules);
 	if (err != VAL_SUCCESS)
-		return (print_val_err(err, "Diameter/height"));
+		return (print_val_err(err, element, "Diameter/height"));
 	return (SUCCESS);
 }

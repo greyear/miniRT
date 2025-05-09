@@ -4,7 +4,7 @@
 /*coordinates [do we have any restrictions?], flt, 3 numbers
 for camera, light, sphere, plane, cylinder*/
 
-int	validate_coordinates(char *str)
+int	validate_coordinates(char *str, char *element)
 {
 	t_val_flags	flags;
 	t_val_rules	rules;
@@ -15,6 +15,6 @@ int	validate_coordinates(char *str)
 	rules.comp = 3;
 	err = validate_value(str, rules);
 	if (err != VAL_SUCCESS)
-		return (print_val_err(err, "Coordinates"));
+		return (print_val_err(err, element, "Coordinates"));
 	return (SUCCESS);
 }

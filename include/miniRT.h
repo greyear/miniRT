@@ -37,12 +37,14 @@ int			validate_sphere(char **args);
 int			validate_plane(char **args);
 int			validate_cylinder(char **args);
 t_val_err	validate_value(char *str, t_val_rules rules);
-int			validate_color(char *str);
-int			validate_vector(char *str);
-int			validate_ratio(char *str);
-int			validate_coordinates(char *str);
-int			validate_fov(char *str);
-int			validate_diameter_height(char *str);
+
+int			validate_color(char *str, char *element);
+int			validate_vector(char *str, char *element);
+int			validate_ratio(char *str, char *element);
+int			validate_coordinates(char *str, char *element);
+int			validate_fov(char *str, char *element);
+int			validate_diameter_height(char *str, char *element);
+
 t_val_err	int_out_of_range(char *str, int min, int max);
 t_val_err	flt_out_of_range(char *str, float min, float max);
 t_val_err	pre_atoi(char *str);
@@ -60,6 +62,6 @@ void		struct_clean(t_miniRT *rt);
 
 //Errors
 int			print_err(char *reason);
-int			print_val_err(t_val_err err, char *place);
+int			print_val_err(t_val_err err, char *element, char *info);
 
 #endif

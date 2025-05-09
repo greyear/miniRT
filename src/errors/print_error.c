@@ -8,10 +8,12 @@ int print_err(char *reason)
 	return(FAILURE);
 }
 
-int	print_val_err(t_val_err err, char *place)
+int	print_val_err(t_val_err err, char *element, char *info)
 {
-	if (place)
-		ft_putstr_fd(place, STDERR_FILENO);
+	ft_putstr_fd(ERR_MSG, STDERR_FILENO);
+	ft_putstr_fd(element, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(info, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 
 	if (err == VAL_ERR_EMPTY)

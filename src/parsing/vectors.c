@@ -4,7 +4,7 @@
 /*3d normalized vector [-1.0,1.0] float, 3 numbers
 for camera, plane, cylinder*/
 
-int	validate_vector(char *str)
+int	validate_vector(char *str, char *element)
 {
 	t_val_flags	flags;
 	t_val_rules	rules;
@@ -17,6 +17,6 @@ int	validate_vector(char *str)
 	rules.comp = 3;
 	err = validate_value(str, rules);
 	if (err != VAL_SUCCESS)
-		return (print_val_err(err, "Vector"));
+		return (print_val_err(err, element, "Vector"));
 	return (SUCCESS);
 }

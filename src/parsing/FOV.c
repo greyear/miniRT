@@ -4,7 +4,7 @@
 /*FOV [0-180] int, 1 number
 for camera*/
 
-int	validate_fov(char *str)
+int	validate_fov(char *str, char *element)
 {
 	t_val_flags	flags;
 	t_val_rules	rules;
@@ -17,6 +17,6 @@ int	validate_fov(char *str)
 	rules.comp = 1;
 	err = validate_value(str, rules);
 	if (err != VAL_SUCCESS)
-		return (print_val_err(err, "FOV"));
+		return (print_val_err(err, element, "FOV"));
 	return (SUCCESS);
 }

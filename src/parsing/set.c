@@ -33,12 +33,21 @@ color: 3 values with commas
 figures dieameters and heights - above 0. just 0 cannot be?
 
 */
-
 /*
-переделала на вывод ошибок:
-- pre_atoi
-- pre_atof
-- validate_value
-- validate: ratio, color, vector, coordinates, diameter/height, FOV
-- int/flt out_of_range
+Cases to consider:
+
+1) 0,0,0 normalized vector. Is it okay or not in the end?
+
+2) Camera: orientation vector [-1,1] but I have less
+C -50,1,20 1,0,-1.0000000000001 180
+
+3) Additional comma after all 3 coordinates
+L -40,0,30, 0.7
+
+4) 0 diameter/height? -0?
+
+5)
+
+6)
+
 */
