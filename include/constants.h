@@ -33,3 +33,7 @@
 # ifndef BIAS
 #  define BIAS 1e-4
 # endif
+
+# ifndef EPSILON
+#  define EPSILON 1e-4
+# endif

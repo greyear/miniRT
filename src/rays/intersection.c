@@ -21,14 +21,18 @@ t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tne
 	hit = false;
 	object = NULL;
 	i = 0;
-	while (i < rt->obj_count) {
+	while (i < rt->obj_count)
+	{
 		hit_arr[0]->temp_part = -1;
 		hit_arr[0]->t0 = INFINITY;
 		hit_arr[0]->t1 = INFINITY;
 		hit = check_intersection(ray, rt->objects[i], hit_arr[0]);
-		if (hit) {
-			if (hit_arr[0]->t0 < 0) hit_arr[0]->t0 = hit_arr[0]->t1;
-			if (hit_arr[0]->t0 < *tnear) {
+		if (hit)
+		{
+			if (hit_arr[0]->t0 < 0)
+				hit_arr[0]->t0 = hit_arr[0]->t1;
+			if (hit_arr[0]->t0 > EPSILON && hit_arr[0]->t0 < *tnear)
+			{
 				*tnear = hit_arr[0]->t0;
 				object = &rt->objects[i];
 				*(hit_arr[1]) = *(hit_arr[0]);
@@ -59,14 +63,16 @@ bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 	radius2 = pow(sphere.diameter / 2, 2);
 	center = sphere.coordinates;
 	ray_length = vec_sub(center, ray.origin);
-	tca = ray_length.x * ray.destination.x + ray_length.y * ray.destination.y + ray_length.z * ray.destination.z;
-	// return if camera is inside an object
-	// if (tca < 0)
-	// 	return (false);
-	d2 = pow(ray_length.x, 2) + pow(ray_length.y, 2) + pow(ray_length.z, 2) - tca * tca;
+	tca = dot(ray_length, ray.destination);
+	d2 = dot(ray_length, ray_length) - tca * tca;
 	if (d2 > radius2)
 		return false;
 	set_hit_interval(hit_info, tca, radius2, d2);
+	hit_info->phit = vec_add(ray.origin, vec_mul_num(ray.destination, hit_info->t0));
+	hit_info->nhit = vec_sub(hit_info->phit, center);
+	normalize(&hit_info->nhit);
+	if (dot(ray.destination, hit_info->nhit) > 0)
+		hit_info->nhit = vec_mul_num(hit_info->nhit, -1);
 	return (true);
 }
 
