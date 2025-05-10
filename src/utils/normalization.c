@@ -14,8 +14,8 @@
 
 inline void normalize(t_vector *vector_to_norm)
 {
-	float	normalized;
-	float	invNor;
+	double	normalized;
+	double	invNor;
 
 	normalized = length2(*vector_to_norm);
 	if (normalized > 0)
@@ -32,7 +32,7 @@ static void	normalize_cylinder(t_obj *object, t_hit cyl_hit, t_vector *nhit, t_v
 	if (cyl_hit.hit_part == 0)
 	{
 		t_vector hit_to_center = vec_sub(*phit, object->coordinates);
-		float h = dot(hit_to_center, object->normalized);
+		double h = dot(hit_to_center, object->normalized);
 		t_vector axis_proj = vec_mul_num(object->normalized, h);
 		*nhit = vec_sub(hit_to_center, axis_proj);
 		normalize(nhit);

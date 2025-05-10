@@ -34,7 +34,7 @@ static t_light_calc	calculate_lights(t_rt *rt, t_obj *object, t_hit *hit_arr)
 
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 {
-	float			tnear;
+	double			tnear;
 	t_obj			*object;
 	t_ray			ray = {rayorig, raydir};
 	t_hit			hit_arr[2];

@@ -12,7 +12,7 @@
 
 #include "../../include/mini_rt.h"
 
-static inline float	calc_cap_offset(t_obj cylinder, int cap)
+static inline double	calc_cap_offset(t_obj cylinder, int cap)
 {
 	if (cap == 0)
 		return (0.0f);
@@ -31,8 +31,8 @@ static void	check_caps_intersection(t_obj cylinder, t_hit *hit_info, t_ray ray, 
 {
 	int			cap;
 	t_vector	cap_center;
-	float		ray_dot_axis;
-	float		t_intersection;
+	double		ray_dot_axis;
+	double		t_intersection;
 	t_vector	to_center;
 
 	cap = -1;
@@ -55,9 +55,9 @@ static void	check_caps_intersection(t_obj cylinder, t_hit *hit_info, t_ray ray, 
 	}
 }
 
-static void	compute_quadratic_roots(t_cyl_inter *inter_obj, float b)
+static void	compute_quadratic_roots(t_cyl_inter *inter_obj, double b)
 {
-	float	sqrt_disc;
+	double	sqrt_disc;
 
 	sqrt_disc = sqrtf(inter_obj->discriminant);
  	inter_obj->t0 = (-b - sqrt_disc) / (2 * inter_obj->ray_perp_len);
@@ -66,8 +66,8 @@ static void	compute_quadratic_roots(t_cyl_inter *inter_obj, float b)
 
 static void	calc_discriminant(t_cyl_inter *inter_obj, t_obj cylinder)
 {
-	float	b;
- 	float	c;
+	double	b;
+ 	double	c;
 
 	b = 2.0f * dot(inter_obj->ray_perp_dir, inter_obj->oc_proj);
 	c = dot(inter_obj->oc_proj, inter_obj->oc_proj) - cylinder.radius * cylinder.radius;
@@ -87,7 +87,7 @@ static inline void	set_ray_candidate(t_cyl_inter *inter_obj, int i)
 static void	check_valid_body_hits(t_cyl_inter *inter_obj, t_ray ray, t_obj cylinder, t_hit *hit_info)
 {
 	int		i;
-	float	height;
+	double	height;
 
 	i = -1;
 	while (i < 2)

@@ -15,8 +15,8 @@
 bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 {
 	bool	shadow_hit;
-	float	pl_side_phit;
-	float	pl_side_light;
+	double	pl_side_phit;
+	double	pl_side_light;
 
 	shadow_hit = false;
 	if (object.type == SPHERE)

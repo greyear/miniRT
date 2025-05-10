@@ -12,10 +12,10 @@
 
 #include "../../include/mini_rt.h"
 
-inline float	random_float_fast(unsigned int *seed)
+inline double	random_double_fast(unsigned int *seed)
 {
 	*seed ^= *seed << 13;
 	*seed ^= *seed >> 17;
 	*seed ^= *seed << 5;
-	return (*seed & 0xFFFFFF) / (float)0xFFFFFF;
+	return (*seed & 0xFFFFFF) / (double)0xFFFFFF;
 }

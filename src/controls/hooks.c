@@ -37,5 +37,5 @@ void	win_resize(int width, int height, void *param)
 	rt->width = width;
 	rt->height = height;
 	rt->needs_render = 1;
-	rt->camera->aspect_ratio = rt->width / (float) rt->height;
+	rt->camera->aspect_ratio = rt->width / (double) rt->height;
 }

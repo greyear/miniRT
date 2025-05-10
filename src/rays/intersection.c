@@ -12,7 +12,7 @@
 
 #include "../../include/mini_rt.h"
 
-t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear)
+t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], double *tnear)
 {
 	t_obj	*object;
 	bool	hit;
@@ -43,9 +43,9 @@ t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tne
 	return (object);
 }
 
-static void	set_hit_interval(t_hit *hit_info, float tca, float radius2, float d2)
+static void	set_hit_interval(t_hit *hit_info, double tca, double radius2, double d2)
 {
-	float thc;
+	double thc;
 	
 	thc = sqrt(radius2 - d2);
 	hit_info->t0 = tca - thc;
@@ -54,11 +54,11 @@ static void	set_hit_interval(t_hit *hit_info, float tca, float radius2, float d2
 
 bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 {
-	float		radius2;
+	double		radius2;
 	t_vector	center;
 	t_vector	ray_length;
-	float		tca;
-	float		d2;
+	double		tca;
+	double		d2;
 
 	radius2 = pow(sphere.diameter / 2, 2);
 	center = sphere.coordinates;
@@ -76,11 +76,11 @@ bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 	return (true);
 }
 
-bool	intersect_plane(t_ray ray, t_obj plane, float *t)
+bool	intersect_plane(t_ray ray, t_obj plane, double *t)
 {
-	float		denom;
+	double		denom;
 	t_vector	diff;
-	float		temp_t;
+	double		temp_t;
 
 	denom = dot(ray.destination, plane.normalized);
 	if (fabsl(denom) > 1e-6f)

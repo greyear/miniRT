@@ -14,14 +14,14 @@
 
 static t_vector	calculate_raydir(int x, int y, unsigned int *seed, t_rt *rt)
 {
-	float		u;
-	float		v;
-	float		xx;
-	float		yy;
+	double		u;
+	double		v;
+	double		xx;
+	double		yy;
 	t_vector	raydir;
 
-	u = (x + random_float_fast(seed)) / (float) rt->width;
-	v = (y + random_float_fast(seed)) / (float) rt->height;
+	u = (x + random_double_fast(seed)) / (double) rt->width;
+	v = (y + random_double_fast(seed)) / (double) rt->height;
 	xx = (2 * u - 1) * rt->camera->angle * rt->camera->aspect_ratio;
 	yy = (1 - 2 * v) * rt->camera->angle;
 	raydir = (t_vector) { xx, yy, -1 };

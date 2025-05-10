@@ -27,12 +27,12 @@ inline t_vector vec_mul(t_vector vec1, t_vector vec2)
 	return ((t_vector) { vec1.x * vec2.x, vec1.y * vec2.y, vec1.z * vec2.z });
 }
 
-inline t_vector vec_mul_num(t_vector vec1, float num)
+inline t_vector vec_mul_num(t_vector vec1, double num)
 {
 	return ((t_vector) { vec1.x * num, vec1.y * num, vec1.z * num });
 }
 
-inline t_vector vec_sub_num(t_vector vec1, float num)
+inline t_vector vec_sub_num(t_vector vec1, double num)
 {
 	return ((t_vector) { vec1.x - num, vec1.y - num, vec1.z - num });
 }
