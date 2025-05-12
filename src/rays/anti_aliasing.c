@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 15:40:55 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 16:05:57 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:40 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_vector	calculate_raydir(int x, int y, unsigned int *seed, t_rt *rt)
 {
-	double		u;
-	double		v;
-	double		xx;
-	double		yy;
+	float		u;
+	float		v;
+	float		xx;
+	float		yy;
 	t_vector	raydir;
 
-	u = (x + random_double_fast(seed)) / (double) rt->width;
-	v = (y + random_double_fast(seed)) / (double) rt->height;
+	u = (x + random_float_fast(seed)) / (float) rt->width;
+	v = (y + random_float_fast(seed)) / (float) rt->height;
 	xx = (2 * u - 1) * rt->camera->angle * rt->camera->aspect_ratio;
 	yy = (1 - 2 * v) * rt->camera->angle;
 	raydir = (t_vector) { xx, yy, -1 };

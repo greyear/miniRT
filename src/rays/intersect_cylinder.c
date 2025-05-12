@@ -6,13 +6,13 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 16:20:41 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 13:27:29 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:46 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-static inline double	calc_cap_offset(t_obj cylinder, int cap)
+static inline float	calc_cap_offset(t_obj cylinder, int cap)
 {
 	if (cap == 0)
 		return (0.0f);
@@ -31,8 +31,8 @@ static void	check_caps_intersection(t_obj cylinder, t_hit *hit_info, t_ray ray, 
 {
 	int			cap;
 	t_vector	cap_center;
-	double		ray_dot_axis;
-	double		t_intersection;
+	float		ray_dot_axis;
+	float		t_intersection;
 	t_vector	to_center;
 
 	cap = -1;
@@ -55,9 +55,9 @@ static void	check_caps_intersection(t_obj cylinder, t_hit *hit_info, t_ray ray, 
 	}
 }
 
-static void	compute_quadratic_roots(t_cyl_inter *inter_obj, double b)
+static void	compute_quadratic_roots(t_cyl_inter *inter_obj, float b)
 {
-	double	sqrt_disc;
+	float	sqrt_disc;
 
 	sqrt_disc = sqrtf(inter_obj->discriminant);
  	inter_obj->t0 = (-b - sqrt_disc) / (2 * inter_obj->ray_perp_len);
@@ -66,8 +66,8 @@ static void	compute_quadratic_roots(t_cyl_inter *inter_obj, double b)
 
 static void	calc_discriminant(t_cyl_inter *inter_obj, t_obj cylinder)
 {
-	double	b;
- 	double	c;
+	float	b;
+ 	float	c;
 
 	b = 2.0f * dot(inter_obj->ray_perp_dir, inter_obj->oc_proj);
 	c = dot(inter_obj->oc_proj, inter_obj->oc_proj) - cylinder.radius * cylinder.radius;
@@ -87,7 +87,7 @@ static inline void	set_ray_candidate(t_cyl_inter *inter_obj, int i)
 static void	check_valid_body_hits(t_cyl_inter *inter_obj, t_ray ray, t_obj cylinder, t_hit *hit_info)
 {
 	int		i;
-	double	height;
+	float	height;
 
 	i = -1;
 	while (i < 2)

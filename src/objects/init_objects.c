@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:35:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/02 16:40:02 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:38 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_obj	init_obj(t_vector coordinates, t_vector em_color, t_obj_type type)
 	def_obj.coordinates = coordinates;
 	def_obj.normalized = (t_vector) { 0.0, 1.0, 0.0};
 	//normalize(&def_obj.normalized);
-	def_obj.diameter = 1000000000.5;
+	def_obj.diameter = 10.5;
 	def_obj.radius = def_obj.diameter / 2;
-	def_obj.height = 10000000;
+	def_obj.height = 10;
 	return (def_obj);
 }
 
@@ -68,7 +68,7 @@ t_camera	*init_camera(void)
 		clean_exit(NULL);
 	camera->coordinates = (t_vector) {0, 0, 0};
 	camera->fov = 70;
-	camera->aspect_ratio = WIN_WIDTH / (double) WIN_HEIGHT;
+	camera->aspect_ratio = WIN_WIDTH / (float) WIN_HEIGHT;
 	camera->angle = tan(M_PI * 0.5 * camera->fov / 180.0);
 	return (camera);
 }

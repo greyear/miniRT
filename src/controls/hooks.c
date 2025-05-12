@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:45:40 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 17:08:05 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:27 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	win_resize(int width, int height, void *param)
 	rt->width = width;
 	rt->height = height;
 	rt->needs_render = 1;
-	rt->camera->aspect_ratio = rt->width / (double) rt->height;
+	rt->camera->aspect_ratio = rt->width / (float) rt->height;
 }

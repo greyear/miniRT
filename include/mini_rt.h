@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 14:59:13 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:13 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ void		create_img(t_rt *rt);
 
 //Rays
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
-double		length2(t_vector vec);
-double		dot(t_vector vec1, t_vector vec2);
+float		length2(t_vector vec);
+float		dot(t_vector vec1, t_vector vec2);
 t_vector	revert_vector(t_vector vec);
-double		lerp(double a, double b, double mix);
+float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
 t_vector	smooth_pixel(int x, int y, t_rt *rt);
 
 //Intersection
 bool		intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info);
 bool		intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info, int *hit_part);
-bool		intersect_plane(t_ray ray, t_obj plane, double *t);
+bool		intersect_plane(t_ray ray, t_obj plane, float *t);
 bool		check_intersection(t_ray ray, t_obj object, t_hit *hit_info);
-t_obj		*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], double *tnear);
+t_obj		*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear);
 
 //Shadows
 bool		check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info);
@@ -71,9 +71,9 @@ void		win_resize(int width, int height, void *param);
 t_vector 	vec_add(t_vector vec1, t_vector vec2);
 t_vector 	vec_sub(t_vector vec1, t_vector vec2);
 t_vector 	vec_mul(t_vector vec1, t_vector vec2);
-t_vector 	vec_mul_num(t_vector vec1, double num);
-t_vector 	vec_sub_num(t_vector vec1, double num);
-double 		random_double_fast(unsigned int *seed);
+t_vector 	vec_mul_num(t_vector vec1, float num);
+t_vector 	vec_sub_num(t_vector vec1, float num);
+float 		random_float_fast(unsigned int *seed);
 void 		normalize(t_vector *vector_to_norm);
 void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_hit);
 

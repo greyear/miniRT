@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:29 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 16:30:09 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:03:21 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	draw_figure(t_rt *rt)
 {
 	size_t time = get_time();
 	rt->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
+	mlx_set_window_limit(rt->mlx, 128, 72, 3000, 2500);
 	mlx_image_t *img = mlx_new_image(rt->mlx, rt->width, rt->height);
 	rt->mlx_img = img;
 	draw_pixels(rt);

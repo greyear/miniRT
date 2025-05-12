@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 14:24:35 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 16:16:13 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:57 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 {
 	bool	shadow_hit;
-	double	pl_side_phit;
-	double	pl_side_light;
+	float	pl_side_phit;
+	float	pl_side_light;
 
 	shadow_hit = false;
 	if (object.type == SPHERE)

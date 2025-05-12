@@ -6,13 +6,13 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:54:22 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 13:36:31 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:49 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], double *tnear)
+t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear)
 {
 	t_obj	*object;
 	bool	hit;
@@ -43,9 +43,9 @@ t_obj	*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], double *tn
 	return (object);
 }
 
-static void	set_hit_interval(t_hit *hit_info, double tca, double radius2, double d2)
+static void	set_hit_interval(t_hit *hit_info, float tca, float radius2, float d2)
 {
-	double thc;
+	float thc;
 	
 	thc = sqrt(radius2 - d2);
 	hit_info->t0 = tca - thc;
@@ -54,11 +54,11 @@ static void	set_hit_interval(t_hit *hit_info, double tca, double radius2, double
 
 bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 {
-	double		radius2;
+	float		radius2;
 	t_vector	center;
 	t_vector	ray_length;
-	double		tca;
-	double		d2;
+	float		tca;
+	float		d2;
 
 	radius2 = pow(sphere.diameter / 2, 2);
 	center = sphere.coordinates;
@@ -76,11 +76,11 @@ bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
 	return (true);
 }
 
-bool	intersect_plane(t_ray ray, t_obj plane, double *t)
+bool	intersect_plane(t_ray ray, t_obj plane, float *t)
 {
-	double		denom;
+	float		denom;
 	t_vector	diff;
-	double		temp_t;
+	float		temp_t;
 
 	denom = dot(ray.destination, plane.normalized);
 	if (fabsl(denom) > 1e-6f)

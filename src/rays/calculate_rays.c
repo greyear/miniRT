@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 14:52:16 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:20:43 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_light_calc	calculate_lights(t_rt *rt, t_obj *object, t_hit *hit_arr)
 
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 {
-	double			tnear;
+	float			tnear;
 	t_obj			*object;
 	t_ray			ray = {rayorig, raydir};
 	t_hit			hit_arr[2];
