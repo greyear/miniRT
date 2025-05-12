@@ -27,8 +27,6 @@
 //Validation
 int			validation(t_miniRT *m, int argc, char *argv[]);
 int			validate_content(t_miniRT *m);
-
-//Parsing
 int			validate_element_type(char *line, t_miniRT *m);
 int			validate_ambient(char **args);
 int			validate_camera(char **args);
@@ -37,20 +35,32 @@ int			validate_sphere(char **args);
 int			validate_plane(char **args);
 int			validate_cylinder(char **args);
 t_val_err	validate_value(char *str, t_val_rules rules);
-
 int			validate_color(char *str, char *element);
 int			validate_vector(char *str, char *element);
 int			validate_ratio(char *str, char *element);
 int			validate_coordinates(char *str, char *element);
 int			validate_fov(char *str, char *element);
 int			validate_diameter_height(char *str, char *element);
-
 t_val_err	int_out_of_range(char *str, int min, int max);
 t_val_err	flt_out_of_range(char *str, float min, float max);
+int			cleaning_line(char **str);
+
+//Parsing
 t_val_err	pre_atoi(char *str);
 t_val_err	pre_atof(char *str);
 int			rt_atoi(const char *str, int *number);
 int			rt_atof(const char *str, float *number);
+int			allocation(t_miniRT *m);
+int			init(t_miniRT *m);
+int			init_ambient(t_miniRT *m, char **args);
+int			init_camera(t_miniRT *m, char **args);
+int			init_light(t_miniRT *m, char **args);
+int			init_sphere(t_miniRT *m, char **args);
+int			init_plane(t_miniRT *m, char **args);
+int			init_cylinder(t_miniRT *m, char **args);
+int			init_color(t_col *color, char *three);
+
+
 
 //Drawing
 void		draw_figure(void);

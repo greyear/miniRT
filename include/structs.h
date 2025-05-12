@@ -25,6 +25,13 @@ typedef struct s_color
 	uint32_t	cur_color;
 }	t_color;
 
+typedef struct s_col
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+}	t_col;
+
 typedef enum e_obj_type
 {
 	SPHERE,
@@ -93,7 +100,7 @@ typedef struct s_vector
 	float	z;
 }	t_vector;
 
-typedef struct s_obj
+/*typedef struct s_obj
 {
 	t_obj_type	type;
 	t_vector	coordinates;
@@ -102,19 +109,19 @@ typedef struct s_obj
 	float		height;
 	float		diameter;
 	t_color		color;
-}	t_obj;
+}	t_obj;*/
 
 typedef struct s_ambient
 {
 	float	ratio;
-	t_color	color;
+	t_col	color;
 }	t_ambient;
 
 typedef struct s_light
 {
 	t_vector	coordinates;
 	float		ratio;
-	t_color		color;
+	t_col		color;
 }	t_light;
 
 typedef struct s_camera
@@ -124,12 +131,40 @@ typedef struct s_camera
 	float		view_field;
 }	t_camera;
 
+typedef struct s_sphere
+{
+	t_vector		coordinates;
+	float			diameter;
+	t_col			color;
+	//struct s_sphere	*next;
+}	t_sphere;
+
+typedef struct s_plane
+{
+	t_vector		coordinates;
+	t_vector		normalized;
+	t_col			color;
+	//struct s_plane	*next;
+}	t_plane;
+
+typedef struct s_cylinder
+{
+	t_vector			coordinates;
+	t_vector			normalized;
+	float				diameter;
+	float				height;
+	t_col				color;
+	//struct s_cylinder	*next;
+}	t_cylinder;
+
 typedef struct s_miniRT
 {
-	t_obj		*objects;
 	t_ambient	amb_light;
-	t_light		light;
 	t_camera	camera;
+	t_light		light;
+	t_sphere	*spheres;
+	t_plane		*planes;
+	t_cylinder	*cylinders;
 	const char	*e_names[E_TYPES_AMOUNT];
 	int			e_count[E_TYPES_AMOUNT];
 	int			fd;

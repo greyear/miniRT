@@ -25,7 +25,7 @@ static void	unify_spaces(char *str)
 	}
 }
 
-static int	cleaning_line(char **str)
+int	cleaning_line(char **str)
 {
 	char	*trimmed;
 
@@ -77,6 +77,6 @@ int	validate_content(t_miniRT *m)
 	}
 	if (at_least_one_element(m) == FAILURE)
 		return (print_err(NO_ELEM_MSG));
-	ft_printf(2, "success\n"); //delete
+	ft_printf(2, "validated\n"); //delete
 	return (SUCCESS);
 }

@@ -35,6 +35,17 @@ int main(int argc, char *argv[])
 		struct_clean(&m);
 		return (FAILURE);
 	}
+	if (allocation(&m))
+	{
+		struct_clean(&m);
+		return (FAILURE);
+	}
+	if (init(&m))
+	{
+		struct_clean(&m);
+		return (FAILURE);
+	}
+	
 	draw_figure();
 	struct_clean(&m);
 	return (SUCCESS);

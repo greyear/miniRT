@@ -55,8 +55,8 @@ PARS_FILES		=	file_validation.c \
 					set.c \
 					content_validation.c \
 					line_validation.c \
-					figures.c \
-					non_figures.c \
+					validate_figures.c \
+					validate_non_figures.c \
 					value_validation.c \
 					colors.c \
 					vectors.c \
@@ -66,7 +66,12 @@ PARS_FILES		=	file_validation.c \
 					diameter_height.c \
 					pre_aton.c \
 					rt_atoi.c \
-					rt_atof.c
+					rt_atof.c \
+					allocation.c \
+					initialization.c \
+					init_figures.c \
+					init_non_figures.c \
+					
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c
 

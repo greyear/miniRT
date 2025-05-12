@@ -18,3 +18,8 @@ int	validate_coordinates(char *str, char *element)
 		return (print_val_err(err, element, "Coordinates"));
 	return (SUCCESS);
 }
+
+int	init_coordinates(char *three)
+{
+
+}
