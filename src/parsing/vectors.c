@@ -20,3 +20,23 @@ int	validate_vector(char *str, char *element)
 		return (print_val_err(err, element, "Vector"));
 	return (SUCCESS);
 }
+
+int	init_vector(t_vector *vector, char *three) //in case of future changes saved this one but it's similar to coordinates
+{
+	char	**split;
+	float	x;
+	float	y;
+	float	z;
+
+	split = ft_split(three, ',');
+	if (!split)
+		return (print_err(MLLC_MSG));
+	rt_atof(split[0], &x);
+	rt_atof(split[1], &y);
+	rt_atof(split[2], &z);
+	vector->x = x;
+	vector->y = y;
+	vector->z = z;
+	ft_clean_arr(&split);
+	return (SUCCESS);
+}

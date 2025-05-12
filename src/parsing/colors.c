@@ -21,16 +21,22 @@ int	validate_color(char *str, char *element)
 	return (SUCCESS);
 }
 
-int	init_color(t_col *color, char *three)
+int	init_colors(t_col *color, char *three)
 {
 	char	**split;
+	int		r;
+	int		g;
+	int		b;
 
 	split = ft_split(three, ',');
 	if (!split)
 		return (print_err(MLLC_MSG));
-	rt_atoi(split[0], &(color->r));
-	rt_atoi(split[1], &(color->g));
-	rt_atoi(split[2], &(color->b));
+	rt_atoi(split[0], &r);
+	rt_atoi(split[1], &g);
+	rt_atoi(split[2], &b);
+	color->r = (uint8_t)r;
+	color->g = (uint8_t)g;
+	color->b = (uint8_t)b;
 	ft_clean_arr(&split);
 	return (SUCCESS);
 }

@@ -58,8 +58,9 @@ int			init_light(t_miniRT *m, char **args);
 int			init_sphere(t_miniRT *m, char **args);
 int			init_plane(t_miniRT *m, char **args);
 int			init_cylinder(t_miniRT *m, char **args);
-int			init_color(t_col *color, char *three);
-
+int			init_colors(t_col *color, char *three);
+int			init_coordinates(t_vector *coordinates, char *three);
+int			init_vector(t_vector *vector, char *three);
 
 
 //Drawing

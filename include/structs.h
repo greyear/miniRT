@@ -128,7 +128,7 @@ typedef struct s_camera
 {
 	t_vector	coordinates;
 	t_vector	normalized;
-	float		view_field;
+	int			view_field;
 }	t_camera;
 
 typedef struct s_sphere
@@ -136,7 +136,6 @@ typedef struct s_sphere
 	t_vector		coordinates;
 	float			diameter;
 	t_col			color;
-	//struct s_sphere	*next;
 }	t_sphere;
 
 typedef struct s_plane
@@ -144,7 +143,6 @@ typedef struct s_plane
 	t_vector		coordinates;
 	t_vector		normalized;
 	t_col			color;
-	//struct s_plane	*next;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -154,7 +152,6 @@ typedef struct s_cylinder
 	float				diameter;
 	float				height;
 	t_col				color;
-	//struct s_cylinder	*next;
 }	t_cylinder;
 
 typedef struct s_miniRT
@@ -167,5 +164,6 @@ typedef struct s_miniRT
 	t_cylinder	*cylinders;
 	const char	*e_names[E_TYPES_AMOUNT];
 	int			e_count[E_TYPES_AMOUNT];
+	int			e_index[E_TYPES_AMOUNT];
 	int			fd;
 }	t_miniRT;

@@ -15,11 +15,12 @@
 void	struct_clean(t_miniRT *rt)
 {
 	//another fields
-	if (rt->objects)
-	{
-		//object_clean(rt);
-		free(rt->objects);
-	}
+	if (rt->spheres)
+		free(rt->spheres);
+	if (rt->planes)
+		free(rt->planes);
+	if (rt->cylinders)
+		free(rt->cylinders);
 	if (rt->fd >= 0)
 		close(rt->fd);
 	/*if (rt)
