@@ -1,5 +1,6 @@
 
 #include "../../include/miniRT.h"
+# include <float.h>
 
 /*diameter/height [0.0, unlimited], 1 number
 for sphere, cylinder*/

@@ -25,10 +25,10 @@ static int	choose_for_validation(char *line)
 	else if (!ft_strcmp(divided[0], "cy"))
 		res = validate_cylinder(args);
 	ft_clean_arr(&divided);
-	return (res);	
+	return (res);
 }
 
-int validate_element_type(char *line, t_miniRT *m)
+int	validate_element_type(char *line, t_miniRT *m)
 {
 	int	i;
 	int	len;
@@ -42,7 +42,7 @@ int validate_element_type(char *line, t_miniRT *m)
 			m->e_count[i]++;
 			if (ft_iscapital(m->e_names[i][0]) && m->e_count[i] > 1)
 				return (print_err(DB_ELEM_MSG));
-			return(choose_for_validation(line));
+			return (choose_for_validation(line));
 		}
 		i++;
 	}

@@ -1,7 +1,7 @@
 
 #include "../../include/miniRT.h"
 
-int validate_ambient(char **args)
+int	validate_ambient(char **args)
 {
 	if (ft_array_len(args) != 2)
 		return (print_err(AMBIENT_ARGS));
@@ -12,7 +12,7 @@ int validate_ambient(char **args)
 	return (SUCCESS);
 }
 
-int validate_camera(char **args)
+int	validate_camera(char **args)
 {
 	if (ft_array_len(args) != 3)
 		return (print_err(CAMERA_ARGS));
@@ -25,7 +25,7 @@ int validate_camera(char **args)
 	return (SUCCESS);
 }
 
-int validate_light(char **args)
+int	validate_light(char **args)
 {
 	if (ft_array_len(args) != 3) //including color, but what if we have no?
 		return (print_err(LIGHT_ARGS));

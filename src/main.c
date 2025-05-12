@@ -15,21 +15,19 @@
 void	init_minirt(t_miniRT *m)
 {
 	ft_bzero(m, sizeof(*m));
-
 	m->e_names[0] = "A";
-	m->e_names[1] = "C",
-	m->e_names[2] = "L",
-	m->e_names[3] = "sp",
-	m->e_names[4] = "pl",
+	m->e_names[1] = "C";
+	m->e_names[2] = "L";
+	m->e_names[3] = "sp";
+	m->e_names[4] = "pl";
 	m->e_names[5] = "cy";
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_miniRT	m; //allocate?
+	t_miniRT	m;
 
 	init_minirt(&m);
-	
 	if (validation(&m, argc, argv))
 	{
 		struct_clean(&m);

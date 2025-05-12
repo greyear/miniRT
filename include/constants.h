@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
+
 # ifndef WIN_WIDTH
 #  define WIN_WIDTH 2000
 # endif
@@ -50,3 +53,5 @@
 # define CONFL_MSG "number should be int or float not both\n"
 # define ATON_MSG "atoi/atof failed\n"
 # define MLLC_MSG "memory allocation failed\n"
+
+#endif

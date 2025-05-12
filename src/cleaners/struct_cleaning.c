@@ -14,7 +14,6 @@
 
 void	struct_clean(t_miniRT *rt)
 {
-	//another fields
 	if (rt->spheres)
 		free(rt->spheres);
 	rt->spheres = NULL;
@@ -24,8 +23,4 @@ void	struct_clean(t_miniRT *rt)
 	if (rt->cylinders)
 		free(rt->cylinders);
 	rt->cylinders = NULL;
-	/*if (rt->fd >= 0)
-		close(rt->fd);*/
-	/*if (rt)
-		free(rt); as we're not allocating rt in main, but just have it in stack*/ 
 }

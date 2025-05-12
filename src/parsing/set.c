@@ -46,8 +46,8 @@ L -40,0,30, 0.7
 
 4) 0 diameter/height? -0?
 
-5)
+5) if there's no line with L should we still store 0s? 3 flags for existence?
 
-6)
+6) 
 
 */

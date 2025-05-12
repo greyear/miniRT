@@ -1,7 +1,7 @@
 
 #include "../../include/libft.h"
 
-int ft_array_len(char **arr)
+int	ft_array_len(char **arr)
 {
 	int	len;
 

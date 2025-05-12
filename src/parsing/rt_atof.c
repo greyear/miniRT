@@ -1,5 +1,6 @@
 
 #include "../../include/miniRT.h"
+# include <float.h>
 
 static int	atof_sign(const char **str)
 {

@@ -1,7 +1,7 @@
 
 #include "../../include/miniRT.h"
 
-int allocation(t_miniRT *m)
+int	allocation(t_miniRT *m)
 {
 	if (m->e_count[E_SPHERE])
 	{

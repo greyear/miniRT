@@ -20,6 +20,7 @@ t_val_err	pre_atoi(char *str)
 	}
 	return (VAL_SUCCESS);
 }
+
 static t_val_err	start_line(char *str, int *i)
 {
 	if (!str || !str[0])

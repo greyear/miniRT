@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef STRUCTS_H
+# define STRUCTS_H
+
 typedef struct s_color
 {
 	uint32_t	start_col; //values from 0 to 4,294,967,295
@@ -167,3 +170,5 @@ typedef struct s_miniRT
 	int			e_index[E_TYPES_AMOUNT];
 	int			fd;
 }	t_miniRT;
+
+#endif
