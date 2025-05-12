@@ -51,7 +51,7 @@ t_val_err	pre_atof(char *str);
 int			rt_atoi(const char *str, int *number);
 int			rt_atof(const char *str, float *number);
 int			allocation(t_miniRT *m);
-int			init(t_miniRT *m);
+int			init(t_miniRT *m, char *filename);
 int			init_ambient(t_miniRT *m, char **args);
 int			init_camera(t_miniRT *m, char **args);
 int			init_light(t_miniRT *m, char **args);
@@ -74,5 +74,8 @@ void		struct_clean(t_miniRT *rt);
 //Errors
 int			print_err(char *reason);
 int			print_val_err(t_val_err err, char *element, char *info);
+
+//Delete
+void		print_scene_info(t_miniRT *m);
 
 #endif

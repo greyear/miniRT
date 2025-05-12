@@ -40,12 +40,12 @@ int main(int argc, char *argv[])
 		struct_clean(&m);
 		return (FAILURE);
 	}
-	if (init(&m))
+	if (init(&m, argv[1]))
 	{
 		struct_clean(&m);
 		return (FAILURE);
 	}
-	
+	print_scene_info(&m);
 	draw_figure();
 	struct_clean(&m);
 	return (SUCCESS);

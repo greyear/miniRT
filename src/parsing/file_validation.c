@@ -52,7 +52,9 @@ int	validation(t_miniRT *m, int argc, char *argv[])
 		return (print_err(READ_FILE_MSG));
 	if (validate_content(m) == FAILURE)
 	{
+		close(m->fd);
 		return(FAILURE);
 	}
+	close(m->fd);
 	return (SUCCESS);
 }

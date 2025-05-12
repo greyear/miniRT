@@ -71,6 +71,8 @@ PARS_FILES		=	file_validation.c \
 					initialization.c \
 					init_figures.c \
 					init_non_figures.c \
+					print_for_testing.c
+#delete last one!
 					
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c

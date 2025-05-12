@@ -17,12 +17,15 @@ void	struct_clean(t_miniRT *rt)
 	//another fields
 	if (rt->spheres)
 		free(rt->spheres);
+	rt->spheres = NULL;
 	if (rt->planes)
 		free(rt->planes);
+	rt->planes = NULL;
 	if (rt->cylinders)
 		free(rt->cylinders);
-	if (rt->fd >= 0)
-		close(rt->fd);
+	rt->cylinders = NULL;
+	/*if (rt->fd >= 0)
+		close(rt->fd);*/
 	/*if (rt)
 		free(rt); as we're not allocating rt in main, but just have it in stack*/ 
 }

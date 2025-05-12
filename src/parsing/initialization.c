@@ -21,11 +21,14 @@ static int	choose_for_initialization(t_miniRT *m, char	**args)
 	return (res);
 }
 
-int	init(t_miniRT *m)
+int	init(t_miniRT *m, char *filename)
 {
 	char	*line;
 	char	**args;
 
+	m->fd = open(filename, O_RDONLY);
+	if (m->fd < 0)
+		return (print_err(READ_FILE_MSG));
 	line = get_next_line(m->fd);
 	while (line)
 	{
@@ -39,6 +42,7 @@ int	init(t_miniRT *m)
 		if (!args)
 		{
 			free(line);
+			close(m->fd);
 			return (print_err(MLLC_MSG));
 		}
 		if (choose_for_initialization(m, args) == FAILURE)
@@ -46,12 +50,14 @@ int	init(t_miniRT *m)
 			free(line);
 			ft_clean_arr(&args);
 			ft_clean_gnl(m->fd);
+			close(m->fd);
 			return (FAILURE);
 		}
 		free(line);
 		ft_clean_arr(&args);
 		line = get_next_line(m->fd);
 	}
+	close(m->fd);
 	ft_printf(2, "initiated\n"); //delete
 	return (SUCCESS);
 }
