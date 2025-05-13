@@ -12,29 +12,7 @@
 
 #include "../../include/miniRT.h"
 
-t_val_err	int_out_of_range(char *str, int min, int max)
-{
-	int	value;
-
-	if (rt_atoi(str, &value) == 1)
-		return (VAL_ERR_ATON);
-	if (value < min || value > max)
-		return (VAL_ERR_RANGE);
-	return (VAL_SUCCESS);
-}
-
-t_val_err	flt_out_of_range(char *str, float min, float max)
-{
-	float	value;
-
-	if (rt_atof(str, &value) == 1)
-		return (VAL_ERR_ATON);
-	if (value < min || value > max)
-		return (VAL_ERR_RANGE);
-	return (VAL_SUCCESS);
-}
-
-static t_val_err	validate_single(char *value, t_val_rules rules)
+static t_val_err	validate_type(char *value, t_val_rules rules)
 {
 	t_val_err	err;
 
@@ -50,6 +28,13 @@ static t_val_err	validate_single(char *value, t_val_rules rules)
 		if (err != VAL_SUCCESS)
 			return (err);
 	}
+	return (VAL_SUCCESS);
+}
+
+static t_val_err	validate_range(char *value, t_val_rules rules)
+{
+	t_val_err	err;
+
 	if (rules.flags & VAL_INT_RANGE)
 	{
 		err = int_out_of_range(value, rules.min_int, rules.max_int);
@@ -62,6 +47,19 @@ static t_val_err	validate_single(char *value, t_val_rules rules)
 		if (err != VAL_SUCCESS)
 			return (err);
 	}
+	return (VAL_SUCCESS);
+}
+
+static t_val_err	validate_single(char *value, t_val_rules rules)
+{
+	t_val_err	err;
+
+	err = validate_type(value, rules);
+	if (err != VAL_SUCCESS)
+		return (err);
+	err = validate_range(value, rules);
+	if (err != VAL_SUCCESS)
+		return (err);
 	return (VAL_SUCCESS);
 }
 

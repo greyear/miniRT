@@ -19,6 +19,35 @@ int	print_err(char *reason)
 	return (FAILURE);
 }
 
+static char	*parsing_err(t_val_err err)
+{
+	if (err == VAL_ERR_EMPTY)
+		return (EMPTY_MSG);
+	else if (err == VAL_ERR_MINUS)
+		return (MINUS_MSG);
+	else if (err == VAL_ERR_NOT_DIGIT)
+		return (FORBID_MSG);
+	else if (err == VAL_ERR_DOTS)
+		return (DOTS_MSG);
+	else if (err == VAL_ERR_BEF_DOT)
+		return (BEF_DOT_MSG);
+	else if (err == VAL_ERR_AFT_DOT)
+		return (AFT_DOT_MSG);
+	else if (err == VAL_ERR_NO_DIGIT)
+		return (DIGIT_MSG);
+	else if (err == VAL_ERR_COMPONENTS)
+		return (COMP_MSG);
+	else if (err == VAL_ERR_RANGE)
+		return (RANGE_MSG);
+	else if (err == VAL_ERR_CONFLICTING_FLAGS)
+		return (CONFL_MSG);
+	else if (err == VAL_ERR_ATON)
+		return (ATON_MSG);
+	else if (err == VAL_ERR_MALLOC)
+		return (MLLC_MSG);
+	return (UNKNOWN_MSG);
+}
+
 int	print_val_err(t_val_err err, char *element, char *info)
 {
 	ft_putstr_fd(ERR_MSG, STDERR_FILENO);
@@ -26,29 +55,6 @@ int	print_val_err(t_val_err err, char *element, char *info)
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(info, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
-	if (err == VAL_ERR_EMPTY)
-		ft_putstr_fd(EMPTY_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_MINUS)
-		ft_putstr_fd(MINUS_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_NOT_DIGIT)
-		ft_putstr_fd(FORBID_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_DOTS)
-		ft_putstr_fd(DOTS_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_BEF_DOT)
-		ft_putstr_fd(BEF_DOT_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_AFT_DOT)
-		ft_putstr_fd(AFT_DOT_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_NO_DIGIT)
-		ft_putstr_fd(DIGIT_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_COMPONENTS)
-		ft_putstr_fd(COMP_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_RANGE)
-		ft_putstr_fd(RANGE_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_CONFLICTING_FLAGS)
-		ft_putstr_fd(CONFL_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_ATON)
-		ft_putstr_fd(ATON_MSG, STDERR_FILENO);
-	else if (err == VAL_ERR_MALLOC)
-		ft_putstr_fd(MLLC_MSG, STDERR_FILENO);
+	ft_putstr_fd(parsing_err(err), STDERR_FILENO);
 	return (FAILURE);
 }

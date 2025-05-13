@@ -58,6 +58,7 @@ PARS_FILES		=	file_validation.c \
 					validate_figures.c \
 					validate_non_figures.c \
 					value_validation.c \
+					range_checks.c \
 					colors.c \
 					vectors.c \
 					ratios.c \

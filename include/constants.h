@@ -32,7 +32,7 @@
 # define READ_FILE_MSG "File cannot be read\n"
 # define NO_ELEM_MSG "No elements found\n"
 # define DB_ELEM_MSG "Elements which are defined by a capital letter can only \
-	be declared once\n"
+be declared once\n"
 # define VALID_MSG "Scene file has invalid lines\n"
 # define AMBIENT_ARGS "Ambient: wrong number of arguments\n"
 # define CAMERA_ARGS "Camera: wrong number of arguments\n"
@@ -52,6 +52,7 @@
 # define COMP_MSG "wrong number of components\n"
 # define CONFL_MSG "number should be int or float not both\n"
 # define ATON_MSG "atoi/atof failed\n"
+# define UNKNOWN_MSG "Unknown validation error\n"
 # define MLLC_MSG "memory allocation failed\n"
 
 #endif
