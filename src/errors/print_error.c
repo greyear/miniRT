@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 12:40:48 by azinchen          #+#    #+#             */
+/*   Updated: 2025/05/13 12:40:52 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-int print_err(char *reason)
+int	print_err(char *reason)
 {
 	ft_putstr_fd(ERR_MSG, STDERR_FILENO);
 	ft_putstr_fd(reason, STDERR_FILENO);
-	return(FAILURE);
+	return (FAILURE);
 }
 
 int	print_val_err(t_val_err err, char *element, char *info)
@@ -15,7 +26,6 @@ int	print_val_err(t_val_err err, char *element, char *info)
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(info, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
-
 	if (err == VAL_ERR_EMPTY)
 		ft_putstr_fd(EMPTY_MSG, STDERR_FILENO);
 	else if (err == VAL_ERR_MINUS)

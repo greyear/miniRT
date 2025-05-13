@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vectors.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 12:49:03 by azinchen          #+#    #+#             */
+/*   Updated: 2025/05/13 12:49:05 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
@@ -21,7 +32,8 @@ int	validate_vector(char *str, char *element)
 	return (SUCCESS);
 }
 
-int	init_vector(t_vector *vector, char *three) //in case of future changes saved this one but it's similar to coordinates
+//in case of future changes saved this one but it's similar to coordinates
+int	init_vector(t_vector *vector, char *three)
 {
 	char	**split;
 	float	x;

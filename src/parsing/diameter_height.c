@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   diameter_height.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 12:43:20 by azinchen          #+#    #+#             */
+/*   Updated: 2025/05/13 12:43:22 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/miniRT.h"
-# include <float.h>
+#include <float.h>
 
 /*diameter/height [0.0, unlimited], 1 number
 for sphere, cylinder*/

@@ -67,9 +67,8 @@ int	validate_content(t_miniRT *m)
 		}
 		if (validate_element_type(line, m) == FAILURE)
 		{
-			//print where the problem is?
 			free(line);
-			ft_clean_gnl(m->fd); //?
+			ft_clean_gnl(m->fd);
 			return (FAILURE);
 		}
 		free(line);

@@ -25,7 +25,7 @@ static int	name_check(char *name)
 
 	l = ft_strlen(name);
 	if (l < 4 || name[l - 1] != 't' || name[l - 2] != 'r'
-			|| name[l - 3] != '.')
+		|| name[l - 3] != '.')
 		return (print_err(WRONG_FILENAME_MSG));
 	return (SUCCESS);
 }
@@ -46,14 +46,14 @@ static int	dir_check(char *name)
 int	validation(t_miniRT *m, int argc, char *argv[])
 {
 	if (arg_check(argc) || name_check(argv[1]) || dir_check(argv[1]))
-		return(FAILURE);
+		return (FAILURE);
 	m->fd = open(argv[1], O_RDONLY);
 	if (m->fd < 0)
 		return (print_err(READ_FILE_MSG));
 	if (validate_content(m) == FAILURE)
 	{
 		close(m->fd);
-		return(FAILURE);
+		return (FAILURE);
 	}
 	close(m->fd);
 	return (SUCCESS);

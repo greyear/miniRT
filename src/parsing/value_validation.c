@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   value_validation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 12:48:37 by azinchen          #+#    #+#             */
+/*   Updated: 2025/05/13 12:48:39 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
@@ -32,8 +43,7 @@ t_val_err	validate_value(char *str, t_val_rules rules)
 	set = ft_split(str, ',');
 	if (!set)
 		return (VAL_ERR_MALLOC);
-	if ((rules.flags & VAL_COMPONENTS) &&
-			(ft_array_len(set) != rules.comp))
+	if ((rules.flags & VAL_COMPONENTS) && (ft_array_len(set) != rules.comp))
 	{
 		ft_clean_arr(&set);
 		return (VAL_ERR_COMPONENTS);
@@ -47,16 +57,30 @@ t_val_err	validate_value(char *str, t_val_rules rules)
 	cur = set;
 	while (*cur)
 	{
-		if ((rules.flags & VAL_INT) && ((err = pre_atoi(*cur)) != VAL_SUCCESS))
-			break ;
-		if ((rules.flags & VAL_FLT) && ((err = pre_atof(*cur)) != VAL_SUCCESS))
-			break ;
-		if ((rules.flags & VAL_INT_RANGE) &&
-				((err = int_out_of_range(*cur, rules.min_int, rules.max_int)) != VAL_SUCCESS))
-			break ;
-		if ((rules.flags & VAL_FLT_RANGE) &&
-				((err = flt_out_of_range(*cur, rules.min_flt, rules.max_flt)) != VAL_SUCCESS))
-			break ;
+		if (rules.flags & VAL_INT)
+		{
+			err = pre_atoi(*cur);
+			if (err != VAL_SUCCESS)
+				break ;
+		}
+		if (rules.flags & VAL_FLT)
+		{
+			err = pre_atof(*cur);
+			if (err != VAL_SUCCESS)
+				break ;
+		}
+		if (rules.flags & VAL_INT_RANGE)
+		{
+			err = int_out_of_range(*cur, rules.min_int, rules.max_int);
+			if (err != VAL_SUCCESS)
+				break ;
+		}
+		if (rules.flags & VAL_FLT_RANGE)
+		{
+			err = flt_out_of_range(*cur, rules.min_flt, rules.max_flt);
+			if (err != VAL_SUCCESS)
+				break ;
+		}
 		cur++;
 	}
 	ft_clean_arr(&set);
