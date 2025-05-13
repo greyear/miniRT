@@ -34,6 +34,46 @@ t_val_err	flt_out_of_range(char *str, float min, float max)
 	return (VAL_SUCCESS);
 }
 
+static t_val_err	validate_single(char *value, t_val_rules rules)
+{
+	t_val_err	err;
+
+	if (rules.flags & VAL_INT)
+	{
+		err = pre_atoi(value);
+		if (err != VAL_SUCCESS)
+			return (err);
+	}
+	if (rules.flags & VAL_FLT)
+	{
+		err = pre_atof(value);
+		if (err != VAL_SUCCESS)
+			return (err);
+	}
+	if (rules.flags & VAL_INT_RANGE)
+	{
+		err = int_out_of_range(value, rules.min_int, rules.max_int);
+		if (err != VAL_SUCCESS)
+			return (err);
+	}
+	if (rules.flags & VAL_FLT_RANGE)
+	{
+		err = flt_out_of_range(value, rules.min_flt, rules.max_flt);
+		if (err != VAL_SUCCESS)
+			return (err);
+	}
+	return (VAL_SUCCESS);
+}
+
+static t_val_err	validate_set_and_rules(char **set, t_val_rules rules)
+{
+	if ((rules.flags & VAL_COMPONENTS) && (ft_array_len(set) != rules.comp))
+		return (VAL_ERR_COMPONENTS);
+	if ((rules.flags & VAL_INT) && (rules.flags & VAL_FLT))
+		return (VAL_ERR_CONFLICTING_FLAGS);
+	return (VAL_SUCCESS);
+}
+
 t_val_err	validate_value(char *str, t_val_rules rules)
 {
 	char		**set;
@@ -43,44 +83,18 @@ t_val_err	validate_value(char *str, t_val_rules rules)
 	set = ft_split(str, ',');
 	if (!set)
 		return (VAL_ERR_MALLOC);
-	if ((rules.flags & VAL_COMPONENTS) && (ft_array_len(set) != rules.comp))
+	err = validate_set_and_rules(set, rules);
+	if (err != VAL_SUCCESS)
 	{
 		ft_clean_arr(&set);
-		return (VAL_ERR_COMPONENTS);
+		return (err);
 	}
-	if ((rules.flags & VAL_INT) && (rules.flags & VAL_FLT))
-	{
-		ft_clean_arr(&set);
-		return (VAL_ERR_CONFLICTING_FLAGS);
-	}
-	err = VAL_SUCCESS;
 	cur = set;
 	while (*cur)
 	{
-		if (rules.flags & VAL_INT)
-		{
-			err = pre_atoi(*cur);
-			if (err != VAL_SUCCESS)
-				break ;
-		}
-		if (rules.flags & VAL_FLT)
-		{
-			err = pre_atof(*cur);
-			if (err != VAL_SUCCESS)
-				break ;
-		}
-		if (rules.flags & VAL_INT_RANGE)
-		{
-			err = int_out_of_range(*cur, rules.min_int, rules.max_int);
-			if (err != VAL_SUCCESS)
-				break ;
-		}
-		if (rules.flags & VAL_FLT_RANGE)
-		{
-			err = flt_out_of_range(*cur, rules.min_flt, rules.max_flt);
-			if (err != VAL_SUCCESS)
-				break ;
-		}
+		err = validate_single(*cur, rules);
+		if (err != VAL_SUCCESS)
+			break ;
 		cur++;
 	}
 	ft_clean_arr(&set);
