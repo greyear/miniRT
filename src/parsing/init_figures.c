@@ -23,8 +23,7 @@ int	init_sphere(t_rt *m, char **args)
 	rt_atof(args[2], &(res.diameter));
 	if (init_colors(&(res.color), args[3]))
 		return (FAILURE);
-	// res.vec_col = rgb_to_vec(res.color);
-	res.vec_col = (t_vector) {1, 0, 0.5};
+	res.vec_col = rgb_to_vec(res.color);
 	res.emission_color = (t_vector) {0,0,0};
 	res.normalized = (t_vector) { 0.0, 1.0, 0.0};
 	res.radius = res.diameter / 2;

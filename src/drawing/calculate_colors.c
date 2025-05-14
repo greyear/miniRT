@@ -19,7 +19,8 @@ uint32_t	vec_to_rgba(t_vector color)
 	uint8_t	b = (uint8_t)(fmax(0, fmin(1, color.z)) * 255);
 	uint8_t	a = 255;
 
-	return ((a << 24) | (r << 16) | (g << 8) | b);
+	//return ((a << 24) | (r << 16) | (g << 8) | b);
+	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
 t_vector	rgb_to_vec(t_col color)
