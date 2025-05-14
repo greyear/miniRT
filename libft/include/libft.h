@@ -28,12 +28,14 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int				ft_array_len(char **arr);
 void			ft_clean_arr(char ***arr);
 void			ft_clean_gnl(int fd);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
+int				ft_iscapital(int c);
 int				ft_isprint(int c);
 int				ft_issign(int c);
 int				ft_isspace(int c);

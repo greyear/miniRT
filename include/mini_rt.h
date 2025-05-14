@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_rt.h                                          :+:      :+:    :+:   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 14:59:13 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:25:08 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#ifndef MINIRT_H
+# define MINIRT_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/include/libft.h"
+# include <stdint.h>
 # include "constants.h"
 # include "structs.h"
 # include <stdio.h>
@@ -24,18 +25,58 @@
 
 # include <sys/time.h> // deleteme
 
+//Validation
+int			validation(t_rt *m, int argc, char *argv[]);
+int			validate_content(t_rt *m);
+int			validate_element_type(char *line, t_rt *m);
+int			validate_ambient(char **args);
+int			validate_camera(char **args);
+int			validate_light(char **args);
+int			validate_sphere(char **args);
+int			validate_plane(char **args);
+int			validate_cylinder(char **args);
+t_val_err	validate_value(char *str, t_val_rules rules);
+int			validate_color(char *str, char *element);
+int			validate_vector(char *str, char *element);
+int			validate_ratio(char *str, char *element);
+int			validate_coordinates(char *str, char *element);
+int			validate_fov(char *str, char *element);
+int			validate_diameter_height(char *str, char *element);
+t_val_err	int_out_of_range(char *str, int min, int max);
+t_val_err	flt_out_of_range(char *str, float min, float max);
+int			cleaning_line(char **str);
+
 //Parsing
-void	name_check(char *name);
-void	dir_check(char *name);
+t_val_err	pre_atoi(char *str);
+t_val_err	pre_atof(char *str);
+int			rt_atoi(const char *str, int *number);
+int			rt_atof(const char *str, float *number);
+int			allocation(t_rt *m);
+int			init(t_rt *m, char *filename);
+int			init_ambient(t_rt *m, char **args);
+int			init_camera(t_rt *m, char **args);
+int			init_light(t_rt *m, char **args);
+int			init_sphere(t_rt *m, char **args);
+int			init_plane(t_rt *m, char **args);
+int			init_cylinder(t_rt *m, char **args);
+int			init_colors(t_col *color, char *three);
+int			init_coordinates(t_vector *coordinates, char *three);
+int			init_vector(t_vector *vector, char *three);
+
+//Errors
+int			print_err(char *reason);
+int			print_val_err(t_val_err err, char *element, char *info);
+
+//Delete
+void		print_scene_info(t_rt *m);
 
 //Drawing
 void		draw_figure(t_rt *obj);
-uint32_t	rgb_to_rgba(uint32_t color);
-uint32_t	gradient(int fst_color, int lst_color, int steps, int cur_step);
 void		render(t_rt *obj);
 uint32_t	vec_to_rgba(t_vector color);
 void		draw_pixels(t_rt *rt);
 void		create_img(t_rt *rt);
+t_vector	rgb_to_vec(t_col color);
 
 //Rays
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
@@ -59,8 +100,6 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light
 
 //Objects
 t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);
-t_light		*init_light(t_rt *rt);
-t_camera	*init_camera(void);
 t_obj		*init_objects(t_rt *rt);
 
 //hooks
@@ -81,6 +120,6 @@ void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_
 void		clean_struct(t_rt *rt);
 void		clean_exit(t_rt *rt);
 
-size_t	get_time(void); //deleteme
+size_t	    get_time(void); //deleteme
 
 #endif

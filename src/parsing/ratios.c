@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filename.c                                         :+:      :+:    :+:   */
+/*   ratios.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 12:15:54 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:08:08 by azinchen         ###   ########.fr       */
+/*   Created: 2025/05/13 12:46:37 by azinchen          #+#    #+#             */
+/*   Updated: 2025/05/13 12:46:39 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-void	name_check(char *name)
+/*ratio [0.0,1.0], 1 number
+for ambient, light*/
+
+int	validate_ratio(char *str, char *element)
 {
-	int	l;
+	t_val_flags	flags;
+	t_val_rules	rules;
+	t_val_err	err;
 
-	l = ft_strlen(name);
-	if (l < 4 || name[l - 1] != 't' || name[l - 2] != 'r'
-		|| name[l - 3] != '.')
-	{
-		ft_putstr_fd("File is not *.rt\n", 2);
-		exit(EXIT_FAILURE); //chech cleaning
-	}
-}
-
-void	dir_check(char *name)
-{
-	DIR	*dir;
-
-	dir = opendir(name);
-	if (dir != NULL)
-	{
-		closedir(dir);
-		ft_putstr_fd("Argument should be a *.rt file\n", 2);
-		exit(EXIT_FAILURE);
-	}
+	flags = VAL_FLT | VAL_FLT_RANGE | VAL_COMPONENTS;
+	rules.flags = flags;
+	rules.min_flt = 0.0;
+	rules.max_flt = 1.0;
+	rules.comp = 1;
+	err = validate_value(str, rules);
+	if (err != VAL_SUCCESS)
+		return (print_val_err(err, element, "Ratio"));
+	return (SUCCESS);
 }

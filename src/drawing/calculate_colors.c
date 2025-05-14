@@ -21,3 +21,13 @@ uint32_t	vec_to_rgba(t_vector color)
 
 	return ((a << 24) | (r << 16) | (g << 8) | b);
 }
+
+t_vector	rgb_to_vec(t_col color)
+{
+	t_vector	vec;
+
+	vec.x = (float) ((float) color.r / 255);
+	vec.y = (float) ((float) color.g / 255);
+	vec.z = (float) ((float) color.b / 255);
+	return (vec);
+}

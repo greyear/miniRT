@@ -17,18 +17,18 @@ static t_light_calc	calculate_lights(t_rt *rt, t_obj *object, t_hit *hit_arr)
 	t_light_calc	lights;
 
 	lights.transmission = (t_vector){1, 1, 1};
-	lights.light_ray.destination = vec_sub(rt->light->coordinates, hit_arr[0].phit);
+	lights.light_ray.destination = vec_sub(rt->light.coordinates, hit_arr[0].phit);
 	normalize(&lights.light_ray.destination);
 	lights.light_ray.origin = (t_vector){0, 0, 0};
 	t_ray	light_ray = {lights.light_ray.origin, lights.light_ray.destination};
 	lights.transmission = calculate_shadows(rt, object, &hit_arr[0], light_ray);
 	lights.light_intensity = fmax(0, dot(hit_arr[0].nhit, lights.light_ray.destination));
-	t_vector light_contribution = vec_mul(object->color,
-		vec_mul_num(rt->light->emission_color, lights.light_intensity));
+	t_vector light_contribution = vec_mul(object->vec_col,
+		vec_mul_num(rt->light.emission_color, lights.light_intensity));
 	light_contribution = vec_mul(light_contribution, lights.transmission);
 	lights.surface_color = light_contribution;
 	lights.surface_color = vec_add(lights.surface_color, object->emission_color);
-	lights.surface_color = vec_add(lights.surface_color, vec_mul(object->color, rt->ambient_light));
+	lights.surface_color = vec_add(lights.surface_color, vec_mul(object->vec_col, rt->amb_light.vec_col));
 	return (lights);	
 }
 

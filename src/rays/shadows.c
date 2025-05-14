@@ -26,7 +26,7 @@ bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 	else if (object.type == PLANE)
 	{
 		pl_side_phit = dot(vec_sub(hit_info->phit, object.coordinates), object.normalized);
-		pl_side_light = dot(vec_sub(rt->light->coordinates, object.coordinates), object.normalized);
+		pl_side_light = dot(vec_sub(rt->light.coordinates, object.coordinates), object.normalized);
 		if (pl_side_phit * pl_side_light < 0.0f)
 			shadow_hit = intersect_plane(light_ray, object, &hit_info->t0) && hit_info->t0 > 0;
 	}
