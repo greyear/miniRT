@@ -6,31 +6,81 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/12 15:20:17 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:47:25 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct s_color
-{
-	uint32_t	start_col; //values from 0 to 4,294,967,295
-	uint32_t	end_col;
-	uint8_t		a_start;
-	uint8_t		r_start;
-	uint8_t		g_start;
-	uint8_t		b_start;
-	uint8_t		a_end;
-	uint8_t		r_end;
-	uint8_t		g_end;
-	uint8_t		b_end;
-	uint32_t	cur_color;
-}	t_color;
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-typedef enum e_obj_type {
+typedef struct s_col
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+}	t_col;
+
+typedef enum e_obj_type
+{
 	SPHERE,
 	CYLINDER,
 	PLANE,
 	LIGHT
 }	t_obj_type;
+
+typedef enum e_element_type
+{
+	E_AMBIENT,
+	E_CAMERA,
+	E_LIGHT,
+	E_SPHERE,
+	E_PLANE,
+	E_CYLINDER,
+	E_TYPES_AMOUNT
+}	t_element_type;
+
+typedef enum e_return
+{
+	SUCCESS = 0,
+	FAILURE = 1
+}	t_return;
+
+typedef enum e_val_flags
+{
+	VAL_INT = 1 << 0,
+	VAL_FLT = 1 << 1,
+	VAL_INT_RANGE = 1 << 2,
+	VAL_FLT_RANGE = 1 << 3,
+	VAL_COMPONENTS = 1 << 4
+}	t_val_flags;
+
+typedef enum e_val_err
+{
+	VAL_SUCCESS = 0,
+	VAL_ERR_EMPTY,
+	VAL_ERR_MINUS,
+	VAL_ERR_NOT_DIGIT,
+	VAL_ERR_DOTS,
+	VAL_ERR_BEF_DOT,
+	VAL_ERR_AFT_DOT,
+	VAL_ERR_NO_DIGIT,
+	VAL_ERR_ATON,
+	VAL_ERR_RANGE,
+	VAL_ERR_COMPONENTS,
+	VAL_ERR_CONFLICTING_FLAGS,
+	VAL_ERR_MALLOC
+}	t_val_err;
+
+typedef struct s_val_rules
+{
+	t_val_flags	flags;
+	float		min_flt;
+	float		max_flt;
+	int			min_int;
+	int			max_int;
+	int			comp;
+	char		*err_msg;
+}	t_val_rules;
 
 typedef struct s_vector
 {
@@ -47,20 +97,23 @@ typedef struct s_obj
 	float		height;
 	float		diameter;
 	float		radius;
-	t_vector	color;
+	t_col		color;
+	t_vector	vec_col;
 	t_vector	emission_color;
 }	t_obj;
 
 typedef struct s_ambient
 {
-	float	ratio;
-	t_color	color;
+	float		ratio;
+	t_col		color;
+	t_vector	vec_col;
 }	t_ambient;
 
 typedef struct s_light
 {
 	t_vector	coordinates;
-	t_vector	color;
+	t_col		color;
+	t_vector	vec_col;
 	t_vector	emission_color;
 	float		diameter;
 	float		ratio;
@@ -70,7 +123,7 @@ typedef struct s_camera
 {
 	t_vector	coordinates;
 	t_vector	normalized;
-	float		fov;
+	int			fov;
 	float		viewporw_size;
 	float		aspect_ratio;
 	float		angle;
@@ -124,13 +177,20 @@ typedef struct s_rt
 	int			width;
 	int			height;
 	t_obj		*objects;
-	t_ambient	*amb_light;
-	t_light		*light;
-	t_camera	*camera;
+	t_ambient	amb_light;
+	t_light		light;
+	t_camera	camera;
 	mlx_t		*mlx;
 	int			obj_count;
-	t_vector	ambient_light;
+	//t_vector	ambient_light;
 	t_vector	*image;
 	mlx_image_t	*mlx_img;
 	int			needs_render;
+	const char	*e_names[E_TYPES_AMOUNT];
+	int			e_count[E_TYPES_AMOUNT];
+	int			e_index[E_TYPES_AMOUNT];
+	int			fd;
+	int			cur_index;
 }	t_rt;
+
+#endif

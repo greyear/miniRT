@@ -18,7 +18,8 @@ t_obj	init_obj(t_vector coordinates, t_vector em_color, t_obj_type type)
 	t_obj		def_obj;
 
 	def_obj.type = type;
-	def_obj.color = (t_vector) {1, 0, 1};
+	// def_obj.color = something;
+	def_obj.vec_col = (t_vector) {1, 0, 1};
 	def_obj.emission_color = em_color;
 	def_obj.coordinates = coordinates;
 	def_obj.normalized = (t_vector) { 0.0, 1.0, 0.0};
@@ -44,31 +45,31 @@ t_obj	*init_objects(t_rt *rt)
 	return (objects);
 }
 
-t_light	*init_light(t_rt *rt)
-{
-	t_light	*light;
+// t_light	*init_light(t_rt *rt)
+// {
+// 	t_light	*light;
 
-	light = ft_calloc(1, sizeof(t_light));
-	if (!light)
-		clean_exit(rt);
-	light->coordinates = (t_vector) {10, 0, 5};
-	light->color = (t_vector) {1, 1, 1};
-	light->emission_color = (t_vector) {1, 1, 1},
-	light->diameter = 5.f;
-	light->ratio = 1.f;
-	return (light);
-}
+// 	light = ft_calloc(1, sizeof(t_light));
+// 	if (!light)
+// 		clean_exit(rt);
+// 	light->coordinates = (t_vector) {10, 0, 5};
+// 	light->color = (t_vector) {1, 1, 1};
+// 	light->emission_color = (t_vector) {1, 1, 1},
+// 	light->diameter = 5.f;
+// 	light->ratio = 1.f;
+// 	return (light);
+// }
 
-t_camera	*init_camera(void)
-{
-	t_camera	*camera;
+// t_camera	*init_camera(void)
+// {
+// 	t_camera	*camera;
 
-	camera = ft_calloc(1, sizeof(t_camera));
-	if (!camera)
-		clean_exit(NULL);
-	camera->coordinates = (t_vector) {0, 0, 0};
-	camera->fov = 70;
-	camera->aspect_ratio = WIN_WIDTH / (float) WIN_HEIGHT;
-	camera->angle = tan(M_PI * 0.5 * camera->fov / 180.0);
-	return (camera);
-}
+// 	camera = ft_calloc(1, sizeof(t_camera));
+// 	if (!camera)
+// 		clean_exit(NULL);
+// 	camera->coordinates = (t_vector) {0, 0, 0};
+// 	camera->fov = 70;
+// 	camera->aspect_ratio = WIN_WIDTH / (float) WIN_HEIGHT;
+// 	camera->angle = tan(M_PI * 0.5 * camera->fov / 180.0);
+// 	return (camera);
+// }

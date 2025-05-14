@@ -32,8 +32,9 @@ DRAWING			=	drawing
 RAYS			=	rays
 CONTROLS		=	controls
 PARS_DIR		=	parsing
+ERR_DIR			=	errors
 CLEAN_DIR		=	clean
-OBJECTS			=	objects
+FIGURES			=	figures
 UTILS			=	utils
 
 #Includes
@@ -49,16 +50,40 @@ LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3
+CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3 -g
 RM				=	rm -f
 
 # Source files
-PARS_FILES		=	filename.c \
+PARS_FILES		=	file_validation.c \
 					set.c \
-					line.c
+					content_validation.c \
+					line_validation.c \
+					validate_figures.c \
+					validate_non_figures.c \
+					value_validation.c \
+					range_checks.c \
+					colors.c \
+					vectors.c \
+					ratios.c \
+					coordinates.c \
+					FOV.c \
+					diameter_height.c \
+					pre_aton.c \
+					rt_atoi.c \
+					rt_atof.c \
+					allocation.c \
+					initialization.c \
+					init_figures.c \
+					init_non_figures.c \
+					print_for_testing.c
+#delete last one!
+					
 CLEAN_FILES		=	struct_cleaning.c
+ERR_FILES		=	print_error.c
 
 SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
+					$(addprefix $(CLEAN_DIR)/, $(CLEAN_FILES)) \
+					$(addprefix $(ERR_DIR)/, $(ERR_FILES)) \
 
 SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/main.c \
@@ -72,11 +97,9 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(RAYS)/intersection.c \
 					$(SRC_DIR)/$(RAYS)/shadows.c \
 					\
-					$(SRC_DIR)/$(CLEAN_DIR)/struct_cleaning.c \
-					\
 					$(SRC_DIR)/$(CONTROLS)/hooks.c \
 					\
-					$(SRC_DIR)/$(OBJECTS)/init_objects.c \
+					$(SRC_DIR)/$(FIGURES)/init_objects.c \
 					\
 					$(SRC_DIR)/$(UTILS)/math_utils.c \
 					$(SRC_DIR)/$(UTILS)/normalization.c \
