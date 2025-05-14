@@ -22,12 +22,13 @@
 # include <string.h> //strerror
 # include <dirent.h> 
 # include <math.h>
-/*# include <float.h>*/
+
+# include <sys/time.h> // deleteme
 
 //Validation
-int			validation(t_miniRT *m, int argc, char *argv[]);
-int			validate_content(t_miniRT *m);
-int			validate_element_type(char *line, t_miniRT *m);
+int			validation(t_rt *m, int argc, char *argv[]);
+int			validate_content(t_rt *m);
+int			validate_element_type(char *line, t_rt *m);
 int			validate_ambient(char **args);
 int			validate_camera(char **args);
 int			validate_light(char **args);
@@ -50,31 +51,75 @@ t_val_err	pre_atoi(char *str);
 t_val_err	pre_atof(char *str);
 int			rt_atoi(const char *str, int *number);
 int			rt_atof(const char *str, float *number);
-int			allocation(t_miniRT *m);
-int			init(t_miniRT *m, char *filename);
-int			init_ambient(t_miniRT *m, char **args);
-int			init_camera(t_miniRT *m, char **args);
-int			init_light(t_miniRT *m, char **args);
-int			init_sphere(t_miniRT *m, char **args);
-int			init_plane(t_miniRT *m, char **args);
-int			init_cylinder(t_miniRT *m, char **args);
+int			allocation(t_rt *m);
+int			init(t_rt *m, char *filename);
+int			init_ambient(t_rt *m, char **args);
+int			init_camera(t_rt *m, char **args);
+int			init_light(t_rt *m, char **args);
+int			init_sphere(t_rt *m, char **args);
+int			init_plane(t_rt *m, char **args);
+int			init_cylinder(t_rt *m, char **args);
 int			init_colors(t_col *color, char *three);
 int			init_coordinates(t_vector *coordinates, char *three);
 int			init_vector(t_vector *vector, char *three);
-
-//Drawing
-void		draw_figure(void);
-uint32_t	rgb_to_rgba(uint32_t color);
-uint32_t	gradient(int fst_color, int lst_color, int steps, int cur_step);
-
-//Cleaners
-void		struct_clean(t_miniRT *rt);
 
 //Errors
 int			print_err(char *reason);
 int			print_val_err(t_val_err err, char *element, char *info);
 
 //Delete
-void		print_scene_info(t_miniRT *m);
+void		print_scene_info(t_rt *m);
+
+//Drawing
+void		draw_figure(t_rt *obj);
+void		render(t_rt *obj);
+uint32_t	vec_to_rgba(t_vector color);
+void		draw_pixels(t_rt *rt);
+void		create_img(t_rt *rt);
+t_vector	rgb_to_vec(t_col color);
+
+//Rays
+t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
+float		length2(t_vector vec);
+float		dot(t_vector vec1, t_vector vec2);
+t_vector	revert_vector(t_vector vec);
+float		lerp(float a, float b, float mix);
+void		clamp(t_vector *pixel);
+t_vector	smooth_pixel(int x, int y, t_rt *rt);
+
+//Intersection
+bool		intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info);
+bool		intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info, int *hit_part);
+bool		intersect_plane(t_ray ray, t_obj plane, float *t);
+bool		check_intersection(t_ray ray, t_obj object, t_hit *hit_info);
+t_obj		*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear);
+
+//Shadows
+bool		check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info);
+t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light_ray);
+
+//Objects
+t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);
+t_obj		*init_objects(t_rt *rt);
+
+//hooks
+void		keys_hook(void *obj);
+void		win_resize(int width, int height, void *param);
+
+//utils
+t_vector 	vec_add(t_vector vec1, t_vector vec2);
+t_vector 	vec_sub(t_vector vec1, t_vector vec2);
+t_vector 	vec_mul(t_vector vec1, t_vector vec2);
+t_vector 	vec_mul_num(t_vector vec1, float num);
+t_vector 	vec_sub_num(t_vector vec1, float num);
+float 		random_float_fast(unsigned int *seed);
+void 		normalize(t_vector *vector_to_norm);
+void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_hit);
+
+//clean
+void		clean_struct(t_rt *rt);
+void		clean_exit(t_rt *rt);
+
+size_t	    get_time(void); //deleteme
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
+#    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/04/09 15:14:43 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/07 16:07:37 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,18 @@ WHITE = \033[0;97m
 NAME 			=	miniRT
 
 # Directories
-LIBFT_DIR		= 	./libft
-MLX_DIR			=	./MLX42
-SRC_DIR 		=	./src
-OBJ_DIR 		=	./obj
-DRAWING			=	./drawing
-
+LIBFT_DIR		= 	libft
+MLX_DIR			=	MLX42
+SRC_DIR 		=	src
+OBJ_DIR 		=	obj
+DRAWING			=	drawing
+RAYS			=	rays
+CONTROLS		=	controls
 PARS_DIR		=	parsing
-CLEAN_DIR		=	cleaners
 ERR_DIR			=	errors
+CLEAN_DIR		=	clean
+FIGURES			=	figures
+UTILS			=	utils
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -47,7 +50,7 @@ LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-g -Wall -Wextra -Werror
+CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3 -g
 RM				=	rm -f
 
 # Source files
@@ -84,8 +87,24 @@ SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
 
 SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/main.c \
-					$(SRC_DIR)/$(DRAWING)/draw_figure.c \
-					$(SRC_DIR)/$(DRAWING)/calculate_colors.c
+         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
+					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
+					\
+					$(SRC_DIR)/$(RAYS)/anti_aliasing.c \
+					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
+					$(SRC_DIR)/$(RAYS)/hits.c \
+					$(SRC_DIR)/$(RAYS)/intersect_cylinder.c \
+					$(SRC_DIR)/$(RAYS)/intersection.c \
+					$(SRC_DIR)/$(RAYS)/shadows.c \
+					\
+					$(SRC_DIR)/$(CONTROLS)/hooks.c \
+					\
+					$(SRC_DIR)/$(FIGURES)/init_objects.c \
+					\
+					$(SRC_DIR)/$(UTILS)/math_utils.c \
+					$(SRC_DIR)/$(UTILS)/normalization.c \
+					$(SRC_DIR)/$(UTILS)/ray_utils.c \
+					$(SRC_DIR)/$(UTILS)/vec_utils.c 
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

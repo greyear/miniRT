@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:50 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:22:07 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:35:09 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,17 @@ be declared once\n"
 # define ATON_MSG "atoi/atof failed\n"
 # define UNKNOWN_MSG "Unknown validation error\n"
 # define MLLC_MSG "memory allocation failed\n"
+
+# ifndef MAX_DEPTH
+#  define MAX_DEPTH 3
+# endif
+
+# ifndef PIXEL_SAMPLES
+#  define PIXEL_SAMPLES 4
+# endif
+
+# ifndef BIAS
+#  define BIAS 1e-4
+# endif
 
 #endif

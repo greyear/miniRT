@@ -1,5 +1,5 @@
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 t_val_err	int_out_of_range(char *str, int min, int max)
 {

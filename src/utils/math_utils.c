@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_cleaning.c                                  :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 14:11:30 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/09 14:17:18 by azinchen         ###   ########.fr       */
+/*   Created: 2025/04/23 17:19:35 by msavelie          #+#    #+#             */
+/*   Updated: 2025/04/24 14:47:47 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
-void	struct_clean(t_miniRT *rt)
+inline float	random_float_fast(unsigned int *seed)
 {
-	if (rt->spheres)
-		free(rt->spheres);
-	rt->spheres = NULL;
-	if (rt->planes)
-		free(rt->planes);
-	rt->planes = NULL;
-	if (rt->cylinders)
-		free(rt->cylinders);
-	rt->cylinders = NULL;
+	*seed ^= *seed << 13;
+	*seed ^= *seed >> 17;
+	*seed ^= *seed << 5;
+	return (*seed & 0xFFFFFF) / (float)0xFFFFFF;
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 static t_val_err	validate_type(char *value, t_val_rules rules)
 {

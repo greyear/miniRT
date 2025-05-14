@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 static int	arg_check(int argc)
 {
@@ -43,7 +43,7 @@ static int	dir_check(char *name)
 	return (SUCCESS);
 }
 
-int	validation(t_miniRT *m, int argc, char *argv[])
+int	validation(t_rt *m, int argc, char *argv[])
 {
 	if (arg_check(argc) || name_check(argv[1]) || dir_check(argv[1]))
 		return (FAILURE);

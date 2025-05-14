@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
 /*   Updated: 2025/04/14 14:51:09 by azinchen         ###   ########.fr       */
@@ -12,21 +12,6 @@
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-typedef struct s_color
-{
-	uint32_t	start_col; //values from 0 to 4,294,967,295
-	uint32_t	end_col;
-	uint8_t		a_start;
-	uint8_t		r_start;
-	uint8_t		g_start;
-	uint8_t		b_start;
-	uint8_t		a_end;
-	uint8_t		r_end;
-	uint8_t		g_end;
-	uint8_t		b_end;
-	uint32_t	cur_color;
-}	t_color;
 
 typedef struct s_col
 {
@@ -39,7 +24,8 @@ typedef enum e_obj_type
 {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
+	LIGHT
 }	t_obj_type;
 
 typedef enum e_element_type
@@ -103,72 +89,108 @@ typedef struct s_vector
 	float	z;
 }	t_vector;
 
-/*typedef struct s_obj
+typedef struct s_obj
 {
 	t_obj_type	type;
 	t_vector	coordinates;
 	t_vector	normalized;
-	float		width;
 	float		height;
 	float		diameter;
-	t_color		color;
-}	t_obj;*/
+	float		radius;
+	t_col		color;
+	t_vector	vec_col;
+	t_vector	emission_color;
+}	t_obj;
 
 typedef struct s_ambient
 {
-	float	ratio;
-	t_col	color;
+	float		ratio;
+	t_col		color;
+	t_vector	vec_col;
 }	t_ambient;
 
 typedef struct s_light
 {
 	t_vector	coordinates;
-	float		ratio;
 	t_col		color;
+	t_vector	vec_col;
+	t_vector	emission_color;
+	float		diameter;
+	float		ratio;
 }	t_light;
 
 typedef struct s_camera
 {
 	t_vector	coordinates;
 	t_vector	normalized;
-	int			view_field;
+	int			fov;
+	float		viewporw_size;
+	float		aspect_ratio;
+	float		angle;
 }	t_camera;
 
-typedef struct s_sphere
+typedef struct s_ray
 {
-	t_vector		coordinates;
-	float			diameter;
-	t_col			color;
-}	t_sphere;
+	t_vector	origin;
+	t_vector	destination;
+}	t_ray;
 
-typedef struct s_plane
+typedef struct s_hit
 {
-	t_vector		coordinates;
-	t_vector		normalized;
-	t_col			color;
-}	t_plane;
+	float		t0;
+	float		t1;
+	int			temp_part;
+	int			hit_part;
+	t_vector	phit;
+	t_vector	nhit;
+}	t_hit;
 
-typedef struct s_cylinder
+typedef struct s_light_calc
 {
-	t_vector			coordinates;
-	t_vector			normalized;
-	float				diameter;
-	float				height;
-	t_col				color;
-}	t_cylinder;
+	t_ray		light_ray;
+	t_vector	transmission;
+	t_vector	light_contribution;
+	t_vector	surface_color;
+	float		light_intensity;
+}	t_light_calc;
 
-typedef struct s_miniRT
+typedef struct s_cyl_inter
 {
+	t_vector	oc;
+	float		dir_dot_axis;
+	t_vector	ray_perp_dir;
+	float		ray_perp_len;
+	float		oc_dot_axis;
+	t_vector	oc_proj;
+	float		discriminant;
+	float		sqrt_disc;
+	float		t0;
+	float		t1;
+	float		t_candidate;
+	t_vector	intersection;
+	t_vector	to_point;
+	int			*hit_part;
+}	t_cyl_inter;
+
+typedef struct s_rt
+{
+	int			width;
+	int			height;
+	t_obj		*objects;
 	t_ambient	amb_light;
-	t_camera	camera;
 	t_light		light;
-	t_sphere	*spheres;
-	t_plane		*planes;
-	t_cylinder	*cylinders;
+	t_camera	camera;
+	mlx_t		*mlx;
+	int			obj_count;
+	//t_vector	ambient_light;
+	t_vector	*image;
+	mlx_image_t	*mlx_img;
+	int			needs_render;
 	const char	*e_names[E_TYPES_AMOUNT];
 	int			e_count[E_TYPES_AMOUNT];
 	int			e_index[E_TYPES_AMOUNT];
 	int			fd;
-}	t_miniRT;
+	int			cur_index;
+}	t_rt;
 
 #endif

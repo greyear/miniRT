@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
-static int	choose_for_initialization(t_miniRT *m, char	**args)
+static int	choose_for_initialization(t_rt *m, char	**args)
 {
 	int	res;
 
@@ -32,7 +32,7 @@ static int	choose_for_initialization(t_miniRT *m, char	**args)
 	return (res);
 }
 
-static int	open_file(t_miniRT *m, char *filename)
+static int	open_file(t_rt *m, char *filename)
 {
 	m->fd = open(filename, O_RDONLY);
 	if (m->fd < 0)
@@ -40,7 +40,7 @@ static int	open_file(t_miniRT *m, char *filename)
 	return (SUCCESS);
 }
 
-static int	process_line(char *line, t_miniRT *m)
+static int	process_line(char *line, t_rt *m)
 {
 	char	**args;
 
@@ -69,7 +69,7 @@ static int	process_line(char *line, t_miniRT *m)
 	return (SUCCESS);
 }
 
-int	init(t_miniRT *m, char *filename)
+int	init(t_rt *m, char *filename)
 {
 	char	*line;
 	int		return_line;

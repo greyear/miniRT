@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 static void	unify_spaces(char *str)
 {
@@ -38,7 +38,7 @@ int	cleaning_line(char **str)
 	return (SUCCESS);
 }
 
-static int	at_least_one_element(t_miniRT *m)
+static int	at_least_one_element(t_rt *m)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ static int	at_least_one_element(t_miniRT *m)
 	return (FAILURE);
 }
 
-int	validate_content(t_miniRT *m)
+int	validate_content(t_rt *m)
 {
 	char	*line;
 

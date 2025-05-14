@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 /*coordinates [do we have any restrictions?], flt, 3 numbers
 for camera, light, sphere, plane, cylinder*/

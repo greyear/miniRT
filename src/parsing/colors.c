@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 /*colors [0-255] RGB int, 3 numbers
 for ambient, sphere, plane, cylinder*/

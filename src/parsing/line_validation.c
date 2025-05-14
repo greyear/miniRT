@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 static int	choose_for_validation(char *line)
 {
@@ -39,7 +39,7 @@ static int	choose_for_validation(char *line)
 	return (res);
 }
 
-int	validate_element_type(char *line, t_miniRT *m)
+int	validate_element_type(char *line, t_rt *m)
 {
 	int	i;
 	int	len;

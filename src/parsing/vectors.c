@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../include/mini_rt.h"
 
 /*3d normalized vector [-1.0,1.0] float, 3 numbers
 for camera, plane, cylinder*/
