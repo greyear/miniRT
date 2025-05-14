@@ -28,14 +28,15 @@ LIBFT_DIR		= 	libft
 MLX_DIR			=	MLX42
 SRC_DIR 		=	src
 OBJ_DIR 		=	obj
-DRAWING			=	drawing
-RAYS			=	rays
-CONTROLS		=	controls
+
+DRAWING_DIR		=	drawing
+RAYS_DIR		=	rays
+CONTROLS_DIR	=	controls
 PARS_DIR		=	parsing
 ERR_DIR			=	errors
 CLEAN_DIR		=	clean
-FIGURES			=	figures
-UTILS			=	utils
+FIGURES_DIR		=	figures
+UTILS_DIR		=	utils
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -66,7 +67,7 @@ PARS_FILES		=	file_validation.c \
 					vectors.c \
 					ratios.c \
 					coordinates.c \
-					FOV.c \
+					fov.c \
 					diameter_height.c \
 					pre_aton.c \
 					rt_atoi.c \
@@ -77,34 +78,34 @@ PARS_FILES		=	file_validation.c \
 					init_non_figures.c \
 					print_for_testing.c
 #delete last one!
-					
+DRAWING_FILES	=	draw_figure.c \
+					calculate_colors.c
+RAYS_FILES		=	anti_aliasing.c \
+					calculate_rays.c \
+					hits.c \
+					intersect_cylinder.c \
+					intersection.c \
+					shadows.c
+FIGURES_FILES	=	init_objects.c
+CONTROLS_FILES	=	hooks.c
+UTILS_FILES		=	math_utils.c \
+					normalization.c \
+					ray_utils.c \
+					vec_utils.c 
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c
 
 SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
+					$(addprefix $(DRAWING_DIR)/, $(DRAWING_FILES)) \
+					$(addprefix $(RAYS_DIR)/, $(RAYS_FILES)) \
+					$(addprefix $(FIGURES_DIR)/, $(FIGURES_FILES)) \
+					$(addprefix $(CONTROLS_DIR)/, $(CONTROLS_FILES)) \
+					$(addprefix $(UTILS_DIR)/, $(UTILS_FILES)) \
 					$(addprefix $(CLEAN_DIR)/, $(CLEAN_FILES)) \
 					$(addprefix $(ERR_DIR)/, $(ERR_FILES)) \
+					main.c
 
-SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
-					$(SRC_DIR)/main.c \
-         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
-					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
-					\
-					$(SRC_DIR)/$(RAYS)/anti_aliasing.c \
-					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
-					$(SRC_DIR)/$(RAYS)/hits.c \
-					$(SRC_DIR)/$(RAYS)/intersect_cylinder.c \
-					$(SRC_DIR)/$(RAYS)/intersection.c \
-					$(SRC_DIR)/$(RAYS)/shadows.c \
-					\
-					$(SRC_DIR)/$(CONTROLS)/hooks.c \
-					\
-					$(SRC_DIR)/$(FIGURES)/init_objects.c \
-					\
-					$(SRC_DIR)/$(UTILS)/math_utils.c \
-					$(SRC_DIR)/$(UTILS)/normalization.c \
-					$(SRC_DIR)/$(UTILS)/ray_utils.c \
-					$(SRC_DIR)/$(UTILS)/vec_utils.c 
+SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
