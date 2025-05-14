@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:50 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/01 13:35:09 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:46:44 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ be declared once\n"
 
 # ifndef BIAS
 #  define BIAS 1e-4
+# endif
+
+# ifndef EPSILON
+#  define EPSILON 1e-4
 # endif
 
 #endif
