@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/05/07 16:07:37 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/14 17:04:08 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ CONTROLS		=	controls
 PARS_DIR		=	parsing
 ERR_DIR			=	errors
 CLEAN_DIR		=	clean
-FIGURES			=	figures
 UTILS			=	utils
 
 #Includes
@@ -98,8 +97,6 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(RAYS)/shadows.c \
 					\
 					$(SRC_DIR)/$(CONTROLS)/hooks.c \
-					\
-					$(SRC_DIR)/$(FIGURES)/init_objects.c \
 					\
 					$(SRC_DIR)/$(UTILS)/math_utils.c \
 					$(SRC_DIR)/$(UTILS)/normalization.c \
