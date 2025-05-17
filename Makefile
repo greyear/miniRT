@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/05/17 16:06:04 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/17 17:51:25 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,8 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(RAYS)/shadows.c \
 					\
 					$(SRC_DIR)/$(CONTROLS)/hooks.c \
-					$(SRC_DIR)/$(CONTROLS)/selection.c \
+					$(SRC_DIR)/$(CONTROLS)/mode_selection.c \
+					$(SRC_DIR)/$(CONTROLS)/obj_selection.c \
 					\
 					$(SRC_DIR)/$(UTILS)/math_utils.c \
 					$(SRC_DIR)/$(UTILS)/normalization.c \

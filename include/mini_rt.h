@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 16:34:37 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:53:58 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ void		win_resize(int width, int height, void *param);
 void		select_objects(t_rt *rt);
 void		select_light(t_rt *rt);
 void		select_camera(t_rt *rt);
+void		set_move_mode(t_rt *rt);
+void		set_rotate_mode(t_rt *rt);
+void		set_scale_mode(t_rt *rt);
 
 //utils
 t_vector 	vec_add(t_vector vec1, t_vector vec2);
