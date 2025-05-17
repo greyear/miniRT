@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/14 16:46:51 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:24:54 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ uint32_t	vec_to_rgba(t_vector color);
 void		draw_pixels(t_rt *rt);
 void		create_img(t_rt *rt);
 t_vector	rgb_to_vec(t_col color);
+void		draw_gui(t_rt *rt);
 
 //Rays
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
@@ -98,13 +99,10 @@ t_obj		*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tn
 bool		check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info);
 t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light_ray);
 
-//Objects
-t_obj		init_obj(t_vector coordinates, t_vector em_color, t_obj_type type);
-t_obj		*init_objects(t_rt *rt);
-
 //hooks
 void		keys_hook(void *obj);
 void		win_resize(int width, int height, void *param);
+void		select_objects(t_rt *rt);
 
 //utils
 t_vector 	vec_add(t_vector vec1, t_vector vec2);

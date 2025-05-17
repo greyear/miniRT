@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/05 16:48:53 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:46:31 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ static t_rt	init_struct(void)
 	rt.width = WIN_WIDTH;
 	rt.height = WIN_HEIGHT;
 	rt.mlx = NULL;
-	//rt.amb_light = NULL;
-	//rt.camera = init_camera();
-	//rt.obj_count = 3;
-	//rt.objects = init_objects(&rt);
-	//rt.light = init_light(&rt);
-	//rt.ambient_light = (t_vector) {0.1, 0.1, 0.1};
 	rt.image = NULL;
 	create_img(&rt);
 	rt.needs_render = 0;

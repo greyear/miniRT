@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/05/14 17:04:08 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/17 12:29:36 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,8 +86,9 @@ SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
 
 SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/main.c \
-         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
+         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
+					$(SRC_DIR)/$(DRAWING)/draw_gui.c \
 					\
 					$(SRC_DIR)/$(RAYS)/anti_aliasing.c \
 					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
@@ -97,6 +98,7 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(RAYS)/shadows.c \
 					\
 					$(SRC_DIR)/$(CONTROLS)/hooks.c \
+					$(SRC_DIR)/$(CONTROLS)/selection.c \
 					\
 					$(SRC_DIR)/$(UTILS)/math_utils.c \
 					$(SRC_DIR)/$(UTILS)/normalization.c \

@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/14 16:47:25 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:49:43 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ typedef enum e_obj_type
 	PLANE,
 	LIGHT
 }	t_obj_type;
+
+typedef enum e_mode
+{
+	MOVE,
+	ROTATE,
+	SCALE
+}	t_mode;
+
+typedef enum e_obj_sel
+{
+	OBJ_SEL,
+	LIGHT_SEL,
+	CAMERA_SEL
+}	t_obj_sel;
 
 typedef enum e_element_type
 {
@@ -182,15 +196,20 @@ typedef struct s_rt
 	t_camera	camera;
 	mlx_t		*mlx;
 	int			obj_count;
-	//t_vector	ambient_light;
 	t_vector	*image;
 	mlx_image_t	*mlx_img;
+	mlx_image_t	*instr_img;
+	mlx_image_t	*mode_img;
+	mlx_image_t	*gui_img;
 	int			needs_render;
 	const char	*e_names[E_TYPES_AMOUNT];
 	int			e_count[E_TYPES_AMOUNT];
 	int			e_index[E_TYPES_AMOUNT];
 	int			fd;
 	int			cur_index;
+	t_obj_sel	obj_sel;
+	t_mode		mode;
+	int			obj_index;
 }	t_rt;
 
 #endif
