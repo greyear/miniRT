@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/05/07 16:07:37 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/17 17:51:25 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ CONTROLS		=	controls
 PARS_DIR		=	parsing
 ERR_DIR			=	errors
 CLEAN_DIR		=	clean
-FIGURES			=	figures
 UTILS			=	utils
 
 #Includes
@@ -50,7 +49,7 @@ LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3 -g
+CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3
 RM				=	rm -f
 
 # Source files
@@ -87,8 +86,9 @@ SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
 
 SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/main.c \
-         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
 					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
+         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
+					$(SRC_DIR)/$(DRAWING)/draw_gui.c \
 					\
 					$(SRC_DIR)/$(RAYS)/anti_aliasing.c \
 					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
@@ -98,8 +98,8 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(RAYS)/shadows.c \
 					\
 					$(SRC_DIR)/$(CONTROLS)/hooks.c \
-					\
-					$(SRC_DIR)/$(FIGURES)/init_objects.c \
+					$(SRC_DIR)/$(CONTROLS)/mode_selection.c \
+					$(SRC_DIR)/$(CONTROLS)/obj_selection.c \
 					\
 					$(SRC_DIR)/$(UTILS)/math_utils.c \
 					$(SRC_DIR)/$(UTILS)/normalization.c \

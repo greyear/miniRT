@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 14:24:35 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/12 15:20:57 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:46:54 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,19 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light
 	t_vector	transmission;
 	int			i;
 	bool		shadow_hit;
+	t_hit		tmp_hit;
 
 	transmission = (t_vector){1, 1, 1};
+	light_ray.origin = vec_add(hit_info->phit, vec_mul_num(hit_info->nhit, BIAS));
 	i = -1;
-	while (i < rt->obj_count)
+	while (++i < rt->obj_count)
 	{
-		++i;
 		if (&rt->objects[i] == object)
 			continue;
-		hit_info->t0 = 0;
-		hit_info->t1 = 0;
-		hit_info->temp_part = -1;
-		light_ray.origin = vec_add(hit_info->phit, vec_mul_num(hit_info->nhit, BIAS));
-		//light_ray.origin = vec_add(hit_info->phit, vec_mul_num(light_ray.destination, BIAS));
-		shadow_hit = check_shadow(rt, rt->objects[i], light_ray, hit_info);
-		if (shadow_hit) {
+		tmp_hit.t0 = 0;
+		shadow_hit = check_shadow(rt, rt->objects[i], light_ray, &tmp_hit);
+		if (shadow_hit && tmp_hit.t0 > BIAS)
+		{
 			transmission = (t_vector){0, 0, 0};
 			break;
 		}
