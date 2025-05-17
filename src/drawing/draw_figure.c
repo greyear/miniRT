@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:29 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 15:55:21 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:32:06 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	draw_figure(t_rt *rt)
 	mlx_image_to_window(rt->mlx, img, 0, 0);
 	draw_gui(rt);
 	printf("%zu\n", get_time() - time);
-	mlx_loop_hook(rt->mlx, keys_hook, rt);
+	mlx_key_hook(rt->mlx, keys_hook, rt);
+	mlx_loop_hook(rt->mlx, main_hook, rt);
 	mlx_resize_hook(rt->mlx, win_resize, rt);
 	mlx_loop(rt->mlx);
 	mlx_terminate(rt->mlx);

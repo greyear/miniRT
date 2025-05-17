@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 12:19:49 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 15:54:06 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:26:29 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	draw_gui(t_rt *rt)
 	mlx_image_to_window(rt->mlx, rt->gui_img, 0, 0);
 	draw_current_obj(rt, rt->mlx);
 	draw_current_mode(rt, rt->mlx);
+	rt->needs_render = 0;
 }

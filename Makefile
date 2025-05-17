@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/05/17 12:29:36 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/17 16:06:04 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3 -g
+CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3
 RM				=	rm -f
 
 # Source files

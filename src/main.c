@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 15:46:31 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:01:14 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_rt	init_struct(void)
 	create_img(&rt);
 	rt.needs_render = 0;
 	rt.cur_index = 0;
+	rt.obj_index = 0;
 	return (rt);
 }
 

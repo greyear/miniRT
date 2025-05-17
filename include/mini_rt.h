@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 12:24:54 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:34:37 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,12 @@ bool		check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info);
 t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light_ray);
 
 //hooks
-void		keys_hook(void *obj);
+void		main_hook(void *obj);
+void		keys_hook(mlx_key_data_t keydata, void *obj);
 void		win_resize(int width, int height, void *param);
 void		select_objects(t_rt *rt);
+void		select_light(t_rt *rt);
+void		select_camera(t_rt *rt);
 
 //utils
 t_vector 	vec_add(t_vector vec1, t_vector vec2);
