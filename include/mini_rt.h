@@ -6,12 +6,12 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 17:53:58 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:01:56 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINI_RT_H
+# define MINI_RT_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/include/libft.h"
@@ -90,14 +90,18 @@ t_vector	smooth_pixel(int x, int y, t_rt *rt);
 
 //Intersection
 bool		intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info);
-bool		intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info, int *hit_part);
+bool		intersect_cylinder(t_ray ray, t_obj cylinder, t_hit *hit_info,
+				int *hit_part);
 bool		intersect_plane(t_ray ray, t_obj plane, float *t);
 bool		check_intersection(t_ray ray, t_obj object, t_hit *hit_info);
-t_obj		*check_obj_intersection(t_rt *rt, t_ray ray, t_hit *hit_arr[2], float *tnear);
+t_obj		*check_obj_intersection(t_rt *rt, t_ray ray,
+				t_hit *hit_arr[2], float *tnear);
 
 //Shadows
-bool		check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info);
-t_vector	calculate_shadows(t_rt *rt, t_obj *object, t_hit *hit_info, t_ray light_ray);
+bool		check_shadow(t_rt *rt, t_obj object,
+				t_ray light_ray, t_hit *hit_info);
+t_vector	calculate_shadows(t_rt *rt, t_obj *object,
+				t_hit *hit_info, t_ray light_ray);
 
 //hooks
 void		main_hook(void *obj);
@@ -111,19 +115,27 @@ void		set_rotate_mode(t_rt *rt);
 void		set_scale_mode(t_rt *rt);
 
 //utils
-t_vector 	vec_add(t_vector vec1, t_vector vec2);
-t_vector 	vec_sub(t_vector vec1, t_vector vec2);
-t_vector 	vec_mul(t_vector vec1, t_vector vec2);
-t_vector 	vec_mul_num(t_vector vec1, float num);
-t_vector 	vec_sub_num(t_vector vec1, float num);
-float 		random_float_fast(unsigned int *seed);
-void 		normalize(t_vector *vector_to_norm);
-void		normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_hit);
+t_vector	vec_add(t_vector vec1, t_vector vec2);
+t_vector	vec_sub(t_vector vec1, t_vector vec2);
+t_vector	vec_mul(t_vector vec1, t_vector vec2);
+t_vector	vec_mul_num(t_vector vec1, float num);
+t_vector	vec_sub_num(t_vector vec1, float num);
+float		random_float_fast(unsigned int *seed);
+void		normalize(t_vector *vector_to_norm);
+void		normilize_object(t_obj *object, t_vector *nhit,
+				t_vector *phit, t_hit cyl_hit);
+void		compute_quadratic_roots(t_cyl_inter *inter_obj, float b);
+void		calc_discriminant(t_cyl_inter *inter_obj, t_obj cylinder);
+float		calc_cap_offset(t_obj cylinder, int cap);
+void		calc_hit_part(int cap, int *hit_part);
+t_vector	calc_cap_center(t_obj cylinder, int cap);
+void		check_caps_intersection(t_obj cylinder, t_hit *hit_info,
+				t_ray ray, int *hit_part);
 
 //clean
 void		clean_struct(t_rt *rt);
 void		clean_exit(t_rt *rt);
 
-size_t	    get_time(void); //deleteme
+size_t		get_time(void); //deleteme
 
 #endif

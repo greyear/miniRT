@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 16:01:14 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:59:12 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_minirt(t_rt *rt)
 	rt->e_names[5] = "cy";
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_rt		rt;
 
@@ -77,9 +77,9 @@ int main(int argc, char *argv[])
 		return (FAILURE);
 	}
 	print_scene_info(&rt);
-	size_t	time = get_time();
+	size_t	time = get_time(); // delete me
 	render(&rt);
-	printf("%zu\n", get_time() - time);
+	printf("%zu\n", get_time() - time); // delete me
 	draw_figure(&rt);
 	clean_struct(&rt);
 	return (SUCCESS);

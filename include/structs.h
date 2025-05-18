@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/17 15:49:43 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:53:02 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,14 @@ typedef struct s_vector
 typedef struct s_obj
 {
 	t_obj_type	type;
-	t_vector	coordinates;
+	t_vector	coords;
 	t_vector	normalized;
 	float		height;
 	float		diameter;
 	float		radius;
 	t_col		color;
 	t_vector	vec_col;
-	t_vector	emission_color;
+	t_vector	em_color;
 }	t_obj;
 
 typedef struct s_ambient
@@ -125,28 +125,27 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	t_vector	coordinates;
+	t_vector	coords;
 	t_col		color;
 	t_vector	vec_col;
-	t_vector	emission_color;
+	t_vector	em_color;
 	float		diameter;
 	float		ratio;
 }	t_light;
 
 typedef struct s_camera
 {
-	t_vector	coordinates;
+	t_vector	coords;
 	t_vector	normalized;
 	int			fov;
-	float		viewporw_size;
 	float		aspect_ratio;
 	float		angle;
 }	t_camera;
 
 typedef struct s_ray
 {
-	t_vector	origin;
-	t_vector	destination;
+	t_vector	orig;
+	t_vector	dest;
 }	t_ray;
 
 typedef struct s_hit
@@ -163,9 +162,9 @@ typedef struct s_light_calc
 {
 	t_ray		light_ray;
 	t_vector	transmission;
-	t_vector	light_contribution;
-	t_vector	surface_color;
-	float		light_intensity;
+	t_vector	light_contrib;
+	t_vector	surf_color;
+	float		light_intens;
 }	t_light_calc;
 
 typedef struct s_cyl_inter

@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:45:40 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 17:56:37 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:56:17 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ void	keys_hook(mlx_key_data_t keydata, void *obj)
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(rt->mlx);
 	if (keydata.key == MLX_KEY_O && keydata.action == MLX_RELEASE
-			&& rt->needs_render == 0)
+		&& rt->needs_render == 0)
 		select_objects(rt);
 	else if (keydata.key == MLX_KEY_L && keydata.action == MLX_RELEASE
-			&& rt->needs_render == 0)
+		&& rt->needs_render == 0)
 		select_light(rt);
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE
 		&& rt->needs_render == 0)
 		select_camera(rt);
 	else if (keydata.key == MLX_KEY_M && keydata.action == MLX_RELEASE
-			&& rt->needs_render == 0)
+		&& rt->needs_render == 0)
 		set_move_mode(rt);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_RELEASE
-			&& rt->needs_render == 0)
+		&& rt->needs_render == 0)
 		set_rotate_mode(rt);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE
-			&& rt->needs_render == 0)
+		&& rt->needs_render == 0)
 		set_scale_mode(rt);
 }
 
