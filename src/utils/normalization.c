@@ -6,34 +6,39 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:02:43 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 15:58:14 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:54:24 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-inline void normalize(t_vector *vector_to_norm)
+inline void	normalize(t_vector *vector_to_norm)
 {
 	float	normalized;
-	float	invNor;
+	float	inv_nor;
 
 	normalized = length2(*vector_to_norm);
 	if (normalized > 0)
 	{
-		invNor = 1 / sqrt(normalized);
-		vector_to_norm->x *= invNor;
-		vector_to_norm->y *= invNor;
-		vector_to_norm->z *= invNor;
+		inv_nor = 1 / sqrt(normalized);
+		vector_to_norm->x *= inv_nor;
+		vector_to_norm->y *= inv_nor;
+		vector_to_norm->z *= inv_nor;
 	}
 }
 
-static void	normalize_cylinder(t_obj *object, t_hit cyl_hit, t_vector *nhit, t_vector *phit)
+static void	normalize_cylinder(t_obj *object, t_hit cyl_hit,
+	t_vector *nhit, t_vector *phit)
 {
+	t_vector	hit_to_center;
+	t_vector	axis_proj;
+	float		h;
+
 	if (cyl_hit.hit_part == 0)
 	{
-		t_vector hit_to_center = vec_sub(*phit, object->coords);
-		float h = dot(hit_to_center, object->normalized);
-		t_vector axis_proj = vec_mul_num(object->normalized, h);
+		hit_to_center = vec_sub(*phit, object->coords);
+		h = dot(hit_to_center, object->normalized);
+		axis_proj = vec_mul_num(object->normalized, h);
 		*nhit = vec_sub(hit_to_center, axis_proj);
 		normalize(nhit);
 	}
@@ -43,7 +48,8 @@ static void	normalize_cylinder(t_obj *object, t_hit cyl_hit, t_vector *nhit, t_v
 		*nhit = object->normalized;
 }
 
-void	normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_hit)
+void	normilize_object(t_obj *object, t_vector *nhit,
+	t_vector *phit, t_hit cyl_hit)
 {
 	if (object->type == SPHERE)
 	{
