@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 15:40:55 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 15:47:35 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:54:07 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_vector	calculate_raydir(int x, int y, unsigned int *seed, t_rt *rt)
 	v = (y + random_float_fast(seed)) / (float) rt->height;
 	xx = (2 * u - 1) * rt->camera.angle * rt->camera.aspect_ratio;
 	yy = (1 - 2 * v) * rt->camera.angle;
-	raydir = (t_vector) { xx, yy, -1 };
+	raydir = (t_vector){xx, yy, -1};
 	return (raydir);
 }
 
@@ -43,7 +43,7 @@ t_vector	smooth_pixel(int x, int y, t_rt *rt)
 	{
 		raydir = calculate_raydir(x, y, &seed, rt);
 		normalize(&raydir);
-		color = calculate_rays(rt->camera.coordinates, raydir, rt);
+		color = calculate_rays(rt->camera.coords, raydir, rt);
 		pixel_color = vec_add(pixel_color, color);
 		s++;
 	}

@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:02:43 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/12 15:21:02 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:58:14 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	normalize_cylinder(t_obj *object, t_hit cyl_hit, t_vector *nhit, t_v
 {
 	if (cyl_hit.hit_part == 0)
 	{
-		t_vector hit_to_center = vec_sub(*phit, object->coordinates);
+		t_vector hit_to_center = vec_sub(*phit, object->coords);
 		float h = dot(hit_to_center, object->normalized);
 		t_vector axis_proj = vec_mul_num(object->normalized, h);
 		*nhit = vec_sub(hit_to_center, axis_proj);
@@ -47,7 +47,7 @@ void	normilize_object(t_obj *object, t_vector *nhit, t_vector *phit, t_hit cyl_h
 {
 	if (object->type == SPHERE)
 	{
-		*nhit = vec_sub(*phit, object->coordinates);
+		*nhit = vec_sub(*phit, object->coords);
 		normalize(nhit);
 	}
 	else if (object->type == CYLINDER)
