@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_non_figures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:44:28 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/13 12:44:30 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:53:42 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	init_camera(t_rt *m, char **args)
 {
 	t_camera	res;
 
-	if (init_coordinates(&(res.coordinates), args[1]))
+	if (init_coordinates(&(res.coords), args[1]))
 		return (FAILURE);
 	if (init_vector(&(res.normalized), args[2]))
 		return (FAILURE);
@@ -43,13 +43,13 @@ int	init_light(t_rt *m, char **args)
 {
 	t_light	res;
 
-	if (init_coordinates(&(res.coordinates), args[1]))
+	if (init_coordinates(&(res.coords), args[1]))
 		return (FAILURE);
 	rt_atof(args[2], &(res.ratio));
 	if (init_colors(&(res.color), args[3]))
 		return (FAILURE);
 	res.vec_col = rgb_to_vec(res.color);
-	res.emission_color = (t_vector) {1,1,1};
+	res.em_color = (t_vector) {1,1,1};
 	res.diameter = 5.f;
 	m->light = res;
 	return (SUCCESS);

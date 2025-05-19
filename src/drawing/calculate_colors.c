@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:49:50 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/24 14:51:05 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:56:55 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 uint32_t	vec_to_rgba(t_vector color)
 {
-	uint8_t	r = (uint8_t)(fmax(0, fmin(1, color.x)) * 255);
-	uint8_t	g = (uint8_t)(fmax(0, fmin(1, color.y)) * 255);
-	uint8_t	b = (uint8_t)(fmax(0, fmin(1, color.z)) * 255);
-	uint8_t	a = 255;
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
 
-	//return ((a << 24) | (r << 16) | (g << 8) | b);
+	r = (uint8_t)(fmax(0, fmin(1, color.x)) * 255);
+	g = (uint8_t)(fmax(0, fmin(1, color.y)) * 255);
+	b = (uint8_t)(fmax(0, fmin(1, color.z)) * 255);
+	a = 255;
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
@@ -27,8 +30,8 @@ t_vector	rgb_to_vec(t_col color)
 {
 	t_vector	vec;
 
-	vec.x = (float) ((float) color.r / 255);
-	vec.y = (float) ((float) color.g / 255);
-	vec.z = (float) ((float) color.b / 255);
+	vec.x = (float)((float) color.r / 255);
+	vec.y = (float)((float) color.g / 255);
+	vec.z = (float)((float) color.b / 255);
 	return (vec);
 }

@@ -6,7 +6,7 @@
 #    By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2025/05/07 16:07:37 by msavelie         ###   ########.fr        #
+#    Updated: 2025/05/18 16:12:01 by msavelie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3 -g
+CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3
 RM				=	rm -f
 
 # Source files
@@ -103,9 +103,27 @@ SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
 					$(addprefix $(UTILS_DIR)/, $(UTILS_FILES)) \
 					$(addprefix $(CLEAN_DIR)/, $(CLEAN_FILES)) \
 					$(addprefix $(ERR_DIR)/, $(ERR_FILES)) \
-					main.c
 
-SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
+					$(SRC_DIR)/main.c \
+         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
+					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
+					\
+					$(SRC_DIR)/$(RAYS)/anti_aliasing.c \
+					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
+					$(SRC_DIR)/$(RAYS)/hits.c \
+					$(SRC_DIR)/$(RAYS)/intersect_cylinder.c \
+					$(SRC_DIR)/$(RAYS)/intersection.c \
+					$(SRC_DIR)/$(RAYS)/shadows.c \
+					\
+					$(SRC_DIR)/$(CONTROLS)/hooks.c \
+					\
+					$(SRC_DIR)/$(FIGURES)/init_objects.c \
+					\
+					$(SRC_DIR)/$(UTILS)/math_utils.c \
+					$(SRC_DIR)/$(UTILS)/normalization.c \
+					$(SRC_DIR)/$(UTILS)/ray_utils.c \
+					$(SRC_DIR)/$(UTILS)/vec_utils.c 
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

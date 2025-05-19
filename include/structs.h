@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:59 by azinchen          #+#    #+#             */
-/*   Updated: 2025/04/14 14:51:09 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:53:02 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ typedef enum e_obj_type
 	PLANE,
 	LIGHT
 }	t_obj_type;
+
+typedef enum e_mode
+{
+	MOVE,
+	ROTATE,
+	SCALE
+}	t_mode;
+
+typedef enum e_obj_sel
+{
+	OBJ_SEL,
+	LIGHT_SEL,
+	CAMERA_SEL
+}	t_obj_sel;
 
 typedef enum e_element_type
 {
@@ -92,14 +106,14 @@ typedef struct s_vector
 typedef struct s_obj
 {
 	t_obj_type	type;
-	t_vector	coordinates;
+	t_vector	coords;
 	t_vector	normalized;
 	float		height;
 	float		diameter;
 	float		radius;
 	t_col		color;
 	t_vector	vec_col;
-	t_vector	emission_color;
+	t_vector	em_color;
 }	t_obj;
 
 typedef struct s_ambient
@@ -111,28 +125,27 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	t_vector	coordinates;
+	t_vector	coords;
 	t_col		color;
 	t_vector	vec_col;
-	t_vector	emission_color;
+	t_vector	em_color;
 	float		diameter;
 	float		ratio;
 }	t_light;
 
 typedef struct s_camera
 {
-	t_vector	coordinates;
+	t_vector	coords;
 	t_vector	normalized;
 	int			fov;
-	float		viewporw_size;
 	float		aspect_ratio;
 	float		angle;
 }	t_camera;
 
 typedef struct s_ray
 {
-	t_vector	origin;
-	t_vector	destination;
+	t_vector	orig;
+	t_vector	dest;
 }	t_ray;
 
 typedef struct s_hit
@@ -149,9 +162,9 @@ typedef struct s_light_calc
 {
 	t_ray		light_ray;
 	t_vector	transmission;
-	t_vector	light_contribution;
-	t_vector	surface_color;
-	float		light_intensity;
+	t_vector	light_contrib;
+	t_vector	surf_color;
+	float		light_intens;
 }	t_light_calc;
 
 typedef struct s_cyl_inter
@@ -182,15 +195,20 @@ typedef struct s_rt
 	t_camera	camera;
 	mlx_t		*mlx;
 	int			obj_count;
-	//t_vector	ambient_light;
 	t_vector	*image;
 	mlx_image_t	*mlx_img;
+	mlx_image_t	*instr_img;
+	mlx_image_t	*mode_img;
+	mlx_image_t	*gui_img;
 	int			needs_render;
 	const char	*e_names[E_TYPES_AMOUNT];
 	int			e_count[E_TYPES_AMOUNT];
 	int			e_index[E_TYPES_AMOUNT];
 	int			fd;
 	int			cur_index;
+	t_obj_sel	obj_sel;
+	t_mode		mode;
+	int			obj_index;
 }	t_rt;
 
 #endif

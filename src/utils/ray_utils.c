@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:25:02 by msavelie          #+#    #+#             */
-/*   Updated: 2025/04/14 15:27:04 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:54:35 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ inline float	length2(t_vector vec)
 
 inline t_vector	revert_vector(t_vector vec)
 {
-	return ((t_vector) {-vec.x, -vec.y, -vec.z});
+	return ((t_vector){-vec.x, -vec.y, -vec.z});
 }
 
 inline float	dot(t_vector vec1, t_vector vec2)
