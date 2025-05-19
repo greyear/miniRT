@@ -103,7 +103,7 @@ bool		check_shadow(t_rt *rt, t_obj object,
 t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 				t_hit *hit_info, t_ray light_ray);
 
-//hooks
+//Hooks
 void		main_hook(void *obj);
 void		keys_hook(mlx_key_data_t keydata, void *obj);
 void		win_resize(int width, int height, void *param);
@@ -113,8 +113,9 @@ void		select_camera(t_rt *rt);
 void		set_move_mode(t_rt *rt);
 void		set_rotate_mode(t_rt *rt);
 void		set_scale_mode(t_rt *rt);
+void		move(t_rt *rt, t_vector change);
 
-//utils
+//Utils
 t_vector	vec_add(t_vector vec1, t_vector vec2);
 t_vector	vec_sub(t_vector vec1, t_vector vec2);
 t_vector	vec_mul(t_vector vec1, t_vector vec2);
@@ -132,7 +133,7 @@ t_vector	calc_cap_center(t_obj cylinder, int cap);
 void		check_caps_intersection(t_obj cylinder, t_hit *hit_info,
 				t_ray ray, int *hit_part);
 
-//clean
+//Clean
 void		clean_struct(t_rt *rt);
 void		clean_exit(t_rt *rt);
 

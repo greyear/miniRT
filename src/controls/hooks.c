@@ -29,6 +29,13 @@ void	main_hook(void *obj)
 		draw_gui(rt);
 }
 
+//instructions what to change
+static void	transform(t_rt *rt, t_vector change)
+{
+	if (rt->mode == MOVE)
+		move(rt, change);0
+}
+
 void	keys_hook(mlx_key_data_t keydata, void *obj)
 {
 	t_rt	*rt;
@@ -54,6 +61,19 @@ void	keys_hook(mlx_key_data_t keydata, void *obj)
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE
 		&& rt->needs_render == 0)
 		set_scale_mode(rt);
+	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		transform(rt, (t_vector) {-100,0,0});
+	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		transform(rt, (t_vector) {1,0,0});
+	else if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
+		transform(rt, (t_vector) {0,1,0});
+	else if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
+		transform(rt, (t_vector) {0,-1,0});
+	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		transform(rt, (t_vector) {0,0,-1}); //or better vice versa?
+	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		transform(rt, (t_vector) {0,0,1});
+
 }
 
 void	win_resize(int width, int height, void *param)
