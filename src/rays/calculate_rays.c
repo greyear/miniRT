@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:04 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 15:56:05 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:11:09 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 	object = check_obj_intersection(rt, ray,
 			(t_hit *[2]){&hit_arr[0], &hit_arr[1]}, &tnear);
 	if (!object)
-		return ((t_vector){1, 1, 0.5});
+		return ((t_vector){0.66, 0.75, 0.56});
 	hit_arr[0].phit = vec_add(rayorig, vec_mul_num(raydir, tnear));
 	normilize_object(object, &hit_arr[0].nhit, &hit_arr[0].phit, hit_arr[1]);
 	if (dot(raydir, hit_arr[0].nhit) > 0)
