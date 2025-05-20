@@ -36,6 +36,8 @@ static void	transform(t_rt *rt, mlx_key_data_t keydata, t_vector change)
 		move(rt, change);
 	if (rt->mode == SCALE)
 		scale(rt, keydata, change);
+	if (rt->mode == ROTATE)
+		rotate(rt, keydata, change);
 	rt->needs_render = 1;
 }
 
