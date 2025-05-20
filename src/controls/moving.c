@@ -12,12 +12,26 @@
 
 #include "../../include/mini_rt.h"
 
-void	move(t_rt *rt, t_vector change) //set limits?
+void	move(t_rt *rt, t_vector change) //set limits? //try to put sphere to the side
 {
+	t_vector	forward;
+	t_vector	right;
+	t_vector	up;
+	t_vector	up_guess;
+	t_vector	world_change;
+
+	forward = normalize_return(rt->camera.normalized);
+	up_guess = (t_vector){0, 1, 0};
+	if (fabs(dot_product(forward, up_guess)) > 0.99)
+		up_guess = (t_vector){1, 0, 0};
+	right = normalize_return(cross_product(up_guess, forward));
+	up = cross_product(forward, right);
+	world_change = vec_add(vec_add(vec_mul_num(right, change.x), vec_mul_num(up, change.y)), vec_mul_num(forward, change.z));
+
 	if (rt->obj_sel == OBJ_SEL)
-		rt->objects[rt->obj_index].coords = vec_add(rt->objects[rt->obj_index].coords, change);
+		rt->objects[rt->obj_index].coords = vec_add(rt->objects[rt->obj_index].coords, world_change);
 	else if (rt->obj_sel == LIGHT_SEL)
-		rt->light.coords = vec_add(rt->light.coords, change);
+		rt->light.coords = vec_add(rt->light.coords, world_change);
 	else if (rt->obj_sel == CAMERA_SEL)
-		rt->camera.coords = vec_add(rt->camera.coords, change);
-} //try to put sphere to the side
+		rt->camera.coords = vec_add(rt->camera.coords, world_change);
+}

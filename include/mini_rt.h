@@ -86,6 +86,8 @@ float		dot(t_vector vec1, t_vector vec2);
 t_vector	revert_vector(t_vector vec);
 float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
+float		dot_product(t_vector a, t_vector b);
+t_vector	cross_product(t_vector a, t_vector b);
 t_vector	smooth_pixel(int x, int y, t_rt *rt);
 
 //Intersection
@@ -127,6 +129,7 @@ float		random_float_fast(unsigned int *seed);
 void		normalize(t_vector *vector_to_norm);
 void		normilize_object(t_obj *object, t_vector *nhit,
 				t_vector *phit, t_hit cyl_hit);
+t_vector	normalize_return(t_vector vector_to_norm);
 void		compute_quadratic_roots(t_cyl_inter *inter_obj, float b);
 void		calc_discriminant(t_cyl_inter *inter_obj, t_obj cylinder);
 float		calc_cap_offset(t_obj cylinder, int cap);
