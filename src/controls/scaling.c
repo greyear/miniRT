@@ -26,7 +26,7 @@ void	scale(t_rt *rt, mlx_key_data_t keydata, t_vector change) //set limits?
 		{
 			if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
 				rt->objects[rt->obj_index].height = float_add(rt->objects[rt->obj_index].height, change.y);
-			if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
+			else if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 				rt->objects[rt->obj_index].radius = float_add(rt->objects[rt->obj_index].radius, change.x / 2);
 		}
 	}

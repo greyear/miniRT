@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalization.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:02:43 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:54:24 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:21:28 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ inline void	normalize(t_vector *vector_to_norm)
 	normalized = length2(*vector_to_norm);
 	if (normalized > 0)
 	{
-		inv_nor = 1 / sqrt(normalized);
+		inv_nor = 1 / sqrt(normalized); //what if 0?
 		vector_to_norm->x *= inv_nor;
 		vector_to_norm->y *= inv_nor;
 		vector_to_norm->z *= inv_nor;

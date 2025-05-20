@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_non_figures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:44:28 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/18 15:53:42 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:14:09 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

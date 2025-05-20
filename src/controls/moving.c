@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:22:38 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/19 15:22:41 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:54:56 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,4 @@ void	move(t_rt *rt, t_vector change) //set limits?
 		rt->light.coords = vec_add(rt->light.coords, change);
 	else if (rt->obj_sel == CAMERA_SEL)
 		rt->camera.coords = vec_add(rt->camera.coords, change);
-}
+} //try to put sphere to the side

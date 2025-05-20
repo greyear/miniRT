@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:59:12 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:05:22 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int	main(int argc, char *argv[])
 		clean_struct(&rt);
 		return (FAILURE);
 	}
-	print_scene_info(&rt);
-	size_t	time = get_time(); // delete me
+	//print_scene_info(&rt);
+	//size_t	time = get_time(); // delete me
 	render(&rt);
-	printf("%zu\n", get_time() - time); // delete me
+	//printf("%zu\n", get_time() - time); // delete me
 	draw_figure(&rt);
 	clean_struct(&rt);
 	return (SUCCESS);

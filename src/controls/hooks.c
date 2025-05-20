@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:45:40 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:56:17 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:45:34 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	keys_hook(mlx_key_data_t keydata, void *obj)
 		transform(rt, keydata, (t_vector) {0,0,-1}); //or better vice versa?
 	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		transform(rt, keydata, (t_vector) {0,0,1});
-
 }
 
 void	win_resize(int width, int height, void *param)
