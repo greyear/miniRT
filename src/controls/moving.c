@@ -12,7 +12,7 @@
 
 #include "../../include/mini_rt.h"
 
-void	move(t_rt *rt, t_vector change)
+void	move(t_rt *rt, t_vector change) //set limits?
 {
 	if (rt->obj_sel == OBJ_SEL)
 		rt->objects[rt->obj_index].coords = vec_add(rt->objects[rt->obj_index].coords, change);

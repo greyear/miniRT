@@ -101,6 +101,7 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(CONTROLS)/mode_selection.c \
 					$(SRC_DIR)/$(CONTROLS)/obj_selection.c \
 					$(SRC_DIR)/$(CONTROLS)/moving.c \
+					$(SRC_DIR)/$(CONTROLS)/scaling.c \
 					\
 					$(SRC_DIR)/$(UTILS)/cylinder_caps.c \
 					$(SRC_DIR)/$(UTILS)/math_utils.c \

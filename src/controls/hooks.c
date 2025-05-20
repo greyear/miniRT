@@ -30,10 +30,13 @@ void	main_hook(void *obj)
 }
 
 //instructions what to change
-static void	transform(t_rt *rt, t_vector change)
+static void	transform(t_rt *rt, mlx_key_data_t keydata, t_vector change)
 {
 	if (rt->mode == MOVE)
-		move(rt, change);0
+		move(rt, change);
+	if (rt->mode == SCALE)
+		scale(rt, keydata, change);
+	rt->needs_render = 1;
 }
 
 void	keys_hook(mlx_key_data_t keydata, void *obj)
@@ -45,7 +48,7 @@ void	keys_hook(mlx_key_data_t keydata, void *obj)
 		mlx_close_window(rt->mlx);
 	if (keydata.key == MLX_KEY_O && keydata.action == MLX_RELEASE
 		&& rt->needs_render == 0)
-		select_objects(rt);
+			select_objects(rt);
 	else if (keydata.key == MLX_KEY_L && keydata.action == MLX_RELEASE
 		&& rt->needs_render == 0)
 		select_light(rt);
@@ -62,17 +65,17 @@ void	keys_hook(mlx_key_data_t keydata, void *obj)
 		&& rt->needs_render == 0)
 		set_scale_mode(rt);
 	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		transform(rt, (t_vector) {-100,0,0});
+		transform(rt, keydata, (t_vector) {-1,0,0});
 	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		transform(rt, (t_vector) {1,0,0});
+		transform(rt, keydata, (t_vector) {1,0,0});
 	else if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
-		transform(rt, (t_vector) {0,1,0});
+		transform(rt, keydata, (t_vector) {0,1,0});
 	else if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
-		transform(rt, (t_vector) {0,-1,0});
+		transform(rt, keydata, (t_vector) {0,-1,0});
 	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		transform(rt, (t_vector) {0,0,-1}); //or better vice versa?
+		transform(rt, keydata, (t_vector) {0,0,-1}); //or better vice versa?
 	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		transform(rt, (t_vector) {0,0,1});
+		transform(rt, keydata, (t_vector) {0,0,1});
 
 }
 
