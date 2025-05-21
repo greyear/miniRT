@@ -23,8 +23,8 @@ int	init_sphere(t_rt *m, char **args)
 	if (init_colors(&(res.color), args[3]))
 		return (FAILURE);
 	res.vec_col = rgb_to_vec(res.color);
-	res.em_color = (t_vector) {0,0,0};
-	res.normalized = (t_vector) { 0.0, 1.0, 0.0};
+	res.em_color = (t_vector){0,0,0};
+	res.normalized = (t_vector){ 0.0, 1.0, 0.0};
 	res.radius = res.diameter / 2;
 	m->objects[m->cur_index] = res;
 	m->cur_index++;
@@ -44,7 +44,7 @@ int	init_plane(t_rt *m, char **args)
 	if (init_colors(&(res.color), args[3]))
 		return (FAILURE);
 	res.vec_col = rgb_to_vec(res.color);
-	res.em_color = (t_vector) {0,0,0};
+	res.em_color = (t_vector){0,0,0};
 	normalize(&res.normalized);
 	m->objects[m->cur_index] = res;
 	m->cur_index++;
@@ -66,7 +66,7 @@ int	init_cylinder(t_rt *m, char **args)
 	if (init_colors(&(res.color), args[5]))
 		return (FAILURE);
 	res.vec_col = rgb_to_vec(res.color);
-	res.em_color = (t_vector) {0,0,0};
+	res.em_color = (t_vector){0,0,0};
 	res.radius = res.diameter / 2;
 	normalize(&res.normalized);
 	m->objects[m->cur_index] = res;

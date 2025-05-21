@@ -33,7 +33,7 @@ t_vector	normalize_return(t_vector vector_to_norm)
 	float		inv_nor;
 	t_vector	res;
 
-	res = (t_vector) {0, 0, 0};
+	res = (t_vector){0, 0, 0};
 	normalized = length2(vector_to_norm);
 	if (normalized > 0)
 	{

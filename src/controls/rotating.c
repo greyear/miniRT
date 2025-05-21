@@ -12,9 +12,10 @@
 
 #include "../../include/mini_rt.h"
 
-static void	rotate_camera(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_vec)
+static void	rotate_camera(t_rt *rt, mlx_key_data_t keydata,
+	t_vector rotation_vec)
 {
-	float angle;
+	float	angle;
 
 	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 	{
@@ -38,7 +39,7 @@ static void	rotate_camera(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_ve
 
 static void	rotate_object(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_vec)
 {
-	float angle;
+	float	angle;
 
 	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 	{

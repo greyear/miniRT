@@ -96,6 +96,7 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(RAYS)/intersect_cylinder.c \
 					$(SRC_DIR)/$(RAYS)/intersection.c \
 					$(SRC_DIR)/$(RAYS)/shadows.c \
+					$(SRC_DIR)/$(RAYS)/products.c \
 					\
 					$(SRC_DIR)/$(CONTROLS)/hooks.c \
 					$(SRC_DIR)/$(CONTROLS)/mode_selection.c \

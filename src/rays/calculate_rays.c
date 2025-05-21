@@ -54,7 +54,7 @@ t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt)
 	object = check_obj_intersection(rt, ray,
 			(t_hit *[2]){&hit_arr[0], &hit_arr[1]}, &tnear);
 	if (!object)
-		return ((t_vector){1, 1, 0.5}); //should there be hardcode?
+		return ((t_vector){1, 1, 0.5});
 	hit_arr[0].phit = vec_add(rayorig, vec_mul_num(raydir, tnear));
 	normilize_object(object, &hit_arr[0].nhit, &hit_arr[0].phit, hit_arr[1]);
 	if (dot(raydir, hit_arr[0].nhit) > 0)
