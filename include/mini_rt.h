@@ -117,6 +117,9 @@ void		set_rotate_mode(t_rt *rt);
 void		set_scale_mode(t_rt *rt);
 void		move(t_rt *rt, t_vector change);
 void		scale(t_rt *rt, mlx_key_data_t keydata, t_vector change);
+void		rotate_x(t_vector *vec, float alpha);
+void		rotate_y(t_vector *vec, float beta);
+void		rotate_z(t_vector *vec, float gamma);
 void		rotate(t_rt *rt, mlx_key_data_t keydata, t_vector change);
 
 //Utils
