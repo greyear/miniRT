@@ -6,17 +6,40 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 14:24:35 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 15:57:59 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:35:22 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
+static bool	set_plane_shadow(t_ray light_ray, t_rt *rt,
+	t_hit *hit_info, t_obj object)
+{
+	float		t;
+	bool		shadow_hit;
+	t_vector	hit_point;
+	t_vector	light_to_hit;
+	t_vector	point_to_hit;
+
+	shadow_hit = false;
+	if (intersect_plane(light_ray, object, &t) && t > BIAS)
+	{
+		hit_point = vec_add(light_ray.orig, vec_mul_num(light_ray.dest, t));
+		light_to_hit = vec_sub(hit_point, rt->light.coords);
+		point_to_hit = vec_sub(hit_point, hit_info->phit);
+		if (dot(light_to_hit, object.normalized)
+			* dot(point_to_hit, object.normalized) < 0)
+		{
+			hit_info->t0 = t;
+			shadow_hit = true;
+		}
+	}
+	return (shadow_hit);
+}
+
 bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 {
 	bool	shadow_hit;
-	float	pl_side_phit;
-	float	pl_side_light;
 
 	shadow_hit = false;
 	if (object.type == SPHERE)
@@ -26,15 +49,7 @@ bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 		shadow_hit = (intersect_cylinder(light_ray, object, hit_info,
 					&hit_info->hit_part) && hit_info->t0 > 0);
 	else if (object.type == PLANE)
-	{
-		pl_side_phit = dot(vec_sub(hit_info->phit, object.coords),
-				object.normalized);
-		pl_side_light = dot(vec_sub(rt->light.coords, object.coords),
-				object.normalized);
-		if (pl_side_phit * pl_side_light < 0.0f)
-			shadow_hit = (intersect_plane(light_ray, object, &hit_info->t0)
-					&& hit_info->t0 > 0);
-	}
+		shadow_hit = set_plane_shadow(light_ray, rt, hit_info, object);
 	return (shadow_hit);
 }
 
