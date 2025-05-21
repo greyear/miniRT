@@ -49,7 +49,7 @@ int	init_light(t_rt *m, char **args)
 	if (init_colors(&(res.color), args[3]))
 		return (FAILURE);
 	res.vec_col = rgb_to_vec(res.color);
-	res.em_color = (t_vector){1,1,1};
+	res.em_color = (t_vector){1, 1, 1};
 	res.diameter = 5.f;
 	m->light = res;
 	return (SUCCESS);
