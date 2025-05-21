@@ -60,13 +60,13 @@ void	rotate(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_vec)
 		{
 			angle = rotation_vec.x / 10;
 			printf("before: %f, %f, %f\n", rt->camera.normalized.x, rt->camera.normalized.y, rt->camera.normalized.z);
-			rotate_x(&(rt->camera.normalized), angle);
+			rotate_y(&(rt->camera.normalized), angle);
 			printf("after: %f, %f, %f\n", rt->camera.normalized.x, rt->camera.normalized.y, rt->camera.normalized.z);
 		}
 		else if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
 		{
 			angle = rotation_vec.y / 10;
-			rotate_y(&(rt->camera.normalized), angle);
+			rotate_x(&(rt->camera.normalized), angle);
 		}
 		else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D)
 		{
