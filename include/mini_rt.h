@@ -104,6 +104,7 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 void		main_hook(void *obj);
 void		keys_hook(mlx_key_data_t keydata, void *obj);
 void		win_resize(int width, int height, void *param);
+void		transform(t_rt *rt, mlx_key_data_t keydata, t_vector change);
 void		select_objects(t_rt *rt);
 void		select_light(t_rt *rt);
 void		select_camera(t_rt *rt);
@@ -143,7 +144,5 @@ t_vector	revert_vector(t_vector vec);
 //Clean
 void		clean_struct(t_rt *rt);
 void		clean_exit(t_rt *rt);
-
-size_t		get_time(void); //deleteme
 
 #endif

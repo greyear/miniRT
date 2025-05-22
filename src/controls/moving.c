@@ -12,7 +12,7 @@
 
 #include "../../include/mini_rt.h"
 
-void	move(t_rt *rt, t_vector change) //limits? //try to push to the side
+void	move(t_rt *rt, t_vector change)
 {
 	t_vector	forward;
 	t_vector	right;
@@ -29,8 +29,10 @@ void	move(t_rt *rt, t_vector change) //limits? //try to push to the side
 	world_change = vec_add(vec_add(vec_mul_num(right, change.x),
 				vec_mul_num(up, change.y)), vec_mul_num(forward, change.z));
 	if (rt->obj_sel == OBJ_SEL)
+	{
 		rt->objects[rt->obj_index].coords
 			= vec_add(rt->objects[rt->obj_index].coords, world_change);
+	}
 	else if (rt->obj_sel == LIGHT_SEL)
 		rt->light.coords = vec_add(rt->light.coords, world_change);
 	else if (rt->obj_sel == CAMERA_SEL)

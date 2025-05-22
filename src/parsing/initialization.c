@@ -85,6 +85,5 @@ int	init(t_rt *m, char *filename)
 		line = get_next_line(m->fd);
 	}
 	close(m->fd);
-	ft_printf(2, "initiated\n"); //delete
 	return (SUCCESS);
 }

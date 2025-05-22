@@ -76,6 +76,5 @@ int	validate_content(t_rt *m)
 	}
 	if (at_least_one_element(m) == FAILURE)
 		return (print_err(NO_ELEM_MSG));
-	ft_printf(2, "validated\n"); //delete
 	return (SUCCESS);
 }

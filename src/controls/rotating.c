@@ -65,12 +65,16 @@ void	rotate(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_vec)
 		if (rt->objects[rt->obj_index].type == SPHERE)
 			return ;
 		if (rt->objects[rt->obj_index].type == CYLINDER)
+		{
 			rotate_object(rt, keydata, rotation_vec);
+		}
 		if (rt->objects[rt->obj_index].type == PLANE)
+		{
 			rotate_object(rt, keydata, rotation_vec);
+		}
 	}
 	else if (rt->obj_sel == LIGHT_SEL)
 		return ;
-	else if (rt->obj_sel == CAMERA_SEL) //what if 0:0:0 as a start?
+	else if (rt->obj_sel == CAMERA_SEL)
 		rotate_camera(rt, keydata, rotation_vec);
 }

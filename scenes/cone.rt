@@ -1,0 +1,24 @@
+R 800 800 blur
+# Ambient Light
+# <intensity: 0-1> <color: red, green, blue>
+A                            0.2         255,255,255
+
+# Camera
+# <coordinates of camera position: x,y,z> <camera view: x,y,z> <pov:x,y,z>
+C   0,0,0         0,0,1   90
+
+# Light
+# <coordinates: x,y,z> <brightness: 0-1> <color:red,green,blue>
+L   -10,3,-5                0.8         	255,255,255
+
+# Sphere
+# <coordinates: x,y,z> <diameter> <color:red,green,blue>
+sp  -2,-1,5             1           255,0,0
+
+# Plane
+# <coordinates: x,y,z> <origin:x,y,z> <color:red,green,blue>
+pl  0,-5,10            0,1,0              200,0,200
+
+# Cone
+# <coordinates: x,y,z>  <orientation: x,y,z> <diameter: >= 0> <height: >= 0> <color:red,green,blue>
+co  0,0,5       1,1,0.9          4      4      0,0,255  checker 0,0,255 1

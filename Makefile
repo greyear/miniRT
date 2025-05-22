@@ -75,8 +75,6 @@ PARS_FILES		=	file_validation.c \
 					init_figures.c \
 					init_non_figures.c \
 
-
-					
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c
 
@@ -100,6 +98,7 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(RAYS)/products.c \
 					\
 					$(SRC_DIR)/$(CONTROLS)/hooks.c \
+					$(SRC_DIR)/$(CONTROLS)/keys_hooks.c \
 					$(SRC_DIR)/$(CONTROLS)/mode_selection.c \
 					$(SRC_DIR)/$(CONTROLS)/obj_selection.c \
 					$(SRC_DIR)/$(CONTROLS)/moving.c \
