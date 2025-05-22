@@ -12,27 +12,26 @@
 
 #include "../../include/mini_rt.h"
 
-static float vec_length(t_vector v)
+static bool	set_plane_shadow(t_ray light_ray, t_rt *rt,
+	t_hit *hit_info, t_obj object)
 {
-	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+	float	t;
+	float	dist_to_light;
+
+	if (intersect_plane(light_ray, object, &t) && t > BIAS)
+	{
+		dist_to_light = vec_length(vec_sub(rt->light.coords, light_ray.orig));
+		if (t < dist_to_light)
+		{
+			hit_info->t0 = t;
+			return (true);
+		}
+	}
+	return (false);
 }
 
-static bool set_plane_shadow(t_ray light_ray, t_rt *rt, t_hit *hit_info, t_obj object)
-{
-    float t;
-    if (intersect_plane(light_ray, object, &t) && t > BIAS)
-    {
-        float dist_to_light = vec_length(vec_sub(rt->light.coords, light_ray.orig));
-        if (t < dist_to_light)
-        {
-            hit_info->t0 = t;
-            return true;
-        }
-    }
-    return false;
-}
-
-bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
+static bool	check_shadow(t_rt *rt, t_obj object,
+	t_ray light_ray, t_hit *hit_info)
 {
 	bool	shadow_hit;
 
@@ -46,6 +45,22 @@ bool	check_shadow(t_rt *rt, t_obj object, t_ray light_ray, t_hit *hit_info)
 	else if (object.type == PLANE)
 		shadow_hit = set_plane_shadow(light_ray, rt, hit_info, object);
 	return (shadow_hit);
+}
+
+static bool	is_correct_distance(t_rt *rt, t_hit *hit_info, t_hit tmp_hit)
+{
+	t_vector	to_light;
+	float		dist_to_light;
+	t_vector	hit_to_obj;
+	float		dist_to_obj;
+
+	to_light = vec_sub(rt->light.coords, hit_info->phit);
+	dist_to_light = vec_length(to_light);
+	hit_to_obj = vec_sub(tmp_hit.phit, hit_info->phit);
+	dist_to_obj = vec_length(hit_to_obj);
+	if (dist_to_obj > dist_to_light + EPSILON)
+		return (false);
+	return (true);
 }
 
 t_vector	calculate_shadows(t_rt *rt, t_obj *object,
@@ -65,15 +80,8 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 		if (&rt->objects[i] == object)
 			continue ;
 		tmp_hit.t0 = 0;
-
-		t_vector to_light = vec_sub(rt->light.coords, hit_info->phit);
-		float dist_to_light = vec_length(to_light);
-		t_vector hit_to_obj = vec_sub(tmp_hit.phit, hit_info->phit);
-		float dist_to_obj = vec_length(hit_to_obj);
-
-		if (dist_to_obj > dist_to_light + EPSILON)
-			continue;
-
+		if (!is_correct_distance(rt, hit_info, tmp_hit))
+			continue ;
 		shadow_hit = check_shadow(rt, rt->objects[i], light_ray, &tmp_hit);
 		if (shadow_hit && tmp_hit.t0 > BIAS)
 		{

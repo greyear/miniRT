@@ -111,7 +111,8 @@ SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 					$(SRC_DIR)/$(UTILS)/math_utils.c \
 					$(SRC_DIR)/$(UTILS)/normalization.c \
 					$(SRC_DIR)/$(UTILS)/ray_utils.c \
-					$(SRC_DIR)/$(UTILS)/vec_utils.c
+					$(SRC_DIR)/$(UTILS)/vec_utils.c \
+					$(SRC_DIR)/$(UTILS)/vec_utils2.c
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

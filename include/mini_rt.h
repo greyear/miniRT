@@ -81,9 +81,6 @@ void		draw_gui(t_rt *rt);
 
 //Rays
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
-float		length2(t_vector vec);
-float		dot(t_vector vec1, t_vector vec2);
-t_vector	revert_vector(t_vector vec);
 float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
 float		dot_product(t_vector a, t_vector b);
@@ -100,8 +97,6 @@ t_obj		*check_obj_intersection(t_rt *rt, t_ray ray,
 				t_hit *hit_arr[2], float *tnear);
 
 //Shadows
-bool		check_shadow(t_rt *rt, t_obj object,
-				t_ray light_ray, t_hit *hit_info);
 t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 				t_hit *hit_info, t_ray light_ray);
 
@@ -140,6 +135,10 @@ void		calc_hit_part(int cap, int *hit_part);
 t_vector	calc_cap_center(t_obj cylinder, int cap);
 void		check_caps_intersection(t_obj cylinder, t_hit *hit_info,
 				t_ray ray, int *hit_part);
+float		vec_length(t_vector v);
+float		length2(t_vector vec);
+float		dot(t_vector vec1, t_vector vec2);
+t_vector	revert_vector(t_vector vec);
 
 //Clean
 void		clean_struct(t_rt *rt);

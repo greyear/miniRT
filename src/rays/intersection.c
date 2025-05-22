@@ -25,6 +25,16 @@ static void	check_nearest_intersection(t_hit *hit_arr[2], t_obj **object,
 	}
 }
 
+static void	set_hit_interval(t_hit *hit_info, float tca,
+	float radius2, float d2)
+{
+	float	thc;
+
+	thc = sqrt(radius2 - d2);
+	hit_info->t0 = tca - thc;
+	hit_info->t1 = tca + thc;
+}
+
 t_obj	*check_obj_intersection(t_rt *rt, t_ray ray,
 	t_hit *hit_arr[2], float *tnear)
 {
@@ -49,16 +59,6 @@ t_obj	*check_obj_intersection(t_rt *rt, t_ray ray,
 		i++;
 	}
 	return (object);
-}
-
-static void	set_hit_interval(t_hit *hit_info, float tca,
-	float radius2, float d2)
-{
-	float	thc;
-
-	thc = sqrt(radius2 - d2);
-	hit_info->t0 = tca - thc;
-	hit_info->t1 = tca + thc;
 }
 
 bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit *hit_info)
