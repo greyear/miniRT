@@ -29,7 +29,6 @@ void	main_hook(void *obj)
 		draw_gui(rt);
 }
 
-//instructions what to change
 static void	transform(t_rt *rt, mlx_key_data_t keydata, t_vector change)
 {
 	if (rt->mode == MOVE)

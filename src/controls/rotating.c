@@ -20,9 +20,7 @@ static void	rotate_camera(t_rt *rt, mlx_key_data_t keydata,
 	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 	{
 		angle = rotation_vec.x / 10;
-		//printf("before: %f, %f, %f\n", rt->camera.normalized.x, rt->camera.normalized.y, rt->camera.normalized.z);
 		rotate_y(&(rt->camera.normalized), angle);
-		//printf("after: %f, %f, %f\n", rt->camera.normalized.x, rt->camera.normalized.y, rt->camera.normalized.z);
 	}
 	else if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
 	{
@@ -37,16 +35,15 @@ static void	rotate_camera(t_rt *rt, mlx_key_data_t keydata,
 	normalize(&rt->camera.normalized);
 }
 
-static void	rotate_object(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_vec)
+static void	rotate_object(t_rt *rt, mlx_key_data_t keydata,
+	t_vector rotation_vec)
 {
 	float	angle;
 
 	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 	{
 		angle = rotation_vec.x / 10;
-		//printf("before: %f, %f, %f\n", rt->objects[rt->obj_index].normalized.x, rt->objects[rt->obj_index].normalized.y, rt->objects[rt->obj_index].normalized.z);
 		rotate_y(&(rt->objects[rt->obj_index].normalized), angle);
-		//printf("after: %f, %f, %f\n", rt->objects[rt->obj_index].normalized.x, rt->objects[rt->obj_index].normalized.y, rt->objects[rt->obj_index].normalized.z);
 	}
 	else if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
 	{
@@ -61,7 +58,6 @@ static void	rotate_object(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_ve
 	normalize(&rt->objects[rt->obj_index].normalized);
 }
 
-//again 3 axes: left/right for x, up/down for y, a/d for z
 void	rotate(t_rt *rt, mlx_key_data_t keydata, t_vector rotation_vec)
 {
 	if (rt->obj_sel == OBJ_SEL)

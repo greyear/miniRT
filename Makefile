@@ -40,7 +40,7 @@ UTILS			=	utils
 LIBFT_INC		=	$(LIBFT_DIR)/include
 MLX_INC			=	$(MLX_DIR)/include
 INCLUDE 		=	./include/
-HEADERS			=	-I$(LIBFT_INC)/libft.h -I$(LIBFT_INC)/get_next_line.h -I$(MLX_INC)
+HEADERS			=	-I$(LIBFT_INC) -I$(MLX_INC)
 
 #Libraries
 LIBFT			=	$(LIBFT_DIR)/libft.a

@@ -37,14 +37,6 @@ static t_rt	init_struct(void)
 	return (rt);
 }
 
-size_t	get_time(void) //deleteme
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
 void	init_minirt(t_rt *rt)
 {
 	rt->e_names[0] = "A";
@@ -57,7 +49,7 @@ void	init_minirt(t_rt *rt)
 
 int	main(int argc, char *argv[])
 {
-	t_rt		rt;
+	t_rt	rt;
 
 	rt = init_struct();
 	init_minirt(&rt);
@@ -76,10 +68,7 @@ int	main(int argc, char *argv[])
 		clean_struct(&rt);
 		return (FAILURE);
 	}
-	//print_scene_info(&rt);
-	//size_t	time = get_time(); // delete me
 	render(&rt);
-	//printf("%zu\n", get_time() - time); // delete me
 	draw_figure(&rt);
 	clean_struct(&rt);
 	return (SUCCESS);
