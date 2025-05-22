@@ -96,7 +96,7 @@ bool	intersect_plane(t_ray ray, t_obj plane, float *t)
 	{
 		diff = vec_sub(plane.coords, ray.orig);
 		temp_t = dot(diff, plane.normalized) / denom;
-		if (temp_t >= 0)
+		if (temp_t > BIAS)
 		{
 			*t = temp_t;
 			return (true);
