@@ -34,7 +34,7 @@ static void	check_valid_body_hits(t_cyl_inter *inter_obj, t_ray ray,
 		if (inter_obj->t_candidate < 0.0f)
 			continue ;
 		inter_obj->intersection = vec_add(ray.orig,
-				vec_mul_num(ray.dest, inter_obj->t_candidate));
+				vec_mul_num(ray.dir, inter_obj->t_candidate));
 		inter_obj->to_point = vec_sub(inter_obj->intersection, cylinder.coords);
 		height = dot(inter_obj->to_point, cylinder.normalized);
 		if (height >= 0.0f && height <= cylinder.height
@@ -55,8 +55,8 @@ bool	intersect_cylinder(t_ray ray, t_obj cylinder,
 	*hit_part = -1;
 	inter_obj.hit_part = hit_part;
 	inter_obj.oc = vec_sub(ray.orig, cylinder.coords);
-	inter_obj.dir_dot_axis = dot(ray.dest, cylinder.normalized);
-	inter_obj.ray_perp_dir = vec_sub(ray.dest,
+	inter_obj.dir_dot_axis = dot(ray.dir, cylinder.normalized);
+	inter_obj.ray_perp_dir = vec_sub(ray.dir,
 			vec_mul_num(cylinder.normalized, inter_obj.dir_dot_axis));
 	inter_obj.ray_perp_len = dot(inter_obj.ray_perp_dir,
 			inter_obj.ray_perp_dir);

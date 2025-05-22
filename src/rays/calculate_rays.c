@@ -19,14 +19,14 @@ static t_light_calc	calculate_lights(t_rt *rt, t_obj *object, t_hit *hit_arr)
 	t_vector		light_contribution;
 
 	lights.transmission = (t_vector){1, 1, 1};
-	lights.light_ray.dest = vec_sub(rt->light.coords,
+	lights.light_ray.dir = vec_sub(rt->light.coords,
 			hit_arr[0].phit);
-	normalize(&lights.light_ray.dest);
+	normalize(&lights.light_ray.dir);
 	lights.light_ray.orig = (t_vector){0, 0, 0};
-	light_ray = (t_ray){lights.light_ray.orig, lights.light_ray.dest};
+	light_ray = (t_ray){lights.light_ray.orig, lights.light_ray.dir};
 	lights.transmission = calculate_shadows(rt, object, &hit_arr[0], light_ray);
 	lights.light_intens = fmax(0, dot(hit_arr[0].nhit,
-				lights.light_ray.dest));
+				lights.light_ray.dir));
 	light_contribution = vec_mul(object->vec_col,
 			vec_mul_num(rt->light.em_color, lights.light_intens));
 	light_contribution = vec_mul(light_contribution, lights.transmission);

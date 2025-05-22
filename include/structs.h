@@ -145,7 +145,7 @@ typedef struct s_camera
 typedef struct s_ray
 {
 	t_vector	orig;
-	t_vector	dest; // rename to dir
+	t_vector	dir;
 }	t_ray;
 
 typedef struct s_hit
