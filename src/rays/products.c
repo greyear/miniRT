@@ -12,13 +12,12 @@
 
 #include "../../include/mini_rt.h"
 
-//скалярное произведение двух векторов
-float	dot_product(t_vector a, t_vector b)
+inline float	dot_product(t_vector a, t_vector b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-t_vector	cross_product(t_vector a, t_vector b)
+inline t_vector	cross_product(t_vector a, t_vector b)
 {
 	t_vector	res;
 

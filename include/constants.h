@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:50 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/18 15:51:39 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:58:19 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define CONSTANTS_H
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 2000
+#  define WIN_WIDTH 800
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1000
+#  define WIN_HEIGHT 500
 # endif
 
 # ifndef HEX_LEN
