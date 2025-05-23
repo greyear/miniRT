@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalization.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:02:43 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:54:24 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:21:28 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ inline void	normalize(t_vector *vector_to_norm)
 		vector_to_norm->y *= inv_nor;
 		vector_to_norm->z *= inv_nor;
 	}
+}
+
+t_vector	normalize_return(t_vector vector_to_norm)
+{
+	float		normalized;
+	float		inv_nor;
+	t_vector	res;
+
+	res = (t_vector){0, 0, 0};
+	normalized = length2(vector_to_norm);
+	if (normalized > 0)
+	{
+		inv_nor = 1 / sqrt(normalized);
+		res.x = vector_to_norm.x * inv_nor;
+		res.y = vector_to_norm.y * inv_nor;
+		res.z = vector_to_norm.z * inv_nor;
+	}
+	return (res);
 }
 
 static void	normalize_cylinder(t_obj *object, t_hit cyl_hit,

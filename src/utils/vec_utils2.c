@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_utils.c                                        :+:      :+:    :+:   */
+/*   vec_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 11:25:02 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:54:35 by msavelie         ###   ########.fr       */
+/*   Created: 2025/05/22 19:21:35 by msavelie          #+#    #+#             */
+/*   Updated: 2025/05/22 19:22:45 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-inline float	lerp(float a, float b, float mix)
+inline float	vec_length(t_vector v)
 {
-	return (b * mix + a * (1 - mix));
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-inline void	clamp(t_vector *pixel)
+inline float	length2(t_vector vec)
 {
-	if (pixel->x < 0)
-		pixel->x = 0;
-	else if (pixel->x > 1)
-		pixel->x = 1;
-	if (pixel->y < 0)
-		pixel->y = 0;
-	else if (pixel->y > 1)
-		pixel->y = 1;
-	if (pixel->z < 0)
-		pixel->z = 0;
-	else if (pixel->z > 1)
-		pixel->z = 1;
+	return (pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
+}
+
+inline t_vector	revert_vector(t_vector vec)
+{
+	return ((t_vector){-vec.x, -vec.y, -vec.z});
+}
+
+inline float	dot(t_vector vec1, t_vector vec2)
+{
+	return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
 }

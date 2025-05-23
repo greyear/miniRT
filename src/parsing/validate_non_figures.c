@@ -38,7 +38,7 @@ int	validate_camera(char **args)
 
 int	validate_light(char **args)
 {
-	if (ft_array_len(args) != 3) //including color, but what if we have no?
+	if (ft_array_len(args) != 3)
 		return (print_err(LIGHT_ARGS));
 	if (validate_coordinates(args[0], "Light"))
 		return (FAILURE);

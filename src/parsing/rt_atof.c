@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
-#include <float.h>
 
 static int	atof_sign(const char **str)
 {

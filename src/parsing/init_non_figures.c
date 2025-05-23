@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:44:28 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/18 15:53:42 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:21:02 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	init_ambient(t_rt *m, char **args)
 	if (init_colors(&(res.color), args[2]))
 		return (FAILURE);
 	res.vec_col = rgb_to_vec(res.color);
+	res.vec_col = vec_mul_num(res.vec_col, res.ratio);
 	m->amb_light = res;
 	return (SUCCESS);
 }
@@ -49,7 +50,8 @@ int	init_light(t_rt *m, char **args)
 	if (init_colors(&(res.color), args[3]))
 		return (FAILURE);
 	res.vec_col = rgb_to_vec(res.color);
-	res.em_color = (t_vector) {1,1,1};
+	res.em_color = (t_vector){1, 1, 1};
+	res.em_color = vec_mul_num(res.em_color, res.ratio);
 	res.diameter = 5.f;
 	m->light = res;
 	return (SUCCESS);

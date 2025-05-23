@@ -28,19 +28,20 @@ LIBFT_DIR		= 	libft
 MLX_DIR			=	MLX42
 SRC_DIR 		=	src
 OBJ_DIR 		=	obj
-DRAWING			=	drawing
-RAYS			=	rays
-CONTROLS		=	controls
+
 PARS_DIR		=	parsing
+DRAWING_DIR		=	drawing
+RAYS_DIR		=	rays
+CONTROLS_DIR	=	controls
 ERR_DIR			=	errors
 CLEAN_DIR		=	clean
-UTILS			=	utils
+UTILS_DIR		=	utils
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
 MLX_INC			=	$(MLX_DIR)/include
 INCLUDE 		=	./include/
-HEADERS			=	-I$(LIBFT_INC)/libft.h -I$(LIBFT_INC)/get_next_line.h -I$(MLX_INC)
+HEADERS			=	-I$(LIBFT_INC) -I$(MLX_INC)
 
 #Libraries
 LIBFT			=	$(LIBFT_DIR)/libft.a
@@ -65,7 +66,7 @@ PARS_FILES		=	file_validation.c \
 					vectors.c \
 					ratios.c \
 					coordinates.c \
-					FOV.c \
+					fov.c \
 					diameter_height.c \
 					pre_aton.c \
 					rt_atoi.c \
@@ -73,39 +74,44 @@ PARS_FILES		=	file_validation.c \
 					allocation.c \
 					initialization.c \
 					init_figures.c \
-					init_non_figures.c \
-					print_for_testing.c
-#delete last one!
-					
+					init_non_figures.c
+DRAWING_FILES	=	calculate_colors.c \
+					draw_figure.c \
+					draw_gui.c
+RAYS_FILES		=	anti_aliasing.c \
+					calculate_rays.c \
+					hits.c \
+					intersect_cylinder.c \
+					intersection.c \
+					shadows.c \
+					products.c
+CONTROLS_FILES	=	hooks.c \
+					keys_hooks.c \
+					mode_selection.c \
+					obj_selection.c \
+					moving.c \
+					scaling.c \
+					rotating.c \
+					rotate_axes.c
 CLEAN_FILES		=	struct_cleaning.c
 ERR_FILES		=	print_error.c
+UTILS_FILES		=	cylinder_caps.c \
+					math_utils.c \
+					normalization.c \
+					ray_utils.c \
+					vec_utils.c \
+					vec_utils2.c
 
 SRC_FILES		=	$(addprefix $(PARS_DIR)/, $(PARS_FILES)) \
+					$(addprefix $(DRAWING_DIR)/, $(DRAWING_FILES)) \
+					$(addprefix $(RAYS_DIR)/, $(RAYS_FILES)) \
+					$(addprefix $(CONTROLS_DIR)/, $(CONTROLS_FILES)) \
 					$(addprefix $(CLEAN_DIR)/, $(CLEAN_FILES)) \
 					$(addprefix $(ERR_DIR)/, $(ERR_FILES)) \
+					$(addprefix $(UTILS_DIR)/, $(UTILS_FILES)) \
+					main.c
 
-SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
-					$(SRC_DIR)/main.c \
-					$(SRC_DIR)/$(DRAWING)/calculate_colors.c \
-         			$(SRC_DIR)/$(DRAWING)/draw_figure.c \
-					$(SRC_DIR)/$(DRAWING)/draw_gui.c \
-					\
-					$(SRC_DIR)/$(RAYS)/anti_aliasing.c \
-					$(SRC_DIR)/$(RAYS)/calculate_rays.c \
-					$(SRC_DIR)/$(RAYS)/hits.c \
-					$(SRC_DIR)/$(RAYS)/intersect_cylinder.c \
-					$(SRC_DIR)/$(RAYS)/intersection.c \
-					$(SRC_DIR)/$(RAYS)/shadows.c \
-					\
-					$(SRC_DIR)/$(CONTROLS)/hooks.c \
-					$(SRC_DIR)/$(CONTROLS)/mode_selection.c \
-					$(SRC_DIR)/$(CONTROLS)/obj_selection.c \
-					\
-					$(SRC_DIR)/$(UTILS)/cylinder_caps.c \
-					$(SRC_DIR)/$(UTILS)/math_utils.c \
-					$(SRC_DIR)/$(UTILS)/normalization.c \
-					$(SRC_DIR)/$(UTILS)/ray_utils.c \
-					$(SRC_DIR)/$(UTILS)/vec_utils.c 
+SRC				=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 # Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

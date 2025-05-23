@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/mini_rt.h"
+#include "include/mini_rt.h"
 
 void print_vector(const char *name, t_vector v) {
 	printf("%s: (%.2f, %.2f, %.2f)\n", name, v.x, v.y, v.z);

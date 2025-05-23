@@ -1,0 +1,87 @@
+# Viewport 
+# <height: 200-2000>
+# <width: 200-2000>
+# optional: <blur>
+R   1000    800
+
+# Ambient Light
+# <intensity: 0-1>
+# <color: red, green, blue 0-255>
+A   0.5     255,255,255
+
+# Camera
+# <coordinates of camera position: x,y,z (-1000000, 1000000)>
+# <camera view: x,y,z (-1000000, 1000000), error when x,y,z 0,0,0>
+# <pov:x,y,z 0-180>
+C   0,0,0   0,0,1   90
+
+# Light
+# <coordinates: x,y,z (-1000000, 1000000)>
+# <brightness: 0-1>
+# <color:red,green,blue 0-255>
+l   0,9.99999,0     0.3     255,255,255
+l   10,10,0         0.3     255,255,255
+
+# Sphere
+# <coordinates: x,y,z (-1000000, 1000000)>
+# <diameter 0-1000000>
+# <color:red,green,blue 0-255>
+# [optional]
+# "checker"
+# <color:red,green,blue 0-255>
+# <quantity 0-1000>
+# [optional]
+# "bump"
+# <texture with .png extension>
+sp  -3,0,5      2       255,255,0       bump textures/mars.png
+sp  3,0,5       2       255,255,255     bump textures/earth.png
+sp  2,-1.5,3    0.5     255,255,255     bump textures/txr2.png
+sp  1,-1.5,3    0.5     255,255,255     bump textures/txr2.png
+sp  0,-1.5,3    0.5     255,255,255     checker 0,0,0 2
+sp  -1,-1.5,3   0.5     255,255,255     bump textures/txr2.png
+sp  -2,-1.5,3   0.5     255,255,255     bump textures/txr2.png
+
+# Plane 
+# <coordinates: x,y,z (-1000000, 1000000)>
+# <origin:x,y,z (-1000000, 1000000), error when x,y,z 0,0,0>
+# <color:red,green,blue 0-255>
+# [optional]
+# "checker"
+# <color:red,green,blue 0-255>
+# <checker element size 0-1000000>
+# [optional]
+# "bump"
+# <texture with .png extension>
+pl  0,-2,10     0,1,0   0,0,250     bump textures/water.png
+pl  0,10,0      0,1,0   0,250,0     bump textures/nightsky.png
+
+# Cylinder
+# <coordinates: x,y,z (-1000000, 1000000)>
+# <orientation: x,y,z (-1000000, 1000000), error when x,y,z 0,0,0>
+# <diameter: 0 - 1000000>
+# <height: 0 - 1000000>
+# <color:red,green,blue 0-255>
+# [optional]
+# "checker"
+# <color:red,green,blue 0-255>
+# <quantity 0-1000>
+# [optional]
+# "bump"
+# <texture with .png extension>
+cy  0,1,10      0,1,0   1   4   255,255,255     bump    textures/comet.png
+
+# Cone
+# <coordinates: x,y,z (-1000000, 1000000)>
+# <orientation: x,y,z (-1000000, 1000000), error when x,y,z 0,0,0>
+# <diameter: 0 - 1000000>
+# <height: 0 - 1000000>
+# <color:red,green,blue 0-255>
+# [optional]
+# "checker"
+# <color:red,green,blue 0-255>
+# <quantity 0-1000>
+# [optional]
+# "bump"
+# <texture with .png extension>
+co  1.5,0,10    0,1,0   1   2   255,255,255     checker     0,0,0   10
+co  -1.5,0,10   0,1,0   1   2   255,255,255     checker     0,0,0   10

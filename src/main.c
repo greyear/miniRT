@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:35:19 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:59:12 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:05:22 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,7 @@ static t_rt	init_struct(void)
 	return (rt);
 }
 
-size_t	get_time(void) //deleteme
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-void	init_minirt(t_rt *rt)
+static void	init_e_names(t_rt *rt)
 {
 	rt->e_names[0] = "A";
 	rt->e_names[1] = "C";
@@ -57,10 +49,10 @@ void	init_minirt(t_rt *rt)
 
 int	main(int argc, char *argv[])
 {
-	t_rt		rt;
+	t_rt	rt;
 
 	rt = init_struct();
-	init_minirt(&rt);
+	init_e_names(&rt);
 	if (validation(&rt, argc, argv))
 	{
 		clean_struct(&rt);
@@ -76,10 +68,7 @@ int	main(int argc, char *argv[])
 		clean_struct(&rt);
 		return (FAILURE);
 	}
-	print_scene_info(&rt);
-	size_t	time = get_time(); // delete me
 	render(&rt);
-	printf("%zu\n", get_time() - time); // delete me
 	draw_figure(&rt);
 	clean_struct(&rt);
 	return (SUCCESS);

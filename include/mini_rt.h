@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 17:01:56 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:03:24 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <string.h> //strerror
 # include <dirent.h> 
 # include <math.h>
+# include <float.h>
 
 # include <sys/time.h> // deleteme
 
@@ -81,11 +82,10 @@ void		draw_gui(t_rt *rt);
 
 //Rays
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
-float		length2(t_vector vec);
-float		dot(t_vector vec1, t_vector vec2);
-t_vector	revert_vector(t_vector vec);
 float		lerp(float a, float b, float mix);
 void		clamp(t_vector *pixel);
+float		dot_product(t_vector a, t_vector b);
+t_vector	cross_product(t_vector a, t_vector b);
 t_vector	smooth_pixel(int x, int y, t_rt *rt);
 
 //Intersection
@@ -98,23 +98,28 @@ t_obj		*check_obj_intersection(t_rt *rt, t_ray ray,
 				t_hit *hit_arr[2], float *tnear);
 
 //Shadows
-bool		check_shadow(t_rt *rt, t_obj object,
-				t_ray light_ray, t_hit *hit_info);
 t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 				t_hit *hit_info, t_ray light_ray);
 
-//hooks
+//Hooks
 void		main_hook(void *obj);
 void		keys_hook(mlx_key_data_t keydata, void *obj);
 void		win_resize(int width, int height, void *param);
+void		transform(t_rt *rt, mlx_key_data_t keydata, t_vector change);
 void		select_objects(t_rt *rt);
 void		select_light(t_rt *rt);
 void		select_camera(t_rt *rt);
 void		set_move_mode(t_rt *rt);
 void		set_rotate_mode(t_rt *rt);
 void		set_scale_mode(t_rt *rt);
+void		move(t_rt *rt, t_vector change);
+void		scale(t_rt *rt, mlx_key_data_t keydata, t_vector change);
+void		rotate_x(t_vector *vec, float alpha);
+void		rotate_y(t_vector *vec, float beta);
+void		rotate_z(t_vector *vec, float gamma);
+void		rotate(t_rt *rt, mlx_key_data_t keydata, t_vector change);
 
-//utils
+//Utils
 t_vector	vec_add(t_vector vec1, t_vector vec2);
 t_vector	vec_sub(t_vector vec1, t_vector vec2);
 t_vector	vec_mul(t_vector vec1, t_vector vec2);
@@ -124,6 +129,7 @@ float		random_float_fast(unsigned int *seed);
 void		normalize(t_vector *vector_to_norm);
 void		normilize_object(t_obj *object, t_vector *nhit,
 				t_vector *phit, t_hit cyl_hit);
+t_vector	normalize_return(t_vector vector_to_norm);
 void		compute_quadratic_roots(t_cyl_inter *inter_obj, float b);
 void		calc_discriminant(t_cyl_inter *inter_obj, t_obj cylinder);
 float		calc_cap_offset(t_obj cylinder, int cap);
@@ -131,11 +137,13 @@ void		calc_hit_part(int cap, int *hit_part);
 t_vector	calc_cap_center(t_obj cylinder, int cap);
 void		check_caps_intersection(t_obj cylinder, t_hit *hit_info,
 				t_ray ray, int *hit_part);
+float		vec_length(t_vector v);
+float		length2(t_vector vec);
+float		dot(t_vector vec1, t_vector vec2);
+t_vector	revert_vector(t_vector vec);
 
-//clean
+//Clean
 void		clean_struct(t_rt *rt);
 void		clean_exit(t_rt *rt);
-
-size_t		get_time(void); //deleteme
 
 #endif
