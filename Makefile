@@ -52,6 +52,11 @@ CC 				=	cc
 CFLAGS 			=	-flto -march=native -mtune=native -fomit-frame-pointer -DNDEBUG -Wall -Wextra -Werror -O3
 RM				=	rm -f
 
+#delete this
+DEBUG_CFLAGS = -Wall -Wextra -Werror -O0 -g -Wuninitialized
+DEBUG: CFLAGS = $(DEBUG_CFLAGS)
+DEBUG: re
+
 # Source files
 PARS_FILES		=	file_validation.c \
 					set.c \

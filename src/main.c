@@ -16,6 +16,8 @@ void	create_img(t_rt *rt)
 {
 	if (rt->image)
 		free(rt->image);
+	/*printf("Allocating image: %d x %d = %lu bytes\n", rt->width, rt->height,
+        sizeof(t_vector) * rt->width * rt->height); //delete*/
 	rt->image = malloc(rt->width * rt->height * sizeof(t_vector));
 	if (!rt->image)
 		clean_exit(rt);
@@ -37,7 +39,7 @@ static t_rt	init_struct(void)
 	return (rt);
 }
 
-void	init_minirt(t_rt *rt)
+static void	init_e_names(t_rt *rt)
 {
 	rt->e_names[0] = "A";
 	rt->e_names[1] = "C";
@@ -52,7 +54,7 @@ int	main(int argc, char *argv[])
 	t_rt	rt;
 
 	rt = init_struct();
-	init_minirt(&rt);
+	init_e_names(&rt);
 	if (validation(&rt, argc, argv))
 	{
 		clean_struct(&rt);
