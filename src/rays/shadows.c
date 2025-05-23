@@ -56,9 +56,6 @@ static bool	is_correct_distance(t_rt *rt, t_hit *hit_info, t_hit tmp_hit)
 
 	to_light = vec_sub(rt->light.coords, hit_info->phit);
 	dist_to_light = vec_length(to_light);
-	//delete
-	//printf("tmp_hit.phit = (%f, %f, %f)\n", tmp_hit.phit.x, tmp_hit.phit.y, tmp_hit.phit.z);
-	//printf("hit_info->phit = (%f, %f, %f)\n", hit_info->phit.x, hit_info->phit.y, hit_info->phit.z);
 	hit_to_obj = vec_sub(tmp_hit.phit, hit_info->phit);
 	dist_to_obj = vec_length(hit_to_obj);
 	if (dist_to_obj > dist_to_light + EPSILON)
@@ -83,7 +80,6 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 		if (&rt->objects[i] == object)
 			continue ;
 		tmp_hit = (t_hit){0};
-		//tmp_hit.t0 = 0; to fix conditional jumps!
 		if (!is_correct_distance(rt, hit_info, tmp_hit))
 			continue ;
 		shadow_hit = check_shadow(rt, rt->objects[i], light_ray, &tmp_hit);

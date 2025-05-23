@@ -22,6 +22,7 @@
 # include <string.h> //strerror
 # include <dirent.h> 
 # include <math.h>
+# include <float.h>
 
 # include <sys/time.h> // deleteme
 

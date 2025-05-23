@@ -23,7 +23,7 @@ static float	float_add(float fl1, float fl2)
 		return (0.0f);
 }
 
-void	scale(t_rt *rt, mlx_key_data_t keydata, t_vector del) //set limits?
+void	scale(t_rt *rt, mlx_key_data_t keydata, t_vector del)
 {
 	if (rt->obj_sel == OBJ_SEL)
 	{

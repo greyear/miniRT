@@ -16,8 +16,6 @@ void	create_img(t_rt *rt)
 {
 	if (rt->image)
 		free(rt->image);
-	/*printf("Allocating image: %d x %d = %lu bytes\n", rt->width, rt->height,
-        sizeof(t_vector) * rt->width * rt->height); //delete*/
 	rt->image = malloc(rt->width * rt->height * sizeof(t_vector));
 	if (!rt->image)
 		clean_exit(rt);

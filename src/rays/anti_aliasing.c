@@ -71,7 +71,6 @@ t_vector	smooth_pixel(int x, int y, t_rt *rt)
 		raydir = calculate_raydir(x, y, &seed, rt);
 		normalize(&raydir);
 		color = calculate_rays(rt->camera.coords, raydir, rt);
-		//printf("color = (%f, %f, %f)\n", color.x, color.y, color.z); //delete!
 		pixel_color = vec_add(pixel_color, color);
 		s++;
 	}
