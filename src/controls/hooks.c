@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:45:40 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/20 16:45:34 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:55:34 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ void	main_hook(void *obj)
 	if (rt->needs_render == 1)
 	{
 		create_img(rt);
-		mlx_resize_image(rt->mlx_img, rt->width, rt->height);
+		if (!mlx_resize_image(rt->mlx_img, rt->width, rt->height))
+		{
+			mlx_close_window(rt->mlx);
+			return ;
+		}
 		render(rt);
 		draw_pixels(rt);
 		rt->needs_render = 0;
 	}
 	else if (rt->needs_render == 2)
-		draw_gui(rt);
+		if (!draw_gui(rt))
+			mlx_close_window(rt->mlx);
 }
 
 void	transform(t_rt *rt, mlx_key_data_t keydata, t_vector change)
