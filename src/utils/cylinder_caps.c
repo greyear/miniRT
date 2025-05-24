@@ -6,20 +6,20 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:10:08 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:10:43 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:20:19 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-inline float	calc_cap_offset(t_obj cylinder, int cap)
+static inline float	calc_cap_offset(t_obj cylinder, int cap)
 {
 	if (cap == 0)
 		return (0.0f);
 	return (cylinder.height);
 }
 
-inline void	calc_hit_part(int cap, int *hit_part)
+static inline void	calc_hit_part(int cap, int *hit_part)
 {
 	if (cap == 0)
 		*hit_part = 1;
@@ -27,7 +27,7 @@ inline void	calc_hit_part(int cap, int *hit_part)
 		*hit_part = 2;
 }
 
-t_vector	calc_cap_center(t_obj cylinder, int cap)
+static t_vector	calc_cap_center(t_obj cylinder, int cap)
 {
 	t_vector	cap_center;
 	t_vector	normalized_cap_offset;
@@ -36,6 +36,13 @@ t_vector	calc_cap_center(t_obj cylinder, int cap)
 			calc_cap_offset(cylinder, cap));
 	cap_center = vec_add(cylinder.coords, normalized_cap_offset);
 	return (cap_center);
+}
+
+static void	write_cap_info(t_hit *hit_info, t_ray ray, float t_intersection)
+{
+	hit_info->t0 = t_intersection;
+	hit_info->phit = vec_add(ray.orig,
+			vec_mul_num(ray.dir, t_intersection));
 }
 
 void	check_caps_intersection(t_obj cylinder, t_hit *hit_info,
@@ -62,7 +69,7 @@ void	check_caps_intersection(t_obj cylinder, t_hit *hit_info,
 					vec_mul_num(ray.dir, t_intersection)), cap_center);
 		if (dot(to_center, to_center) <= pow(cylinder.radius, 2))
 		{
-			hit_info->t0 = t_intersection;
+			write_cap_info(hit_info, ray, t_intersection);
 			calc_hit_part(cap, hit_part);
 		}
 	}

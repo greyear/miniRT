@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/24 12:43:48 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:17:52 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,6 @@ void		normilize_object(t_obj *object, t_vector *nhit,
 t_vector	normalize_return(t_vector vector_to_norm);
 void		compute_quadratic_roots(t_cyl_inter *inter_obj, float b);
 void		calc_discriminant(t_cyl_inter *inter_obj, t_obj cylinder);
-float		calc_cap_offset(t_obj cylinder, int cap);
-void		calc_hit_part(int cap, int *hit_part);
-t_vector	calc_cap_center(t_obj cylinder, int cap);
 void		check_caps_intersection(t_obj cylinder, t_hit *hit_info,
 				t_ray ray, int *hit_part);
 float		vec_length(t_vector v);

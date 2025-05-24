@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:20:50 by azinchen          #+#    #+#             */
-/*   Updated: 2025/05/21 19:58:19 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/24 13:54:12 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ be declared once\n"
 # endif
 
 # ifndef EPSILON
-#  define EPSILON 1e-4
+#  define EPSILON 1e-2
 # endif
 
 #endif

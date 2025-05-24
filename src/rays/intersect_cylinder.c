@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 16:20:41 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/18 16:10:28 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:54:32 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	check_valid_body_hits(t_cyl_inter *inter_obj, t_ray ray,
 			&& inter_obj->t_candidate < hit_info->t0)
 		{
 			hit_info->t0 = inter_obj->t_candidate;
+			hit_info->phit = inter_obj->intersection;
 			*inter_obj->hit_part = 0;
 		}
 	}
