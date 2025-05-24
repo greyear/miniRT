@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 12:19:49 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/17 18:12:55 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:44:53 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,18 @@ static void	draw_current_mode(t_rt *rt, mlx_t *obj)
 		rt->mode_img = mlx_put_string(obj, "scale", 5, 20);
 }
 
-void	draw_gui(t_rt *rt)
+bool	draw_gui(t_rt *rt)
 {
 	mlx_delete_image(rt->mlx, rt->gui_img);
 	rt->gui_img = mlx_new_image(rt->mlx, 130, 50);
 	draw_back(rt->gui_img);
-	mlx_image_to_window(rt->mlx, rt->gui_img, 0, 0);
+	if (mlx_image_to_window(rt->mlx, rt->gui_img, 0, 0) == -1)
+	{
+		mlx_terminate(rt->mlx);
+		return (false);
+	}
 	draw_current_obj(rt, rt->mlx);
 	draw_current_mode(rt, rt->mlx);
 	rt->needs_render = 0;
+	return (true);
 }

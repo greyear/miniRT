@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:48:59 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/20 15:03:24 by azinchen         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:43:48 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ uint32_t	vec_to_rgba(t_vector color);
 void		draw_pixels(t_rt *rt);
 void		create_img(t_rt *rt);
 t_vector	rgb_to_vec(t_col color);
-void		draw_gui(t_rt *rt);
+bool		draw_gui(t_rt *rt);
 
 //Rays
 t_vector	calculate_rays(t_vector rayorig, t_vector raydir, t_rt *rt);
