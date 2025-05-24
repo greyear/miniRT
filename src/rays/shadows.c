@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 14:24:35 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/24 13:07:34 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:14:20 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 static bool	set_plane_shadow(t_ray light_ray, t_rt *rt,
 	t_hit *hit_info, t_obj object)
 {
-	float	t;
-	float	dist_to_light;
+	float		t;
+	t_vector	hit_point;
+	t_vector	to_light;
+	t_vector	to_hit;
 
 	if (intersect_plane(light_ray, object, &t) && t > BIAS)
 	{
-		dist_to_light = vec_length(vec_sub(rt->light.coords, light_ray.orig));
-		if (t < dist_to_light)
+		hit_point = vec_add(light_ray.orig, vec_mul_num(light_ray.dir, t));
+		to_light = vec_sub(rt->light.coords, light_ray.orig);
+		to_hit = vec_sub(hit_point, light_ray.orig);
+		if (vec_length(to_hit) < vec_length(to_light) - EPSILON)
 		{
 			hit_info->t0 = t;
+			hit_info->phit = hit_point;
 			return (true);
 		}
 	}
@@ -81,8 +86,7 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 			continue ;
 		tmp_hit = (t_hit){0};
 		shadow_hit = check_shadow(rt, rt->objects[i], light_ray, &tmp_hit);
-		if (shadow_hit && tmp_hit.t0 > BIAS
-			&& is_correct_distance(rt, hit_info, tmp_hit))
+		if (shadow_hit && is_correct_distance(rt, hit_info, tmp_hit))
 		{
 			transmission = (t_vector){0, 0, 0};
 			break ;
