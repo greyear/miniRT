@@ -6,7 +6,7 @@
 /*   By: msavelie <msavelie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 14:24:35 by msavelie          #+#    #+#             */
-/*   Updated: 2025/05/21 20:14:45 by msavelie         ###   ########.fr       */
+/*   Updated: 2025/05/24 13:07:34 by msavelie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,9 @@ t_vector	calculate_shadows(t_rt *rt, t_obj *object,
 		if (&rt->objects[i] == object)
 			continue ;
 		tmp_hit = (t_hit){0};
-		if (!is_correct_distance(rt, hit_info, tmp_hit))
-			continue ;
 		shadow_hit = check_shadow(rt, rt->objects[i], light_ray, &tmp_hit);
-		if (shadow_hit && tmp_hit.t0 > BIAS)
+		if (shadow_hit && tmp_hit.t0 > BIAS
+			&& is_correct_distance(rt, hit_info, tmp_hit))
 		{
 			transmission = (t_vector){0, 0, 0};
 			break ;
