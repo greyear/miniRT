@@ -16,6 +16,11 @@ int	allocation(t_rt *m)
 {
 	m->obj_count = m->e_count[E_SPHERE] + m->e_count[E_PLANE]
 		+ m->e_count[E_CYLINDER];
+	if (m->obj_count == 0)
+	{
+		m->objects = NULL;
+		return (SUCCESS);
+	}
 	m->objects = ft_calloc(m->obj_count, sizeof(t_obj));
 	if (!m->objects)
 		return (print_err(MLLC_MSG));

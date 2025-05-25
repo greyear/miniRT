@@ -59,7 +59,7 @@ static void	draw_current_obj(t_rt *rt, mlx_t *obj)
 	char	*full_str;
 
 	mlx_delete_image(obj, rt->instr_img);
-	if (rt->obj_sel == OBJ_SEL)
+	if (rt->obj_sel == OBJ_SEL && rt->objects && rt->obj_index < rt->obj_count)
 	{
 		full_str = check_obj_type(rt);
 		rt->instr_img = mlx_put_string(obj, full_str, 5, 5);
