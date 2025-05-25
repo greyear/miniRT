@@ -31,6 +31,6 @@ void	clean_struct(t_rt *rt)
 void	clean_exit(t_rt *rt)
 {
 	clean_struct(rt);
-	printf("malloc error\n");
+	ft_putstr_fd(MLLC_MSG, STDERR_FILENO);
 	exit (1);
 }
