@@ -17,10 +17,10 @@ static float	float_add(float fl1, float fl2)
 	float	res;
 
 	res = fl1 + fl2;
-	if (res >= 0.00001f)
+	if (res >= 0.5)
 		return (res);
 	else
-		return (0.0f);
+		return (0.5);
 }
 
 void	scale(t_rt *rt, mlx_key_data_t keydata, t_vector del)
