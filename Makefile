@@ -144,7 +144,6 @@ clean:
 				@make clean -C ./libft --no-print-directory
 				@echo "$(YELLOW)🧹 Deleting object files... 🧹$(DEF_COLOR)"
 				@$(RM) -rf $(OBJ_DIR)
-				@$(RM) .cache_exists
 		
 fclean: 		clean 
 				@echo "$(RED)🧽 Deleting libft... 🧽$(DEF_COLOR)"
